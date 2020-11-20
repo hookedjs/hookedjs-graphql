@@ -1,0 +1,56 @@
+{
+  "name": "nexus-prisma-react-blog",
+  "version": "0.0.0",
+  "license": "ISC",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn codegen && cd packages/client && yarn build",
+    "codegen": "run-s -l codegen:*",
+    "codegen:common": "cd packages/common && yarn build",
+    "codegen:server": "cd packages/server && yarn codegen",
+    "codegen:client": "cd packages/client && yarn typegen",
+    "dev": "npm-run-all -l codegen -p dev:*",
+    "dev:db": "./scripts/docker-db.sh",
+    "dev:client": "cd packages/client && yarn dev",
+    "dev:server": "cd packages/server && yarn dev",
+    "seed": "cd packages/server && yarn seed",
+    "start": "yarn codegen && cd packages/server && yarn start",
+    "lint": "run-s -l lint:*",
+    "lint:eslint": "eslint --cache --ext .ts 'packages/*/src/**/*.ts' 'packages/server/prisma/**/*.ts' --fix",
+    "lint:common": "tsc -p packages/common/tsconfig.json",
+    "lint:server": "tsc -p packages/server/tsconfig.json",
+    "lint:client": "tsc -p packages/client/tsconfig.json",
+    "test": "run-p -l --aggregate-output test:*",
+    "test:common": "cd packages/common && yarn test",
+    "test:server": "cd packages/server && yarn test",
+    "test:client": "cd packages/client && yarn test",
+    "clean": "rimraf packages/*/**/{__generated__,build,node_modules,schema.graphql} node_modules .eslintcache"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.9",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "eslint": "^6.6.3",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "husky": "^4.3.0",
+    "rimraf": "*",
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0",
+    "typescript": "4.0.2"
+  },
+  "engines": {
+    "node": ">=12 <15"
+  }
+}

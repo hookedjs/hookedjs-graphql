@@ -1,0 +1,49 @@
+{
+  "name": "@pkg/server",
+  "version": "0.0.0",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "postinstall": "yarn codegen",
+    "codegen": "yarn prisma:codegen && yarn nexus:codegen",
+    "start": "NODE_ENV=production ts-node --transpile-only src/main.ts",
+    "dev": "NODE_ENV=development ts-node-dev --tree-kill --no-notify --respawn --transpile-only src/main.ts",
+    "seed": "yarn ts-node prisma/seed.ts",
+    "lint": "eslint --ext .js,.ts 'src/**/*.ts' 'prisma/**/*.ts' --fix",
+    "repl": "ts-node-dev --respawn src/repl.ts",
+    "nexus:codegen": "NODE_ENV=development ts-node --transpile-only src/schema",
+    "prisma:save": "prisma migrate save --experimental -c",
+    "prisma:apply": "prisma migrate up --experimental -c > /dev/null",
+    "prisma:codegen": "prisma generate"
+  },
+  "dependencies": {
+    "@nexus/schema": "0.18.0",
+    "@prisma/client": "2.10.0",
+    "@types/papaparse": "^5.2.4",
+    "apollo-server-express": "^2.19.0",
+    "compression": "^1.7.4",
+    "express-jwt": "^6.0.0",
+    "graphql": "^15.3.0",
+    "graphql-query-complexity": "^0.7.1",
+    "graphql-tools": "^4.0.7",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "nexus-plugin-prisma": "0.23.1",
+    "rambdax": "^7.0.1",
+    "sirv": "^1.0.7"
+  },
+  "devDependencies": {
+    "@prisma/cli": "2.11.0",
+    "@types/compression": "^1.7.0",
+    "@types/express-jwt": "^0.0.42",
+    "@types/faker": "^5.1.2",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/morgan": "^1.9.2",
+    "@types/node": "^14.14.9",
+    "@types/ws": "^7.2.7",
+    "faker": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=12 <15"
+  }
+}
