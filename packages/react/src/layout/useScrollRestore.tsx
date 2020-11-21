@@ -7,8 +7,8 @@
  * - window.history.state.key is a unique history ID that is populated by popular routers (react-router, reach-router)
  * - This approach is imperfect, but "good-enough".
  */
-import { waitForTruthy } from '@pkg/common/dist/async'
-import { indexedDBSupported, KeyValueStore } from '@pkg/common/dist/indexedDb'
+import { waitForTruthy } from '@h/common/dist/async'
+import { indexedDBSupported, KeyValueStore } from '@h/common/dist/indexedDb'
 import React from 'react'
 
 const envIsSupported = window.scrollTo && indexedDBSupported

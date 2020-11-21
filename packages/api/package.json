@@ -1,5 +1,5 @@
 {
-  "name": "@pkg/server",
+  "name": "@h/api",
   "version": "0.0.0",
   "license": "ISC",
   "private": true,
@@ -9,8 +9,8 @@
     "start": "NODE_ENV=production ts-node --transpile-only src/main.ts",
     "dev": "NODE_ENV=development ts-node-dev --tree-kill --no-notify --respawn --transpile-only src/main.ts",
     "seed": "yarn ts-node prisma/seed.ts",
-    "lint": "eslint --ext .js,.ts 'src/**/*.ts' 'prisma/**/*.ts' --fix",
     "repl": "ts-node-dev --respawn src/repl.ts",
+    "validate": "tsc --noEmit",
     "nexus:codegen": "NODE_ENV=development ts-node --transpile-only src/schema",
     "prisma:save": "prisma migrate save --experimental -c",
     "prisma:apply": "prisma migrate up --experimental -c > /dev/null",

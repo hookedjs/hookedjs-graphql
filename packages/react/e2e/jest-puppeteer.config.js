@@ -8,7 +8,7 @@ module.exports = {
 			// debug: true,
 		},
 		{
-			command: 'cd ../../server && NODE_ENV=development E2E_USER_AUTHORIZED=true npm start',
+			command: 'cd ../../api && NODE_ENV=development E2E_USER_AUTHORIZED=true npm start',
 			port: 4000,
 			launchTimeout: 20000,
 			usedPortAction: 'kill',

@@ -1,16 +1,17 @@
 {
-  "name": "@pkg/client",
+  "name": "@h/react",
   "version": "0.1.0",
   "license": "ISC",
   "private": true,
   "scripts": {
-    "typegen": "apollo client:codegen --target=typescript --globalTypesFile=src/__generated__/globalTypes.ts && rm -rf __generated__",
+    "codegen": "apollo client:codegen --target=typescript --globalTypesFile=src/__generated__/globalTypes.ts && rm -rf __generated__",
     "build": "react-app-rewired build",
     "dev": "BROWSER=false react-app-rewired start",
     "repl": "ts-node-dev --respawn src/repl",
     "analyze": "ANALYZE=1 npm run build",
     "test": "react-app-rewired test",
-    "e2e": "cd e2e && jest"
+    "e2e": "cd e2e && jest",
+    "validate": "tsc --noEmit"
   },
   "browserslist": {
     "production": [

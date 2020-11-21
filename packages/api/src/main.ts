@@ -118,7 +118,7 @@ app.use(errorLogMiddleware)
 
 apolloServer.applyMiddleware({app})
 app.use(sirv(
-  path.join(__dirname, '../client/build'),
+  path.join(__dirname, '../react/build'),
   {
     dev, etag: true, maxAge: 10 * 60 * 1000,
     immutable: true, single: true,
@@ -150,8 +150,3 @@ const server = app.listen({port: PORT}, () => console.log(`🚀 Server ready at 
 //   process.on('SIGINT', handleExit);
 //   process.on('SIGTERM', handleExit);
 // }
-
-// TODO: Logging - checkout dombro-apollo-stack and the nexus docs
-// TODO: Upgrade the seed.js to use faker like the homepoint demo
-// TODO: Images
-// TODO: Internationalization - maybe https://enappd.com/blog/how-to-translate-in-ionic-internationalization-and-localization/143/

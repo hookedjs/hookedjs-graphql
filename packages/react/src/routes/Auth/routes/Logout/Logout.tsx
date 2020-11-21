@@ -1,4 +1,4 @@
-import { wait } from '@pkg/common/dist/async'
+import { wait } from '@h/common/dist/async'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 

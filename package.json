@@ -1,5 +1,5 @@
 {
-  "name": "nexus-prisma-react-blog",
+  "name": "hookedjs",
   "version": "0.0.0",
   "license": "ISC",
   "private": true,
@@ -7,31 +7,23 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn codegen && cd packages/client && yarn build",
-    "codegen": "run-s -l codegen:*",
-    "codegen:common": "cd packages/common && yarn build",
-    "codegen:server": "cd packages/server && yarn codegen",
-    "codegen:client": "cd packages/client && yarn typegen",
+    "postinstall": "yarn codegen",
+    "build": "yarn codegen && cd packages/react && yarn build",
+    "codegen": "yarn workspaces run codegen",
+    "clean": "rimraf packages/*/**/{__generated__,build,node_modules,schema.graphql} node_modules .eslintcache",
     "dev": "npm-run-all -l codegen -p dev:*",
     "dev:db": "./scripts/docker-db.sh",
-    "dev:client": "cd packages/client && yarn dev",
-    "dev:server": "cd packages/server && yarn dev",
-    "seed": "cd packages/server && yarn seed",
-    "start": "yarn codegen && cd packages/server && yarn start",
-    "lint": "run-s -l lint:*",
-    "lint:eslint": "eslint --cache --ext .ts 'packages/*/src/**/*.ts' 'packages/server/prisma/**/*.ts' --fix",
-    "lint:common": "tsc -p packages/common/tsconfig.json",
-    "lint:server": "tsc -p packages/server/tsconfig.json",
-    "lint:client": "tsc -p packages/client/tsconfig.json",
-    "test": "run-p -l --aggregate-output test:*",
-    "test:common": "cd packages/common && yarn test",
-    "test:server": "cd packages/server && yarn test",
-    "test:client": "cd packages/client && yarn test",
-    "clean": "rimraf packages/*/**/{__generated__,build,node_modules,schema.graphql} node_modules .eslintcache"
+    "dev:common": "cd packages/common && yarn dev",
+    "dev:api": "cd packages/api && yarn dev",
+    "dev:react": "cd packages/react && yarn dev",
+    "start": "yarn codegen && cd packages/api && yarn start",
+    "validate": "printf \"\\n> @all\\n\" && yarn lint && yarn workspaces run validate",
+    "lint": "eslint --cache --ext .ts 'packages/*/src/**/*.ts' 'packages/api/prisma/**/*.ts' --fix",
+    "test": "yarn workspaces run test"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint"
+      "pre-commit": "yarn validate"
     }
   },
   "dependencies": {
