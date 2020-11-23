@@ -10,12 +10,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "noEmit": true,
-    "paths": {
-      "@root/*": ["*"],
-      "@app/*": ["src/*"]
-    }
+    "noEmit": true
   },
   "include": ["src"],
   "exclude": ["prisma/**/*", "node_modules"]

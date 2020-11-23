@@ -201,11 +201,11 @@
     },
     {
       "tag": "CreateModel",
-      "model": "ErrorLog"
+      "model": "ApiError"
     },
     {
       "tag": "CreateField",
-      "model": "ErrorLog",
+      "model": "ApiError",
       "field": "id",
       "type": "String",
       "arity": "Required"
@@ -215,7 +215,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "ErrorLog",
+          "model": "ApiError",
           "field": "id"
         },
         "directive": "default"
@@ -227,7 +227,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "ErrorLog",
+          "model": "ApiError",
           "field": "id"
         },
         "directive": "default"
@@ -240,7 +240,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "ErrorLog",
+          "model": "ApiError",
           "field": "id"
         },
         "directive": "id"
@@ -248,7 +248,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "ErrorLog",
+      "model": "ApiError",
       "field": "createdAt",
       "type": "DateTime",
       "arity": "Required"
@@ -258,7 +258,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "ErrorLog",
+          "model": "ApiError",
           "field": "createdAt"
         },
         "directive": "default"
@@ -270,7 +270,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "ErrorLog",
+          "model": "ApiError",
           "field": "createdAt"
         },
         "directive": "default"
@@ -280,33 +280,22 @@
     },
     {
       "tag": "CreateField",
-      "model": "ErrorLog",
-      "field": "updatedAt",
-      "type": "DateTime",
+      "model": "ApiError",
+      "field": "ip",
+      "type": "String",
       "arity": "Required"
     },
     {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "ErrorLog",
-          "field": "updatedAt"
-        },
-        "directive": "updatedAt"
-      }
-    },
-    {
       "tag": "CreateField",
-      "model": "ErrorLog",
-      "field": "createdById",
+      "model": "ApiError",
+      "field": "reqUserId",
       "type": "String",
       "arity": "Optional"
     },
     {
       "tag": "CreateField",
-      "model": "ErrorLog",
-      "field": "createdBy",
+      "model": "ApiError",
+      "field": "reqUser",
       "type": "User",
       "arity": "Optional"
     },
@@ -315,8 +304,8 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "ErrorLog",
-          "field": "createdBy"
+          "model": "ApiError",
+          "field": "reqUser"
         },
         "directive": "relation"
       }
@@ -327,13 +316,13 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "ErrorLog",
-          "field": "createdBy"
+          "model": "ApiError",
+          "field": "reqUser"
         },
         "directive": "relation"
       },
       "argument": "fields",
-      "value": "[createdById]"
+      "value": "[reqUserId]"
     },
     {
       "tag": "CreateArgument",
@@ -341,8 +330,8 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "ErrorLog",
-          "field": "createdBy"
+          "model": "ApiError",
+          "field": "reqUser"
         },
         "directive": "relation"
       },
@@ -351,30 +340,413 @@
     },
     {
       "tag": "CreateField",
-      "model": "ErrorLog",
+      "model": "ApiError",
+      "field": "userAgent",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "operationName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
       "field": "message",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "ErrorLog",
+      "model": "ApiError",
       "field": "stack",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "reqBody",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "resBody",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "ApiAccess"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ApiAccess",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ApiAccess",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "cuid()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ApiAccess",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ApiAccess",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ApiAccess",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "ip",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "reqUserId",
       "type": "String",
       "arity": "Optional"
     },
     {
       "tag": "CreateField",
-      "model": "ErrorLog",
-      "field": "reqBody",
-      "type": "Json",
+      "model": "ApiAccess",
+      "field": "reqUser",
+      "type": "User",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ApiAccess",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ApiAccess",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[reqUserId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ApiAccess",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "userAgent",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "operationName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "region",
+      "type": "String",
       "arity": "Optional"
     },
     {
       "tag": "CreateField",
-      "model": "ErrorLog",
-      "field": "resBody",
-      "type": "Json",
+      "model": "ApiAccess",
+      "field": "city",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "country",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "eu",
+      "type": "Boolean",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "lat",
+      "type": "Float",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "lon",
+      "type": "Float",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiAccess",
+      "field": "duration",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "ClientEvent"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ClientEvent",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ClientEvent",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "cuid()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ClientEvent",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ClientEvent",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ClientEvent",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "ip",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "reqUserById",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "reqUser",
+      "type": "User",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ClientEvent",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ClientEvent",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[reqUserById]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ClientEvent",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "userAgent",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "region",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "city",
+      "type": "String",
       "arity": "Optional"
     },
     {

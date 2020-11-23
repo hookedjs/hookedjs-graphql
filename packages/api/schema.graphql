@@ -2,6 +2,470 @@
 ### Do not make changes to this file directly
 
 
+type ApiAccess {
+  city: String
+  createdAt: DateTime!
+  duration: Int!
+  id: String!
+  ip: String!
+  operationName: String!
+  region: String
+  reqUser: User
+  userAgent: String!
+}
+
+input ApiAccessCreateInput {
+  city: String
+  country: String
+  createdAt: DateTime
+  duration: Int!
+  eu: Boolean
+  id: String
+  ip: String!
+  lat: Float
+  lon: Float
+  operationName: String!
+  region: String
+  reqUser: UserCreateOneWithoutApiAccessInput
+  userAgent: String!
+}
+
+input ApiAccessCreateManyWithoutReqUserInput {
+  connect: [ApiAccessWhereUniqueInput!]
+  create: [ApiAccessCreateWithoutReqUserInput!]
+}
+
+input ApiAccessCreateWithoutReqUserInput {
+  city: String
+  country: String
+  createdAt: DateTime
+  duration: Int!
+  eu: Boolean
+  id: String
+  ip: String!
+  lat: Float
+  lon: Float
+  operationName: String!
+  region: String
+  userAgent: String!
+}
+
+input ApiAccessListRelationFilter {
+  every: ApiAccessWhereInput
+  none: ApiAccessWhereInput
+  some: ApiAccessWhereInput
+}
+
+input ApiAccessOrderByInput {
+  city: SortOrder
+  country: SortOrder
+  createdAt: SortOrder
+  duration: SortOrder
+  eu: SortOrder
+  id: SortOrder
+  ip: SortOrder
+  lat: SortOrder
+  lon: SortOrder
+  operationName: SortOrder
+  region: SortOrder
+  reqUserId: SortOrder
+  userAgent: SortOrder
+}
+
+input ApiAccessScalarWhereInput {
+  AND: [ApiAccessScalarWhereInput!]
+  city: StringNullableFilter
+  country: StringNullableFilter
+  createdAt: DateTimeFilter
+  duration: IntFilter
+  eu: BoolNullableFilter
+  id: StringFilter
+  ip: StringFilter
+  lat: FloatNullableFilter
+  lon: FloatNullableFilter
+  NOT: [ApiAccessScalarWhereInput!]
+  operationName: StringFilter
+  OR: [ApiAccessScalarWhereInput!]
+  region: StringNullableFilter
+  reqUserId: StringNullableFilter
+  userAgent: StringFilter
+}
+
+input ApiAccessUpdateInput {
+  city: NullableStringFieldUpdateOperationsInput
+  country: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  duration: IntFieldUpdateOperationsInput
+  eu: NullableBoolFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  lat: NullableFloatFieldUpdateOperationsInput
+  lon: NullableFloatFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+  region: NullableStringFieldUpdateOperationsInput
+  reqUser: UserUpdateOneWithoutApiAccessInput
+  userAgent: StringFieldUpdateOperationsInput
+}
+
+input ApiAccessUpdateManyDataInput {
+  city: NullableStringFieldUpdateOperationsInput
+  country: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  duration: IntFieldUpdateOperationsInput
+  eu: NullableBoolFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  lat: NullableFloatFieldUpdateOperationsInput
+  lon: NullableFloatFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+  region: NullableStringFieldUpdateOperationsInput
+  userAgent: StringFieldUpdateOperationsInput
+}
+
+input ApiAccessUpdateManyWithoutReqUserInput {
+  connect: [ApiAccessWhereUniqueInput!]
+  create: [ApiAccessCreateWithoutReqUserInput!]
+  delete: [ApiAccessWhereUniqueInput!]
+  deleteMany: [ApiAccessScalarWhereInput!]
+  disconnect: [ApiAccessWhereUniqueInput!]
+  set: [ApiAccessWhereUniqueInput!]
+  update: [ApiAccessUpdateWithWhereUniqueWithoutReqUserInput!]
+  updateMany: [ApiAccessUpdateManyWithWhereNestedInput!]
+  upsert: [ApiAccessUpsertWithWhereUniqueWithoutReqUserInput!]
+}
+
+input ApiAccessUpdateManyWithWhereNestedInput {
+  data: ApiAccessUpdateManyDataInput!
+  where: ApiAccessScalarWhereInput!
+}
+
+input ApiAccessUpdateWithoutReqUserDataInput {
+  city: NullableStringFieldUpdateOperationsInput
+  country: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  duration: IntFieldUpdateOperationsInput
+  eu: NullableBoolFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  lat: NullableFloatFieldUpdateOperationsInput
+  lon: NullableFloatFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+  region: NullableStringFieldUpdateOperationsInput
+  userAgent: StringFieldUpdateOperationsInput
+}
+
+input ApiAccessUpdateWithWhereUniqueWithoutReqUserInput {
+  data: ApiAccessUpdateWithoutReqUserDataInput!
+  where: ApiAccessWhereUniqueInput!
+}
+
+input ApiAccessUpsertWithWhereUniqueWithoutReqUserInput {
+  create: ApiAccessCreateWithoutReqUserInput!
+  update: ApiAccessUpdateWithoutReqUserDataInput!
+  where: ApiAccessWhereUniqueInput!
+}
+
+input ApiAccessWhereInput {
+  AND: [ApiAccessWhereInput!]
+  city: StringNullableFilter
+  country: StringNullableFilter
+  createdAt: DateTimeFilter
+  duration: IntFilter
+  eu: BoolNullableFilter
+  id: StringFilter
+  ip: StringFilter
+  lat: FloatNullableFilter
+  lon: FloatNullableFilter
+  NOT: [ApiAccessWhereInput!]
+  operationName: StringFilter
+  OR: [ApiAccessWhereInput!]
+  region: StringNullableFilter
+  reqUser: UserWhereInput
+  reqUserId: StringNullableFilter
+  userAgent: StringFilter
+}
+
+input ApiAccessWhereUniqueInput {
+  id: String
+}
+
+type ApiError {
+  createdAt: DateTime!
+  id: String!
+  ip: String!
+  message: String!
+  operationName: String!
+  reqBody: Json!
+  reqUser: User
+  resBody: Json!
+  stack: Json!
+  userAgent: String!
+}
+
+input ApiErrorCreateInput {
+  createdAt: DateTime
+  id: String
+  ip: String!
+  message: String!
+  operationName: String!
+  reqBody: Json!
+  reqUser: UserCreateOneWithoutApiErrorInput
+  resBody: Json!
+  stack: Json!
+  userAgent: String!
+}
+
+input ApiErrorCreateManyWithoutReqUserInput {
+  connect: [ApiErrorWhereUniqueInput!]
+  create: [ApiErrorCreateWithoutReqUserInput!]
+}
+
+input ApiErrorCreateWithoutReqUserInput {
+  createdAt: DateTime
+  id: String
+  ip: String!
+  message: String!
+  operationName: String!
+  reqBody: Json!
+  resBody: Json!
+  stack: Json!
+  userAgent: String!
+}
+
+input ApiErrorListRelationFilter {
+  every: ApiErrorWhereInput
+  none: ApiErrorWhereInput
+  some: ApiErrorWhereInput
+}
+
+input ApiErrorOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  ip: SortOrder
+  message: SortOrder
+  operationName: SortOrder
+  reqBody: SortOrder
+  reqUserId: SortOrder
+  resBody: SortOrder
+  stack: SortOrder
+  userAgent: SortOrder
+}
+
+input ApiErrorScalarWhereInput {
+  AND: [ApiErrorScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  ip: StringFilter
+  message: StringFilter
+  NOT: [ApiErrorScalarWhereInput!]
+  operationName: StringFilter
+  OR: [ApiErrorScalarWhereInput!]
+  reqUserId: StringNullableFilter
+  userAgent: StringFilter
+}
+
+input ApiErrorUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+  reqBody: Json
+  reqUser: UserUpdateOneWithoutApiErrorInput
+  resBody: Json
+  stack: Json
+  userAgent: StringFieldUpdateOperationsInput
+}
+
+input ApiErrorUpdateManyDataInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+  reqBody: Json
+  resBody: Json
+  stack: Json
+  userAgent: StringFieldUpdateOperationsInput
+}
+
+input ApiErrorUpdateManyWithoutReqUserInput {
+  connect: [ApiErrorWhereUniqueInput!]
+  create: [ApiErrorCreateWithoutReqUserInput!]
+  delete: [ApiErrorWhereUniqueInput!]
+  deleteMany: [ApiErrorScalarWhereInput!]
+  disconnect: [ApiErrorWhereUniqueInput!]
+  set: [ApiErrorWhereUniqueInput!]
+  update: [ApiErrorUpdateWithWhereUniqueWithoutReqUserInput!]
+  updateMany: [ApiErrorUpdateManyWithWhereNestedInput!]
+  upsert: [ApiErrorUpsertWithWhereUniqueWithoutReqUserInput!]
+}
+
+input ApiErrorUpdateManyWithWhereNestedInput {
+  data: ApiErrorUpdateManyDataInput!
+  where: ApiErrorScalarWhereInput!
+}
+
+input ApiErrorUpdateWithoutReqUserDataInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+  reqBody: Json
+  resBody: Json
+  stack: Json
+  userAgent: StringFieldUpdateOperationsInput
+}
+
+input ApiErrorUpdateWithWhereUniqueWithoutReqUserInput {
+  data: ApiErrorUpdateWithoutReqUserDataInput!
+  where: ApiErrorWhereUniqueInput!
+}
+
+input ApiErrorUpsertWithWhereUniqueWithoutReqUserInput {
+  create: ApiErrorCreateWithoutReqUserInput!
+  update: ApiErrorUpdateWithoutReqUserDataInput!
+  where: ApiErrorWhereUniqueInput!
+}
+
+input ApiErrorWhereInput {
+  AND: [ApiErrorWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  ip: StringFilter
+  message: StringFilter
+  NOT: [ApiErrorWhereInput!]
+  operationName: StringFilter
+  OR: [ApiErrorWhereInput!]
+  reqUser: UserWhereInput
+  reqUserId: StringNullableFilter
+  userAgent: StringFilter
+}
+
+input ApiErrorWhereUniqueInput {
+  id: String
+}
+
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+type ClientEvent {
+  city: String
+  createdAt: DateTime!
+  id: String!
+  ip: String!
+  name: String!
+  region: String
+  reqUser: User
+  reqUserById: String
+  userAgent: String!
+}
+
+input ClientEventCreateManyWithoutReqUserInput {
+  connect: [ClientEventWhereUniqueInput!]
+  create: [ClientEventCreateWithoutReqUserInput!]
+}
+
+input ClientEventCreateWithoutReqUserInput {
+  city: String
+  createdAt: DateTime
+  id: String
+  ip: String!
+  name: String!
+  region: String
+  userAgent: String!
+}
+
+input ClientEventListRelationFilter {
+  every: ClientEventWhereInput
+  none: ClientEventWhereInput
+  some: ClientEventWhereInput
+}
+
+input ClientEventScalarWhereInput {
+  AND: [ClientEventScalarWhereInput!]
+  city: StringNullableFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  ip: StringFilter
+  name: StringFilter
+  NOT: [ClientEventScalarWhereInput!]
+  OR: [ClientEventScalarWhereInput!]
+  region: StringNullableFilter
+  reqUserById: StringNullableFilter
+  userAgent: StringFilter
+}
+
+input ClientEventUpdateManyDataInput {
+  city: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  region: NullableStringFieldUpdateOperationsInput
+  userAgent: StringFieldUpdateOperationsInput
+}
+
+input ClientEventUpdateManyWithoutReqUserInput {
+  connect: [ClientEventWhereUniqueInput!]
+  create: [ClientEventCreateWithoutReqUserInput!]
+  delete: [ClientEventWhereUniqueInput!]
+  deleteMany: [ClientEventScalarWhereInput!]
+  disconnect: [ClientEventWhereUniqueInput!]
+  set: [ClientEventWhereUniqueInput!]
+  update: [ClientEventUpdateWithWhereUniqueWithoutReqUserInput!]
+  updateMany: [ClientEventUpdateManyWithWhereNestedInput!]
+  upsert: [ClientEventUpsertWithWhereUniqueWithoutReqUserInput!]
+}
+
+input ClientEventUpdateManyWithWhereNestedInput {
+  data: ClientEventUpdateManyDataInput!
+  where: ClientEventScalarWhereInput!
+}
+
+input ClientEventUpdateWithoutReqUserDataInput {
+  city: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  region: NullableStringFieldUpdateOperationsInput
+  userAgent: StringFieldUpdateOperationsInput
+}
+
+input ClientEventUpdateWithWhereUniqueWithoutReqUserInput {
+  data: ClientEventUpdateWithoutReqUserDataInput!
+  where: ClientEventWhereUniqueInput!
+}
+
+input ClientEventUpsertWithWhereUniqueWithoutReqUserInput {
+  create: ClientEventCreateWithoutReqUserInput!
+  update: ClientEventUpdateWithoutReqUserDataInput!
+  where: ClientEventWhereUniqueInput!
+}
+
+input ClientEventWhereInput {
+  AND: [ClientEventWhereInput!]
+  city: StringNullableFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  ip: StringFilter
+  name: StringFilter
+  NOT: [ClientEventWhereInput!]
+  OR: [ClientEventWhereInput!]
+  region: StringNullableFilter
+  reqUser: UserWhereInput
+  reqUserById: StringNullableFilter
+  userAgent: StringFilter
+}
+
+input ClientEventWhereUniqueInput {
+  id: String
+}
+
 scalar DateTime
 
 input DateTimeFieldUpdateOperationsInput {
@@ -40,174 +504,23 @@ input EnumUserRoleNullableListFilter {
   equals: [UserRole!]
 }
 
-type ErrorLog {
-  createdAt: DateTime!
-  createdBy: User
-  createdById: String
-  id: String!
-  message: String!
-  reqBody: Json
-  resBody: Json
-  stack: String
-  updatedAt: DateTime!
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
 }
 
-input ErrorLogCreateInput {
-  code: String
-  createdAt: DateTime
-  id: String
-  ip: String!
-  message: String!
-  reqBody: Json
-  resBody: Json
-  stack: String
-  updatedAt: DateTime
-  userAgent: String
-}
-
-input ErrorLogCreateManyWithoutCreatedByInput {
-  connect: [ErrorLogWhereUniqueInput!]
-  create: [ErrorLogCreateWithoutCreatedByInput!]
-}
-
-input ErrorLogCreateWithoutCreatedByInput {
-  code: String
-  createdAt: DateTime
-  id: String
-  ip: String!
-  message: String!
-  reqBody: Json
-  resBody: Json
-  stack: String
-  updatedAt: DateTime
-  userAgent: String
-}
-
-input ErrorLogListRelationFilter {
-  every: ErrorLogWhereInput
-  none: ErrorLogWhereInput
-  some: ErrorLogWhereInput
-}
-
-input ErrorLogOrderByInput {
-  code: SortOrder
-  createdAt: SortOrder
-  createdById: SortOrder
-  id: SortOrder
-  ip: SortOrder
-  message: SortOrder
-  reqBody: SortOrder
-  resBody: SortOrder
-  stack: SortOrder
-  updatedAt: SortOrder
-  userAgent: SortOrder
-}
-
-input ErrorLogScalarWhereInput {
-  AND: [ErrorLogScalarWhereInput!]
-  code: StringNullableFilter
-  createdAt: DateTimeFilter
-  createdById: StringNullableFilter
-  id: StringFilter
-  ip: StringFilter
-  message: StringFilter
-  NOT: [ErrorLogScalarWhereInput!]
-  OR: [ErrorLogScalarWhereInput!]
-  reqBody: JsonNullableFilter
-  resBody: JsonNullableFilter
-  stack: StringNullableFilter
-  updatedAt: DateTimeFilter
-  userAgent: StringNullableFilter
-}
-
-input ErrorLogUpdateInput {
-  code: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  createdBy: UserUpdateOneWithoutErrorLogInput
-  id: StringFieldUpdateOperationsInput
-  ip: StringFieldUpdateOperationsInput
-  message: StringFieldUpdateOperationsInput
-  reqBody: Json
-  resBody: Json
-  stack: NullableStringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  userAgent: NullableStringFieldUpdateOperationsInput
-}
-
-input ErrorLogUpdateManyDataInput {
-  code: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  ip: StringFieldUpdateOperationsInput
-  message: StringFieldUpdateOperationsInput
-  reqBody: Json
-  resBody: Json
-  stack: NullableStringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  userAgent: NullableStringFieldUpdateOperationsInput
-}
-
-input ErrorLogUpdateManyWithoutCreatedByInput {
-  connect: [ErrorLogWhereUniqueInput!]
-  create: [ErrorLogCreateWithoutCreatedByInput!]
-  delete: [ErrorLogWhereUniqueInput!]
-  deleteMany: [ErrorLogScalarWhereInput!]
-  disconnect: [ErrorLogWhereUniqueInput!]
-  set: [ErrorLogWhereUniqueInput!]
-  update: [ErrorLogUpdateWithWhereUniqueWithoutCreatedByInput!]
-  updateMany: [ErrorLogUpdateManyWithWhereNestedInput!]
-  upsert: [ErrorLogUpsertWithWhereUniqueWithoutCreatedByInput!]
-}
-
-input ErrorLogUpdateManyWithWhereNestedInput {
-  data: ErrorLogUpdateManyDataInput!
-  where: ErrorLogScalarWhereInput!
-}
-
-input ErrorLogUpdateWithoutCreatedByDataInput {
-  code: NullableStringFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  ip: StringFieldUpdateOperationsInput
-  message: StringFieldUpdateOperationsInput
-  reqBody: Json
-  resBody: Json
-  stack: NullableStringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  userAgent: NullableStringFieldUpdateOperationsInput
-}
-
-input ErrorLogUpdateWithWhereUniqueWithoutCreatedByInput {
-  data: ErrorLogUpdateWithoutCreatedByDataInput!
-  where: ErrorLogWhereUniqueInput!
-}
-
-input ErrorLogUpsertWithWhereUniqueWithoutCreatedByInput {
-  create: ErrorLogCreateWithoutCreatedByInput!
-  update: ErrorLogUpdateWithoutCreatedByDataInput!
-  where: ErrorLogWhereUniqueInput!
-}
-
-input ErrorLogWhereInput {
-  AND: [ErrorLogWhereInput!]
-  code: StringNullableFilter
-  createdAt: DateTimeFilter
-  createdBy: UserWhereInput
-  createdById: StringNullableFilter
-  id: StringFilter
-  ip: StringFilter
-  message: StringFilter
-  NOT: [ErrorLogWhereInput!]
-  OR: [ErrorLogWhereInput!]
-  reqBody: JsonNullableFilter
-  resBody: JsonNullableFilter
-  stack: StringNullableFilter
-  updatedAt: DateTimeFilter
-  userAgent: StringNullableFilter
-}
-
-input ErrorLogWhereUniqueInput {
-  id: String
+input IntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
+  set: Int
 }
 
 input IntFilter {
@@ -234,23 +547,25 @@ input IntNullableFilter {
 
 scalar Json
 
-input JsonNullableFilter {
-  equals: Json
-  not: Json
-}
-
 type Mutation {
-  createOneErrorLog(data: ErrorLogCreateInput!): ErrorLog!
+  createOneApiAccess(data: ApiAccessCreateInput!): ApiAccess!
+  createOneApiError(data: ApiErrorCreateInput!): ApiError!
   createOnePost(data: PostCreateInput!): Post!
   createOneTag(data: TagCreateInput!): Tag!
   createOneUser(data: RegisterInputType!): User
   deleteOnePost(where: PostWhereUniqueInput!): Post
   deleteOneTag(where: TagWhereUniqueInput!): Tag
   deleteOneUser(where: UserWhereUniqueInput!): User
-  updateOneErrorLog(data: ErrorLogUpdateInput!, where: ErrorLogWhereUniqueInput!): ErrorLog
+  updateOneApiAccess(data: ApiAccessUpdateInput!, where: ApiAccessWhereUniqueInput!): ApiAccess
+  updateOneApiError(data: ApiErrorUpdateInput!, where: ApiErrorWhereUniqueInput!): ApiError
   updateOnePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateOneTag(data: TagUpdateInput!, where: TagWhereUniqueInput!): Tag
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+}
+
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
 }
 
 input NestedDateTimeFilter {
@@ -269,6 +584,17 @@ input NestedEnumPostStatusFilter {
   in: [PostStatus!]
   not: NestedEnumPostStatusFilter
   notIn: [PostStatus!]
+}
+
+input NestedFloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
 }
 
 input NestedIntFilter {
@@ -319,6 +645,18 @@ input NestedStringNullableFilter {
   not: NestedStringNullableFilter
   notIn: [String!]
   startsWith: String
+}
+
+input NullableBoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input NullableFloatFieldUpdateOperationsInput {
+  decrement: Float
+  divide: Float
+  increment: Float
+  multiply: Float
+  set: Float
 }
 
 input NullableIntFieldUpdateOperationsInput {
@@ -524,8 +862,10 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  errorLog(where: ErrorLogWhereUniqueInput!): ErrorLog
-  errorLogs(after: ErrorLogWhereUniqueInput, before: ErrorLogWhereUniqueInput, first: Int, last: Int, orderBy: [ErrorLogOrderByInput!], where: ErrorLogWhereInput): [ErrorLog!]!
+  apiAccess(where: ApiAccessWhereUniqueInput!): ApiAccess
+  apiAccesses(after: ApiAccessWhereUniqueInput, before: ApiAccessWhereUniqueInput, first: Int, last: Int, orderBy: [ApiAccessOrderByInput!], where: ApiAccessWhereInput): [ApiAccess!]!
+  apiError(where: ApiErrorWhereUniqueInput!): ApiError
+  apiErrors(after: ApiErrorWhereUniqueInput, before: ApiErrorWhereUniqueInput, first: Int, last: Int, orderBy: [ApiErrorOrderByInput!], where: ApiErrorWhereInput): [ApiError!]!
   post(where: PostWhereUniqueInput!): Post
   posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
   tag(where: TagWhereUniqueInput!): Tag
@@ -713,6 +1053,16 @@ type User {
   updatedAt: DateTime!
 }
 
+input UserCreateOneWithoutApiAccessInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutApiAccessInput
+}
+
+input UserCreateOneWithoutApiErrorInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutApiErrorInput
+}
+
 input UserCreateOneWithoutPostsInput {
   connect: UserWhereUniqueInput
   create: UserCreateWithoutPostsInput
@@ -722,7 +1072,22 @@ input UserCreaterolesInput {
   set: [UserRole!]!
 }
 
-input UserCreateWithoutErrorLogInput {
+input UserCreateWithoutApiAccessInput {
+  ApiError: ApiErrorCreateManyWithoutReqUserInput
+  ClientEvent: ClientEventCreateManyWithoutReqUserInput
+  createdAt: DateTime
+  email: String!
+  id: String
+  name: String
+  password: String
+  posts: PostCreateManyWithoutAuthorInput
+  roles: UserCreaterolesInput
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutApiErrorInput {
+  ApiAccess: ApiAccessCreateManyWithoutReqUserInput
+  ClientEvent: ClientEventCreateManyWithoutReqUserInput
   createdAt: DateTime
   email: String!
   id: String
@@ -734,9 +1099,11 @@ input UserCreateWithoutErrorLogInput {
 }
 
 input UserCreateWithoutPostsInput {
+  ApiAccess: ApiAccessCreateManyWithoutReqUserInput
+  ApiError: ApiErrorCreateManyWithoutReqUserInput
+  ClientEvent: ClientEventCreateManyWithoutReqUserInput
   createdAt: DateTime
   email: String!
-  ErrorLog: ErrorLogCreateManyWithoutCreatedByInput
   id: String
   name: String
   password: String
@@ -761,9 +1128,11 @@ enum UserRole {
 }
 
 input UserUpdateInput {
+  ApiAccess: ApiAccessUpdateManyWithoutReqUserInput
+  ApiError: ApiErrorUpdateManyWithoutReqUserInput
+  ClientEvent: ClientEventUpdateManyWithoutReqUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  ErrorLog: ErrorLogUpdateManyWithoutCreatedByInput
   id: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
@@ -779,20 +1148,44 @@ input UserUpdateOneRequiredWithoutPostsInput {
   upsert: UserUpsertWithoutPostsInput
 }
 
-input UserUpdateOneWithoutErrorLogInput {
+input UserUpdateOneWithoutApiAccessInput {
   connect: UserWhereUniqueInput
-  create: UserCreateWithoutErrorLogInput
+  create: UserCreateWithoutApiAccessInput
   delete: Boolean
   disconnect: Boolean
-  update: UserUpdateWithoutErrorLogDataInput
-  upsert: UserUpsertWithoutErrorLogInput
+  update: UserUpdateWithoutApiAccessDataInput
+  upsert: UserUpsertWithoutApiAccessInput
+}
+
+input UserUpdateOneWithoutApiErrorInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutApiErrorInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutApiErrorDataInput
+  upsert: UserUpsertWithoutApiErrorInput
 }
 
 input UserUpdaterolesInput {
   set: [UserRole!]!
 }
 
-input UserUpdateWithoutErrorLogDataInput {
+input UserUpdateWithoutApiAccessDataInput {
+  ApiError: ApiErrorUpdateManyWithoutReqUserInput
+  ClientEvent: ClientEventUpdateManyWithoutReqUserInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  posts: PostUpdateManyWithoutAuthorInput
+  roles: UserUpdaterolesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutApiErrorDataInput {
+  ApiAccess: ApiAccessUpdateManyWithoutReqUserInput
+  ClientEvent: ClientEventUpdateManyWithoutReqUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -804,9 +1197,11 @@ input UserUpdateWithoutErrorLogDataInput {
 }
 
 input UserUpdateWithoutPostsDataInput {
+  ApiAccess: ApiAccessUpdateManyWithoutReqUserInput
+  ApiError: ApiErrorUpdateManyWithoutReqUserInput
+  ClientEvent: ClientEventUpdateManyWithoutReqUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  ErrorLog: ErrorLogUpdateManyWithoutCreatedByInput
   id: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
@@ -814,9 +1209,14 @@ input UserUpdateWithoutPostsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input UserUpsertWithoutErrorLogInput {
-  create: UserCreateWithoutErrorLogInput!
-  update: UserUpdateWithoutErrorLogDataInput!
+input UserUpsertWithoutApiAccessInput {
+  create: UserCreateWithoutApiAccessInput!
+  update: UserUpdateWithoutApiAccessDataInput!
+}
+
+input UserUpsertWithoutApiErrorInput {
+  create: UserCreateWithoutApiErrorInput!
+  update: UserUpdateWithoutApiErrorDataInput!
 }
 
 input UserUpsertWithoutPostsInput {
@@ -826,9 +1226,11 @@ input UserUpsertWithoutPostsInput {
 
 input UserWhereInput {
   AND: [UserWhereInput!]
+  ApiAccess: ApiAccessListRelationFilter
+  ApiError: ApiErrorListRelationFilter
+  ClientEvent: ClientEventListRelationFilter
   createdAt: DateTimeFilter
   email: StringFilter
-  ErrorLog: ErrorLogListRelationFilter
   id: StringFilter
   name: StringNullableFilter
   NOT: [UserWhereInput!]

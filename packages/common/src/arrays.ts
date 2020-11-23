@@ -20,3 +20,7 @@ export type ArrayDifferenceType = <T extends any>(...arrays: T[][]) => T[];
 export function intersection(...arrays) {
   return arrays.reduce((a, b) => b.filter(Set.prototype.has.bind(new Set(a))))
 }
+
+export function keyBy(key: string, arr: Record<string, any>[]): any {
+  return Object.fromEntries(arr.map(r => [r[key], r]))
+}

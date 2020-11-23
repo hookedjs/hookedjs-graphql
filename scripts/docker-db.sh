@@ -10,7 +10,7 @@ check_docker() {
 }
 
 seed() {
-  cd packages/server
+  cd packages/api
   yarn prisma:apply
   yarn seed
 }

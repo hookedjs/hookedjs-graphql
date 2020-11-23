@@ -13,6 +13,7 @@ module.exports = {
     "semi": ["error", "never"],
     "quotes": ["error", "single"],
     "max-len": ["error", {"code": 140}],
+    "no-empty": 0,
     "@typescript-eslint/ban-ts-comment": 0,
     "@typescript-eslint/ban-ts-ignore": 0,
     "@typescript-eslint/no-unused-vars": 0,

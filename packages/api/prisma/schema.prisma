@@ -26,19 +26,47 @@ enum UserRole {
   AUTHOR
 }
 
-model ErrorLog {
+model ApiError {
   id            String   @default(cuid()) @id
   createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  createdById   String?
-  createdBy     User?    @relation(fields: [createdById], references: [id])
   ip            String
-  userAgent     String?
+  reqUserId     String?
+  reqUser       User?    @relation(fields: [reqUserId], references: [id])
+  userAgent     String
+  operationName String
   message       String
-  stack         String?
-  code          String?
-  reqBody       Json?
-  resBody       Json?
+  stack         Json
+  reqBody       Json
+  resBody       Json
+}
+
+model ApiAccess {
+  id            String   @default(cuid()) @id
+  createdAt     DateTime @default(now())
+  ip            String
+  reqUserId     String?
+  reqUser       User?    @relation(fields: [reqUserId], references: [id])
+  userAgent     String
+  operationName String
+  region        String?
+  city          String?
+  country       String?
+  eu            Boolean?
+  lat           Float?
+  lon           Float?
+  duration      Int
+}
+
+model ClientEvent {
+  id            String   @default(cuid()) @id
+  createdAt     DateTime @default(now())
+  ip            String
+  reqUserById   String?
+  reqUser       User?    @relation(fields: [reqUserById], references: [id])
+  userAgent     String
+  name          String
+  region        String?
+  city          String?
 }
 
 model Post {
