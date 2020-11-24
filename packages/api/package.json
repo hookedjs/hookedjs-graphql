@@ -23,7 +23,6 @@
     "@types/papaparse": "^5.2.4",
     "apollo-server-express": "^2.19.0",
     "compression": "^1.7.4",
-    "express-jwt": "^6.0.0",
     "geoip-lite": "^1.4.2",
     "graphql": "^15.3.0",
     "graphql-query-complexity": "^0.7.1",

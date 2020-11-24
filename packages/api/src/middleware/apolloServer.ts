@@ -1,4 +1,5 @@
 import {ApolloServer} from 'apollo-server-express'
+import {AuthenticationError} from 'apollo-server-express'
 import {separateOperations} from 'graphql'
 import {fieldExtensionsEstimator, getComplexity, simpleEstimator} from 'graphql-query-complexity'
 
@@ -8,7 +9,10 @@ import schema from '../schema'
 const apolloServer = new ApolloServer({
   schema,
   context: ctx => {
-    const user = ctx.req.user ?? {id: '', roles: []}
+    const user = ctx.req.user
+    if (ctx.req.get('Authorization') && !user.id) {
+      throw new AuthenticationError('Token is invalid')
+    }
     return {...ctx, prisma, user}
   },
   plugins: [

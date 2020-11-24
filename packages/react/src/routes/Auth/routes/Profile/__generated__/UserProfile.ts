@@ -10,7 +10,7 @@
 export interface UserProfile_user {
   __typename: "User";
   id: string;
-  name: string | null;
+  name: string;
   createdAt: any;
   updatedAt: any;
 }

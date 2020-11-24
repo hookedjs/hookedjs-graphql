@@ -7,6 +7,10 @@ export const Post = objectType({
     t.model.title()
     t.model.tags()
     t.model.status()
+    t.model.createdBy()
+    t.model.createdById()
+    t.model.updatedBy()
+    t.model.updatedById()
     t.model.author()
     t.model.authorId()
   },
@@ -23,8 +27,18 @@ export const Queries = extendType({
 export const Mutations = extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOnePost()
-    t.crud.updateOnePost()
+    t.crud.createOnePost({
+      computedInputs: {
+        createdBy: ({ctx}) => ({connect: {id: ctx.user.id}}),
+        updatedBy: ({ctx}) => ({connect: {id: ctx.user.id}}),
+        author: ({ctx}) => ({connect: {id: ctx.user.id}}),
+      },
+    })
+    t.crud.updateOnePost({
+      computedInputs: {
+        updatedBy: ({ctx}) => ({connect: {id: ctx.user.id}}),
+      },
+    })
     t.crud.deleteOnePost()
   },
 })

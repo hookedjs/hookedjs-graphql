@@ -4,9 +4,9 @@ export function isEmail(email: string) {
   return re.test(String(email))
 }
 
-export function assertEmail(email: string) {
+export function assertEmail(email: string, errorClass: any = Error) {
   if (!isEmail(email)) {
-    throw new Error('Email is invalid')
+    throw new errorClass('Email is invalid')
   }
   return email.toLowerCase()
 }

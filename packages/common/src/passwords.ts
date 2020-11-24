@@ -20,7 +20,7 @@ export function isPassword(subject: string) {
   return isPasswordRegex.test(subject)
 }
 
-export function assertPasswordStrength(password: string) {
-  if (!isPassword(password)) throw new Error(isPasswordRequirements)
+export function assertPasswordStrength(password: string, errorClass: any = Error) {
+  if (!isPassword(password)) throw new errorClass(isPasswordRequirements)
   return password
 }

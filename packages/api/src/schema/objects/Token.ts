@@ -1,4 +1,5 @@
 import {extendType, objectType, stringArg} from '@nexus/schema'
+import {AuthenticationError, ForbiddenError} from 'apollo-server-express'
 
 import { crypto, prisma } from '../lib'
 
@@ -6,6 +7,7 @@ export const Token = objectType({
   name: 'Token',
   definition(t) {
     t.string('accessToken')
+    t.string('refreshToken')
     t.string('userId')
     t.list.string('roles')
   },
@@ -14,7 +16,7 @@ export const Token = objectType({
 export const Queries = extendType({
   type: 'Query',
   definition(t) {
-    t.field('token', {
+    t.field('auth', {
       type: 'Token',
       args: {
         email: stringArg({required: true}),
@@ -28,11 +30,37 @@ export const Queries = extendType({
           await crypto.verify(args.password, user?.password ?? '')
           && user
         )) {
-          throw new Error('Username or Password is invalid')
+          throw new AuthenticationError('Username or Password is invalid')
         }
         return {
           // Return token + user info, so that clients dont need to decode it
           accessToken: crypto.tokenize({id: user.id, roles: user.roles}),
+          refreshToken: crypto.tokenize({id: user.id}, '30d'),
+          userId: user.id,
+          roles: user.roles,
+        }
+      },
+    })
+    t.field('authRefresh', {
+      type: 'Token',
+      args: {
+        refreshToken: stringArg({required: true}),
+      },
+      resolve: async (_root, args, ctx) => {
+        let userId: string
+        try {
+          userId = crypto.untokenize(args.refreshToken).id
+        } catch (e) {
+          throw new AuthenticationError('refreshToken is invalid')
+        }
+        const user = await prisma.user.findOne({where: {id: userId}})
+        if (!user?.roles.length) {
+          throw new ForbiddenError('refreshToken is declined')
+        }
+        return {
+          // Return token + user info, so that clients dont need to decode it
+          accessToken: crypto.tokenize({id: user.id, roles: user.roles}, '15m'),
+          refreshToken: crypto.tokenize({type:'refresh', id: user.id}, '30d'),
           userId: user.id,
           roles: user.roles,
         }

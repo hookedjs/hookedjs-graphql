@@ -29,6 +29,6 @@ export const Mutations = extendType({
   type: 'Mutation',
   definition(t) {
     t.crud.createOneApiError()
-    t.crud.updateOneApiError()
+    // t.crud.updateOneApiError()
   },
 })

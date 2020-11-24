@@ -28,6 +28,6 @@ export const Mutations = extendType({
   type: 'Mutation',
   definition(t) {
     t.crud.createOneApiAccess()
-    t.crud.updateOneApiAccess()
+    // t.crud.updateOneApiAccess()
   },
 })

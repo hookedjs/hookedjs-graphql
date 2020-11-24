@@ -3,14 +3,13 @@ import express from 'express'
 import path from 'path'
 import sirv from 'sirv'
 
-import {crypto} from './lib'
-import {apolloServer, gqlLogger} from './middleware'
+import {apolloServer, gqlLogger, jwt} from './middleware'
 
 const {PORT = 4000, NODE_ENV} = process.env
 const dev = NODE_ENV === 'development'
 
 const app = express()
-app.use(crypto.jwtMiddleware)
+app.use(jwt)
 app.use(compression())
 app.use(gqlLogger)
 

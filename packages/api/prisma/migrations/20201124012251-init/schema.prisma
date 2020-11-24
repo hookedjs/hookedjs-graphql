@@ -7,28 +7,10 @@ generator prisma_client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id        String   @default(cuid()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String?
-  posts     Post[]
-  roles     UserRole[]
-  email     String @unique
-  password  String?
-
-  @@index([email])
-}
-
-enum UserRole {
-  ADMIN
-  EDITOR
-  AUTHOR
-}
-
 model ApiError {
   id            String   @default(cuid()) @id
   createdAt     DateTime @default(now())
+
   ip            String
   reqUserId     String?
   reqUser       User?    @relation(fields: [reqUserId], references: [id])
@@ -44,6 +26,7 @@ model ApiAccess {
   id            String   @default(cuid()) @id
   createdAt     DateTime @default(now())
   ip            String
+
   reqUserId     String?
   reqUser       User?    @relation(fields: [reqUserId], references: [id])
   userAgent     String
@@ -60,6 +43,7 @@ model ApiAccess {
 model ClientEvent {
   id            String   @default(cuid()) @id
   createdAt     DateTime @default(now())
+
   ip            String
   reqUserById   String?
   reqUser       User?    @relation(fields: [reqUserById], references: [id])
@@ -69,16 +53,51 @@ model ClientEvent {
   city          String?
 }
 
+model User {
+  id            String   @default(cuid()) @id
+  createdAt     DateTime @default(now())
+  createdById   String?
+  createdBy     User?    @relation("UsersCreatedByUser", fields: [createdById], references: [id])
+  usersCreated User[]   @relation("UsersCreatedByUser")
+
+  updatedAt     DateTime @updatedAt
+  updatedById   String?
+  updatedBy     User?    @relation("UsersUpdatedByUser", fields: [updatedById], references: [id])
+  usersUpdated User[]   @relation("UsersUpdatedByUser")
+
+  name          String
+  roles         UserRole[]
+  email         String @unique
+  password      String?
+
+  postsAuthored Post[]   @relation("PostsAuthoredByUser")
+  postsCreated  Post[]   @relation("PostsCreatedByUser")
+  postsUpdated  Post[]   @relation("PostsUpdatedByUser")
+
+  @@index([email])
+}
+
+enum UserRole {
+  ADMIN
+  EDITOR
+  AUTHOR
+}
+
 model Post {
-  id       String     @default(cuid()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title    String
-  tags     Tag[]
-  blogId   Int?
-  status   PostStatus
-  authorId String
-  author   User      @relation(fields: [authorId], references: [id])
+  id            String     @default(cuid()) @id
+  createdAt     DateTime   @default(now())
+  createdById   String?
+  createdBy     User?      @relation("PostsCreatedByUser", fields: [createdById], references: [id])
+  updatedAt     DateTime   @updatedAt
+  updatedById   String?
+  updatedBy     User?      @relation("PostsUpdatedByUser", fields: [updatedById], references: [id])
+
+  title         String
+  tags          Tag[]
+  blogId        Int?
+  status        PostStatus
+  authorId      String
+  author        User       @relation("PostsAuthoredByUser", fields: [authorId], references: [id])
 }
 
 enum PostStatus {

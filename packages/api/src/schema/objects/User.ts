@@ -9,10 +9,17 @@ export const User = objectType({
   definition(t) {
     t.model.id()
     t.model.createdAt()
+    t.model.createdBy()
+    t.model.createdById()
     t.model.updatedAt()
+    t.model.updatedBy()
+    t.model.updatedById()
 
     t.model.name()
-    t.model.posts({filtering: true, ordering: true, pagination: true})
+    t.model.usersCreated({filtering: true, ordering: true, pagination: true})
+    t.model.postsAuthored({filtering: true, ordering: true, pagination: true})
+    t.model.postsCreated({filtering: true, ordering: true, pagination: true})
+    t.model.postsUpdated({filtering: true, ordering: true, pagination: true})
 
     t.model.roles()
     // Below sadly doesn't expose the enum, so skipping security for now
@@ -50,6 +57,10 @@ export const Mutations = extendType({
         const res = await prisma.user.create({
           data: {
             ...args.data,
+            ...ctx.user.id && {
+              createdBy: {connect: {id: ctx.user.id}},
+              updatedBy: {connect: {id: ctx.user.id}}
+            },
             roles: ['AUTHOR'],
             password: passwordHash,
           },
@@ -61,7 +72,11 @@ export const Mutations = extendType({
         return res
       },
     })
-    t.crud.updateOneUser()
+    t.crud.updateOneUser({
+      computedInputs: {
+        updatedBy: ({ctx}) => ({connect: {id: ctx.user.id}}),
+      },
+    })
     t.crud.deleteOneUser()
   },
 })

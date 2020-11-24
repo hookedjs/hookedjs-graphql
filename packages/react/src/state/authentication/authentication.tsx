@@ -1,31 +1,33 @@
-import { gql, useApolloClient } from '@apollo/client'
+import {gql, useApolloClient} from '@apollo/client'
 import React from 'react'
-import { useLocalStorage } from 'react-use'
+import {useInterval, useLocalStorage} from 'react-use'
 
-import { ContextType } from './types'
+import {ContextType} from './types'
 
 export const defaultValue: ContextType['state'] = Object.freeze({
   accessToken: '',
+  refreshToken: '',
   userId: '',
   roles: [],
 })
 
 export const AuthenticationContext = React.createContext<ContextType>({
   state: defaultValue,
-  login: async () => ({ graphQLErrors: [{ message: 'Not initialized' }] as any }),
-  logout: async () => {},
-  register: async () => ({ graphQLErrors: [{ message: 'Not initialized' }] as any }),
+  login: async () => ({graphQLErrors: [{message: 'Not initialized'}] as any}),
+  logout: async () => {
+  },
+  register: async () => ({graphQLErrors: [{message: 'Not initialized'}] as any}),
 })
 
-export const AuthenticationProvider: React.FC = ({ children }) => {
+export const AuthenticationProvider: React.FC = ({children}) => {
   const [state = defaultValue, setState] = useLocalStorage<ContextType['state']>('authentication', defaultValue)
   const apolloClient = useApolloClient()
 
   const login: ContextType['login'] = React.useCallback(
     async (creds) => {
-      const res = await apolloClient.query({ query: TOKEN, variables: creds })
+      const res = await apolloClient.query({query: AUTH, variables: creds})
         .then(res => {
-          setState(res.data.token)
+          setState(res.data.auth)
           return res
         })
         .catch(e => e)
@@ -40,10 +42,9 @@ export const AuthenticationProvider: React.FC = ({ children }) => {
 
   const register: ContextType['register'] = React.useCallback(
     async (creds) => {
-      const res = await apolloClient.mutate({ mutation: REGISTER, variables: { data: creds } })
-        .then(res => {
-          setState(res.data.token)
-          return login({ email: creds.email, password: creds.password! })
+      const res = await apolloClient.mutate({mutation: REGISTER, variables: {data: creds}})
+        .then(() => {
+          return login({email: creds.email, password: creds.password!})
         })
         .catch(e => e)
       return res
@@ -51,18 +52,20 @@ export const AuthenticationProvider: React.FC = ({ children }) => {
     [apolloClient, login, setState]
   )
 
-  // const refresh = React.useCallback(async () => {
-  //   if (state.refreshToken) {
-  //     const res = await mockApi(EndpointsEnum.refresh, { refreshToken: state.refreshToken });
-  //     if (!res.error) {
-  //       setState(res.data);
-  //     }
-  //   }
-  // }, [setState, state.refreshToken]);
-  //
-  // useInterval(refresh, 10 * 1000);
+  useInterval(() => {
+    if (state.refreshToken) {
+      apolloClient.query({query: AUTH_REFRESH, variables: {refreshToken: state.refreshToken}})
+        .then(res => {
+          setState(res.data.authRefresh)
+        })
+        .catch(e => {
+          console.error(e)
+          setState(defaultValue)
+        })
+    }
+  }, 60 * 1000)
 
-  const values: ContextType = { state, login, logout, register }
+  const values: ContextType = {state, login, logout, register}
 
   return <AuthenticationContext.Provider value={values}>{children}</AuthenticationContext.Provider>
 }
@@ -71,20 +74,32 @@ export function useAuthentication() {
   return React.useContext(AuthenticationContext)
 }
 
-const TOKEN = gql`
-  query Token($email: String!, $password: String!) {
-    token(email: $email, password: $password) {
-      accessToken
-      userId
-      roles
+const AUTH = gql`
+    query Auth($email: String!, $password: String!) {
+        auth(email: $email, password: $password) {
+            accessToken
+            refreshToken
+            userId
+            roles
+        }
     }
-  }
+`
+
+const AUTH_REFRESH = gql`
+    query AuthRefresh($refreshToken: String!) {
+        authRefresh(refreshToken: $refreshToken) {
+            accessToken
+            refreshToken
+            userId
+            roles
+        }
+    }
 `
 
 const REGISTER = gql`
-  mutation Register($data: RegisterInputType!) {
-    createOneUser(data: $data) {
-      id
+    mutation Register($data: RegisterInputType!) {
+        createOneUser(data: $data) {
+            id
+        }
     }
-  }
 `

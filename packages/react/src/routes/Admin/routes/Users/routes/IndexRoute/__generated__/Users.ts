@@ -12,7 +12,7 @@ import { UserRole } from "./../../../../../../../__generated__/globalTypes";
 export interface Users_users {
   __typename: "User";
   id: string;
-  name: string | null;
+  name: string;
   createdAt: any;
   updatedAt: any;
   roles: UserRole[];

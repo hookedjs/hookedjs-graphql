@@ -1,5 +1,4 @@
 import crypto from 'crypto'
-import expressJwt from 'express-jwt'
 import jwt from 'jsonwebtoken'
 
 const salt = '551ae75784b425427b561e4acfebd82b' //crypto.randomBytes(16).toString("hex")
@@ -19,8 +18,12 @@ export async function verify(str: string, hashToCheck: string): Promise<boolean>
   return hashToCheck === hashExpected
 }
 
-export function tokenize(obj: Record<string, any>) {
-  return jwt.sign(obj, secret, { expiresIn: '1d' })
+export function tokenize(obj: Record<string, any>, expiresIn = '1h') {
+  return jwt.sign(obj, secret, { expiresIn })
+}
+
+export function untokenize(token: string) {
+  return jwt.verify(token, secret) as Record<string, any>
 }
 
 export function safeStringCompare(a: string, b: string): boolean {
@@ -29,11 +32,11 @@ export function safeStringCompare(a: string, b: string): boolean {
   return crypto.timingSafeEqual(bufA, bufB)
 }
 
-export const jwtMiddleware = expressJwt({
-  secret,
-  // requestProperty: "auth",
-  algorithms: ['HS256'],
-  credentialsRequired: false,
-  // getToken: (req) => req.cookies.auth,
-})
+// export const jwtMiddleware = expressJwt({
+//   secret,
+//   // requestProperty: "auth",
+//   algorithms: ['HS256'],
+//   credentialsRequired: false,
+//   // getToken: (req) => req.cookies.auth,
+// })
 

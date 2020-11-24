@@ -33,6 +33,6 @@ export const ClientEventMutations = extendType({
         }),
       },
     })
-    t.crud.updateOneApiError()
+    // t.crud.updateOneApiError()
   },
 })

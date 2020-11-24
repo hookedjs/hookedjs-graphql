@@ -8,6 +8,7 @@ function gqlLogger(req: Request, res: Response, next: NextFunction) {
   const start = Date.now()
   const oldWrite = res.write,
     oldEnd = res.end
+    // oldSend = res.send
 
   const chunks: any[] = []
 
@@ -16,6 +17,10 @@ function gqlLogger(req: Request, res: Response, next: NextFunction) {
     // eslint-disable-next-line prefer-rest-params
     return oldWrite.apply(res, arguments as any)
   }
+
+  // res.send = function(body: any) {
+  //   oldSend(body)
+  // }
 
   res.end = function (chunk: any) {
     if (chunk)

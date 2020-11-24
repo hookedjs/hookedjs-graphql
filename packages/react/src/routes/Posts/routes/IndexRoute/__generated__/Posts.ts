@@ -10,7 +10,7 @@
 export interface Posts_posts_author {
   __typename: "User";
   id: string;
-  name: string | null;
+  name: string;
 }
 
 export interface Posts_posts {

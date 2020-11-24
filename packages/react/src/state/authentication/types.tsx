@@ -5,6 +5,7 @@ import { Token_token, TokenVariables } from './__generated__/Token'
 
 export interface AuthState {
   accessToken: string;
+  refreshToken: string;
   userId: string;
   roles: string[];
 }
