@@ -32,6 +32,7 @@ export const Queries = extendType({
         )) {
           throw new AuthenticationError('Username or Password is invalid')
         }
+        ctx.req.user = { id: user.id, roles: user.roles }
         return {
           // Return token + user info, so that clients dont need to decode it
           accessToken: crypto.tokenize({id: user.id, roles: user.roles}),
@@ -54,6 +55,7 @@ export const Queries = extendType({
           throw new AuthenticationError('refreshToken is invalid')
         }
         const user = await prisma.user.findOne({where: {id: userId}})
+        ctx.req.user = { id: user?.id, roles: user?.roles ?? [] }
         if (!user?.roles.length) {
           throw new ForbiddenError('refreshToken is declined')
         }

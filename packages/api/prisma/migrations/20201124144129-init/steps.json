@@ -182,13 +182,6 @@
     {
       "tag": "CreateField",
       "model": "ApiError",
-      "field": "userAgent",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
       "field": "operationName",
       "type": "String",
       "arity": "Required"
@@ -363,58 +356,9 @@
     {
       "tag": "CreateField",
       "model": "ApiAccess",
-      "field": "userAgent",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiAccess",
       "field": "operationName",
       "type": "String",
       "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiAccess",
-      "field": "region",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiAccess",
-      "field": "city",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiAccess",
-      "field": "country",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiAccess",
-      "field": "eu",
-      "type": "Boolean",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiAccess",
-      "field": "lat",
-      "type": "Float",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiAccess",
-      "field": "lon",
-      "type": "Float",
-      "arity": "Optional"
     },
     {
       "tag": "CreateField",
@@ -575,20 +519,6 @@
       "field": "name",
       "type": "String",
       "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ClientEvent",
-      "field": "region",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ClientEvent",
-      "field": "city",
-      "type": "String",
-      "arity": "Optional"
     },
     {
       "tag": "CreateModel",

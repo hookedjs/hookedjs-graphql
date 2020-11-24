@@ -14,7 +14,6 @@ model ApiError {
   ip            String
   reqUserId     String?
   reqUser       User?    @relation(fields: [reqUserId], references: [id])
-  userAgent     String
   operationName String
   message       String
   stack         Json
@@ -29,14 +28,7 @@ model ApiAccess {
 
   reqUserId     String?
   reqUser       User?    @relation(fields: [reqUserId], references: [id])
-  userAgent     String
   operationName String
-  region        String?
-  city          String?
-  country       String?
-  eu            Boolean?
-  lat           Float?
-  lon           Float?
   duration      Int
 }
 
@@ -49,8 +41,6 @@ model ClientEvent {
   reqUser       User?    @relation(fields: [reqUserById], references: [id])
   userAgent     String
   name          String
-  region        String?
-  city          String?
 }
 
 model User {

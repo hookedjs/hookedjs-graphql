@@ -54,7 +54,7 @@ export const Mutations = extendType({
       args: {data: CreateOneUserType.asArg({required: true})},
       resolve: async (_root, args, ctx) => {
         const passwordHash = await crypto.hash(args.data.password!)
-        const res = await prisma.user.create({
+        const user = await prisma.user.create({
           data: {
             ...args.data,
             ...ctx.user.id && {
@@ -69,7 +69,8 @@ export const Mutations = extendType({
             throw new ValidationError('Email is already registered')
           throw e
         })
-        return res
+        ctx.req.user = { id: user.id, roles: user.roles }
+        return user
       },
     })
     t.crud.updateOneUser({

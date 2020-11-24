@@ -10,8 +10,6 @@ export const ClientEvent = objectType({
     t.model.reqUser()
     t.model.userAgent()
     t.model.name()
-    t.model.region()
-    t.model.city()
   },
 })
 

@@ -8,10 +8,7 @@ export const ApiAccess = objectType({
     t.model.ip()
     t.model.reqUserId()
     t.model.reqUser()
-    t.model.userAgent()
     t.model.operationName()
-    t.model.region()
-    t.model.city()
     t.model.duration()
   },
 })

@@ -3,32 +3,22 @@
 
 
 type ApiAccess {
-  city: String
   createdAt: DateTime!
   duration: Int!
   id: String!
   ip: String!
   operationName: String!
-  region: String
   reqUser: User
   reqUserId: String
-  userAgent: String!
 }
 
 input ApiAccessCreateInput {
-  city: String
-  country: String
   createdAt: DateTime
   duration: Int!
-  eu: Boolean
   id: String
   ip: String!
-  lat: Float
-  lon: Float
   operationName: String!
-  region: String
   reqUser: UserCreateOneWithoutApiAccessInput
-  userAgent: String!
 }
 
 input ApiAccessCreateManyWithoutReqUserInput {
@@ -37,18 +27,11 @@ input ApiAccessCreateManyWithoutReqUserInput {
 }
 
 input ApiAccessCreateWithoutReqUserInput {
-  city: String
-  country: String
   createdAt: DateTime
   duration: Int!
-  eu: Boolean
   id: String
   ip: String!
-  lat: Float
-  lon: Float
   operationName: String!
-  region: String
-  userAgent: String!
 }
 
 input ApiAccessListRelationFilter {
@@ -58,53 +41,32 @@ input ApiAccessListRelationFilter {
 }
 
 input ApiAccessOrderByInput {
-  city: SortOrder
-  country: SortOrder
   createdAt: SortOrder
   duration: SortOrder
-  eu: SortOrder
   id: SortOrder
   ip: SortOrder
-  lat: SortOrder
-  lon: SortOrder
   operationName: SortOrder
-  region: SortOrder
   reqUserId: SortOrder
-  userAgent: SortOrder
 }
 
 input ApiAccessScalarWhereInput {
   AND: [ApiAccessScalarWhereInput!]
-  city: StringNullableFilter
-  country: StringNullableFilter
   createdAt: DateTimeFilter
   duration: IntFilter
-  eu: BoolNullableFilter
   id: StringFilter
   ip: StringFilter
-  lat: FloatNullableFilter
-  lon: FloatNullableFilter
   NOT: [ApiAccessScalarWhereInput!]
   operationName: StringFilter
   OR: [ApiAccessScalarWhereInput!]
-  region: StringNullableFilter
   reqUserId: StringNullableFilter
-  userAgent: StringFilter
 }
 
 input ApiAccessUpdateManyDataInput {
-  city: NullableStringFieldUpdateOperationsInput
-  country: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   duration: IntFieldUpdateOperationsInput
-  eu: NullableBoolFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
-  lat: NullableFloatFieldUpdateOperationsInput
-  lon: NullableFloatFieldUpdateOperationsInput
   operationName: StringFieldUpdateOperationsInput
-  region: NullableStringFieldUpdateOperationsInput
-  userAgent: StringFieldUpdateOperationsInput
 }
 
 input ApiAccessUpdateManyWithoutReqUserInput {
@@ -125,18 +87,11 @@ input ApiAccessUpdateManyWithWhereNestedInput {
 }
 
 input ApiAccessUpdateWithoutReqUserDataInput {
-  city: NullableStringFieldUpdateOperationsInput
-  country: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   duration: IntFieldUpdateOperationsInput
-  eu: NullableBoolFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
-  lat: NullableFloatFieldUpdateOperationsInput
-  lon: NullableFloatFieldUpdateOperationsInput
   operationName: StringFieldUpdateOperationsInput
-  region: NullableStringFieldUpdateOperationsInput
-  userAgent: StringFieldUpdateOperationsInput
 }
 
 input ApiAccessUpdateWithWhereUniqueWithoutReqUserInput {
@@ -152,22 +107,15 @@ input ApiAccessUpsertWithWhereUniqueWithoutReqUserInput {
 
 input ApiAccessWhereInput {
   AND: [ApiAccessWhereInput!]
-  city: StringNullableFilter
-  country: StringNullableFilter
   createdAt: DateTimeFilter
   duration: IntFilter
-  eu: BoolNullableFilter
   id: StringFilter
   ip: StringFilter
-  lat: FloatNullableFilter
-  lon: FloatNullableFilter
   NOT: [ApiAccessWhereInput!]
   operationName: StringFilter
   OR: [ApiAccessWhereInput!]
-  region: StringNullableFilter
   reqUser: UserWhereInput
   reqUserId: StringNullableFilter
-  userAgent: StringFilter
 }
 
 input ApiAccessWhereUniqueInput {
@@ -185,7 +133,6 @@ type ApiError {
   reqUserId: String
   resBody: Json!
   stack: Json!
-  userAgent: String!
 }
 
 input ApiErrorCreateInput {
@@ -198,7 +145,6 @@ input ApiErrorCreateInput {
   reqUser: UserCreateOneWithoutApiErrorInput
   resBody: Json!
   stack: Json!
-  userAgent: String!
 }
 
 input ApiErrorCreateManyWithoutReqUserInput {
@@ -215,7 +161,6 @@ input ApiErrorCreateWithoutReqUserInput {
   reqBody: Json!
   resBody: Json!
   stack: Json!
-  userAgent: String!
 }
 
 input ApiErrorListRelationFilter {
@@ -234,7 +179,6 @@ input ApiErrorOrderByInput {
   reqUserId: SortOrder
   resBody: SortOrder
   stack: SortOrder
-  userAgent: SortOrder
 }
 
 input ApiErrorScalarWhereInput {
@@ -247,7 +191,6 @@ input ApiErrorScalarWhereInput {
   operationName: StringFilter
   OR: [ApiErrorScalarWhereInput!]
   reqUserId: StringNullableFilter
-  userAgent: StringFilter
 }
 
 input ApiErrorUpdateManyDataInput {
@@ -259,7 +202,6 @@ input ApiErrorUpdateManyDataInput {
   reqBody: Json
   resBody: Json
   stack: Json
-  userAgent: StringFieldUpdateOperationsInput
 }
 
 input ApiErrorUpdateManyWithoutReqUserInput {
@@ -288,7 +230,6 @@ input ApiErrorUpdateWithoutReqUserDataInput {
   reqBody: Json
   resBody: Json
   stack: Json
-  userAgent: StringFieldUpdateOperationsInput
 }
 
 input ApiErrorUpdateWithWhereUniqueWithoutReqUserInput {
@@ -313,25 +254,17 @@ input ApiErrorWhereInput {
   OR: [ApiErrorWhereInput!]
   reqUser: UserWhereInput
   reqUserId: StringNullableFilter
-  userAgent: StringFilter
 }
 
 input ApiErrorWhereUniqueInput {
   id: String
 }
 
-input BoolNullableFilter {
-  equals: Boolean
-  not: NestedBoolNullableFilter
-}
-
 type ClientEvent {
-  city: String
   createdAt: DateTime!
   id: String!
   ip: String!
   name: String!
-  region: String
   reqUser: User
   reqUserById: String
   userAgent: String!
@@ -343,12 +276,10 @@ input ClientEventCreateManyWithoutReqUserInput {
 }
 
 input ClientEventCreateWithoutReqUserInput {
-  city: String
   createdAt: DateTime
   id: String
   ip: String!
   name: String!
-  region: String
   userAgent: String!
 }
 
@@ -360,25 +291,21 @@ input ClientEventListRelationFilter {
 
 input ClientEventScalarWhereInput {
   AND: [ClientEventScalarWhereInput!]
-  city: StringNullableFilter
   createdAt: DateTimeFilter
   id: StringFilter
   ip: StringFilter
   name: StringFilter
   NOT: [ClientEventScalarWhereInput!]
   OR: [ClientEventScalarWhereInput!]
-  region: StringNullableFilter
   reqUserById: StringNullableFilter
   userAgent: StringFilter
 }
 
 input ClientEventUpdateManyDataInput {
-  city: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  region: NullableStringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
 }
 
@@ -400,12 +327,10 @@ input ClientEventUpdateManyWithWhereNestedInput {
 }
 
 input ClientEventUpdateWithoutReqUserDataInput {
-  city: NullableStringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
-  region: NullableStringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
 }
 
@@ -422,14 +347,12 @@ input ClientEventUpsertWithWhereUniqueWithoutReqUserInput {
 
 input ClientEventWhereInput {
   AND: [ClientEventWhereInput!]
-  city: StringNullableFilter
   createdAt: DateTimeFilter
   id: StringFilter
   ip: StringFilter
   name: StringFilter
   NOT: [ClientEventWhereInput!]
   OR: [ClientEventWhereInput!]
-  region: StringNullableFilter
   reqUser: UserWhereInput
   reqUserById: StringNullableFilter
   userAgent: StringFilter
@@ -475,17 +398,6 @@ input EnumPostStatusFilter {
 
 input EnumUserRoleNullableListFilter {
   equals: [UserRole!]
-}
-
-input FloatNullableFilter {
-  equals: Float
-  gt: Float
-  gte: Float
-  in: [Float!]
-  lt: Float
-  lte: Float
-  not: NestedFloatNullableFilter
-  notIn: [Float!]
 }
 
 input IntFieldUpdateOperationsInput {
@@ -534,11 +446,6 @@ type Mutation {
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
-input NestedBoolNullableFilter {
-  equals: Boolean
-  not: NestedBoolNullableFilter
-}
-
 input NestedDateTimeFilter {
   equals: DateTime
   gt: DateTime
@@ -555,17 +462,6 @@ input NestedEnumPostStatusFilter {
   in: [PostStatus!]
   not: NestedEnumPostStatusFilter
   notIn: [PostStatus!]
-}
-
-input NestedFloatNullableFilter {
-  equals: Float
-  gt: Float
-  gte: Float
-  in: [Float!]
-  lt: Float
-  lte: Float
-  not: NestedFloatNullableFilter
-  notIn: [Float!]
 }
 
 input NestedIntFilter {
@@ -616,18 +512,6 @@ input NestedStringNullableFilter {
   not: NestedStringNullableFilter
   notIn: [String!]
   startsWith: String
-}
-
-input NullableBoolFieldUpdateOperationsInput {
-  set: Boolean
-}
-
-input NullableFloatFieldUpdateOperationsInput {
-  decrement: Float
-  divide: Float
-  increment: Float
-  multiply: Float
-  set: Float
 }
 
 input NullableIntFieldUpdateOperationsInput {

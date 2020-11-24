@@ -8,7 +8,6 @@ export const ApiError = objectType({
     t.model.ip()
     t.model.reqUserId()
     t.model.reqUser()
-    t.model.userAgent()
     t.model.operationName()
     t.model.message()
     t.model.stack()

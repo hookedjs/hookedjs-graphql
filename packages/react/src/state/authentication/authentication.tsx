@@ -49,7 +49,7 @@ export const AuthenticationProvider: React.FC = ({children}) => {
         .catch(e => e)
       return res
     },
-    [apolloClient, login, setState]
+    [apolloClient, login]
   )
 
   useInterval(() => {
