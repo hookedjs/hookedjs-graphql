@@ -1,4 +1,7 @@
 import {extendType, objectType} from '@nexus/schema'
+import {allow} from 'graphql-shield'
+
+import {isAdmin, RuleSet} from '../lib'
 
 export const ClientEvent = objectType({
   name: 'ClientEvent',
@@ -34,3 +37,11 @@ export const ClientEventMutations = extendType({
     // t.crud.updateOneApiError()
   },
 })
+
+export const Rules: RuleSet = {
+  Query: {},
+  Mutation: {
+    createOneClientEvent: allow,
+  },
+  ClientEvent: isAdmin,
+}

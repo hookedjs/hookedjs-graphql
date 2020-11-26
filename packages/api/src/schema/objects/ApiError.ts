@@ -1,5 +1,7 @@
 import {extendType, objectType} from '@nexus/schema'
 
+import {isAdmin, RuleSet} from '../lib'
+
 export const ApiError = objectType({
   name: 'ApiError',
   definition(t) {
@@ -31,3 +33,9 @@ export const Mutations = extendType({
     // t.crud.updateOneApiError()
   },
 })
+
+export const Rules: RuleSet = {
+  Query: {},
+  Mutation: {},
+  ApiError: isAdmin,
+}

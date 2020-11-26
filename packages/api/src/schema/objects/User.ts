@@ -1,8 +1,9 @@
 import {extendType, inputObjectType, objectType} from '@nexus/schema'
 import {UserRole} from '@prisma/client'
 import {ValidationError} from 'apollo-server-express'
+import {allow, rule} from 'graphql-shield'
 
-import {crypto, prisma} from '../lib'
+import {crypto, isAuthenticated, prisma, RuleSet} from '../lib'
 
 export const User = objectType({
   name: 'User',
@@ -80,3 +81,24 @@ export const CreateOneUserType = inputObjectType({
     t.password('password', {required: true})
   },
 })
+
+const isSelf = rule({ cache: 'strict' })(
+  async (parent, args, ctx, info) => {
+    return parent.id === ctx.user.id || ctx.user.roles.includes('admin')
+  },
+)
+
+export const Rules: RuleSet = {
+  Query: {
+    users: isAuthenticated,
+  },
+  Mutation: {
+    createOneUser: allow,
+  },
+  User: {
+    id: isAuthenticated,
+    name: isAuthenticated,
+    email: isSelf,
+    postsAuthored: isAuthenticated,
+  }
+}

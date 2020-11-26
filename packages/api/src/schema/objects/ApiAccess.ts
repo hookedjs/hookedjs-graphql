@@ -1,5 +1,7 @@
 import {extendType, objectType} from '@nexus/schema'
 
+import {isAdmin, RuleSet} from '../lib'
+
 export const ApiAccess = objectType({
   name: 'ApiAccess',
   definition(t) {
@@ -28,3 +30,9 @@ export const Mutations = extendType({
     // t.crud.updateOneApiAccess()
   },
 })
+
+export const Rules: RuleSet = {
+  Query: {},
+  Mutation: {},
+  ApiAccess: isAdmin,
+}

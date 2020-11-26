@@ -1,5 +1,7 @@
 import {extendType, objectType} from '@nexus/schema'
 
+import {isAuthenticated, RuleSet} from '../lib'
+
 export const Tag = objectType({
   name: 'Tag',
   definition(t) {
@@ -24,3 +26,13 @@ export const Mutations = extendType({
     t.crud.deleteOneTag()
   },
 })
+
+export const Rules: RuleSet = {
+  Query: {
+    tags: isAuthenticated,
+  },
+  Mutation: {
+    createOneTag: isAuthenticated,
+  },
+  Tag: isAuthenticated,
+}

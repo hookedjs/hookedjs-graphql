@@ -1,4 +1,8 @@
 import {extendType, objectType} from '@nexus/schema'
+import {PostStatus} from '@prisma/client'
+import {rule} from 'graphql-shield'
+
+import {isAuthenticated, RuleSet} from '../lib'
 
 export const Post = objectType({
   name: 'Post',
@@ -45,3 +49,26 @@ export const Mutations = extendType({
     t.crud.deleteOnePost()
   },
 })
+
+const isPostPublishedOrOwner = rule({ cache: 'strict' })(
+  async (parent, args, ctx, info) => {
+    return parent.status === PostStatus.PUBLISHED || parent.authorId === ctx.user.id || ctx.user.roles.includes('admin')
+  },
+)
+
+export const Rules: RuleSet = {
+  Query: {
+    posts: isAuthenticated,
+  },
+  Mutation: {
+    createOnePost: isAuthenticated,
+  },
+  Post: {
+    id: isPostPublishedOrOwner,
+    title: isPostPublishedOrOwner,
+    tags: isPostPublishedOrOwner,
+    status: isPostPublishedOrOwner,
+    author: isPostPublishedOrOwner,
+    authorId: isPostPublishedOrOwner,
+  }
+}

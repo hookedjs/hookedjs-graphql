@@ -1,75 +1,35 @@
-import { PostStatus } from '@prisma/client'
-import {allow, and, deny, not,or, rule, shield } from 'graphql-shield'
+import {shield } from 'graphql-shield'
 
-const isAuthenticated = rule({ cache: 'contextual' })(
-  async (parent, args, ctx, info) => {
-    return !!ctx.user.id
-  },
+import {ApiAccess, ApiError, ClientEvent, Post, Tag,Token, User} from '../objects'
+import {isAdmin, RuleSet} from './rules'
+
+const rules = mergeRules(
+  ApiAccess.Rules,
+  ApiError.Rules,
+  ClientEvent.Rules,
+  Post.Rules,
+  Tag.Rules,
+  Token.Rules,
+  User.Rules
 )
 
-function isAdminCtx(ctx: any) {
-  return ctx.user.roles.includes('admin')
+const permissions = shield(rules, {
+  fallbackError: 'Forbidden',
+  fallbackRule: isAdmin,
+  allowExternalErrors: true,
 }
-
-const isAdmin = rule({ cache: 'contextual' })(
-  async (parent, args, ctx, info) => {
-    return isAdminCtx(ctx)
-  },
-)
-
-const isEditor = rule({ cache: 'contextual' })(
-  async (parent, args, ctx, info) => {
-    return ctx.user.roles.includes('editor') || isAdminCtx(ctx)
-  },
-)
-
-const isSelf = rule({ cache: 'strict' })(
-  async (parent, args, ctx, info) => {
-    return parent.id === ctx.user.id || isAdminCtx(ctx)
-  },
-)
-
-const isPostPublishedOrOwner = rule({ cache: 'strict' })(
-  async (parent, args, ctx, info) => {
-    return parent.status === PostStatus.PUBLISHED || parent.authorId === ctx.user.id || isAdminCtx(ctx)
-  },
-)
-
-const permissions = shield(
-  {
-    Query: {
-      auth: allow,
-      authRefresh: allow,
-      users: isAuthenticated,
-      tags: isAuthenticated,
-      posts: isAuthenticated,
-    },
-    Mutation: {
-      createOneClientEvent: allow,
-      createOneUser: allow,
-      createOnePost: isAuthenticated,
-      createOneTag: isAuthenticated,
-    },
-    User: {
-      id: isAuthenticated,
-      name: isAuthenticated,
-      email: isSelf,
-      postsAuthored: isAuthenticated,
-    },
-    Post: {
-      id: isPostPublishedOrOwner,
-      title: isPostPublishedOrOwner,
-      tags: isPostPublishedOrOwner,
-      status: isPostPublishedOrOwner,
-      author: isPostPublishedOrOwner,
-      authorId: isPostPublishedOrOwner,
-    },
-    Tag: isAuthenticated,
-  }, {
-    fallbackError: 'Forbidden',
-    fallbackRule: isAdmin,
-    allowExternalErrors: true,
-  }
 )
 
 export default permissions
+
+
+function mergeRules(...rules: RuleSet[]): RuleSet {
+  return rules.reduce(
+    (a,r) => ({
+      ...a,
+      ...r,
+      Query: {...a.Query, ...r.Query},
+      Mutation: {...a.Mutation, ...r.Mutation },
+    }),
+    {Query:{}, Mutation: {}})
+}

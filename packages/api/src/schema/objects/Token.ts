@@ -1,7 +1,8 @@
 import {extendType, objectType, stringArg} from '@nexus/schema'
 import {AuthenticationError, ForbiddenError} from 'apollo-server-express'
+import {allow} from 'graphql-shield'
 
-import { crypto, prisma } from '../lib'
+import {crypto, prisma, RuleSet} from '../lib'
 
 export const Token = objectType({
   name: 'Token',
@@ -70,3 +71,12 @@ export const Queries = extendType({
     })
   },
 })
+
+export const Rules: RuleSet = {
+  Query: {
+    auth: allow,
+    authRefresh: allow,
+  },
+  Mutation: {},
+  Token: allow,
+}
