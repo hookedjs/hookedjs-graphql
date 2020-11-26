@@ -84,7 +84,6 @@ model Post {
 
   title         String
   tags          Tag[]
-  blogId        Int?
   status        PostStatus
   authorId      String
   author        User       @relation("PostsAuthoredByUser", fields: [authorId], references: [id])

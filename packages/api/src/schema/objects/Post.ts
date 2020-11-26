@@ -3,14 +3,17 @@ import {extendType, objectType} from '@nexus/schema'
 export const Post = objectType({
   name: 'Post',
   definition(t) {
+    t.model.createdAt()
+    t.model.createdBy()
+    t.model.createdById()
+    t.model.updatedAt()
+    t.model.updatedBy()
+    t.model.updatedById()
     t.model.id()
+
     t.model.title()
     t.model.tags()
     t.model.status()
-    t.model.createdBy()
-    t.model.createdById()
-    t.model.updatedBy()
-    t.model.updatedById()
     t.model.author()
     t.model.authorId()
   },

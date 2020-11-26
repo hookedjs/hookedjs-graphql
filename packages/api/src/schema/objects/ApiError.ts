@@ -27,7 +27,7 @@ export const Queries = extendType({
 export const Mutations = extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneApiError()
+    // t.crud.createOneApiError()
     // t.crud.updateOneApiError()
   },
 })

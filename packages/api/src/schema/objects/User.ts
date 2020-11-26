@@ -2,7 +2,7 @@ import {extendType, inputObjectType, objectType} from '@nexus/schema'
 import {UserRole} from '@prisma/client'
 import {ValidationError} from 'apollo-server-express'
 
-import {crypto, forbidAll, limitToOwner, prisma} from '../lib'
+import {crypto, prisma} from '../lib'
 
 export const User = objectType({
   name: 'User',
@@ -14,26 +14,16 @@ export const User = objectType({
     t.model.updatedAt()
     t.model.updatedBy()
     t.model.updatedById()
+    t.model.password()
 
     t.model.name()
+    t.model.email()
+    t.model.roles()
+
     t.model.usersCreated({filtering: true, ordering: true, pagination: true})
     t.model.postsAuthored({filtering: true, ordering: true, pagination: true})
     t.model.postsCreated({filtering: true, ordering: true, pagination: true})
     t.model.postsUpdated({filtering: true, ordering: true, pagination: true})
-
-    t.model.roles()
-    // Below sadly doesn't expose the enum, so skipping security for now
-    // t.list.string("roles", {
-    //   resolve: auth.guardIfNotOwner("roles", []),
-    // })
-
-    t.email('email', {
-      resolve: limitToOwner('email', [UserRole.EDITOR]),
-    })
-
-    t.password('password', {
-      resolve: forbidAll('password'),
-    })
   },
 })
 

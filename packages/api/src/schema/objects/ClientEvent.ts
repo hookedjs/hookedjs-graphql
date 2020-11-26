@@ -16,15 +16,15 @@ export const ClientEvent = objectType({
 export const Queries = extendType({
   type: 'Query',
   definition(t) {
-    t.crud.apiError()
-    t.crud.apiErrors({filtering: true, ordering: true, pagination: true})
+    t.crud.clientEvent()
+    t.crud.clientEvents({filtering: true, ordering: true, pagination: true})
   },
 })
 
 export const ClientEventMutations = extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneApiError({
+    t.crud.createOneClientEvent({
       computedInputs: {
         createdBy: ({ctx}) => ({
           connect: {id: ctx.user.id},

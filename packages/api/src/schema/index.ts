@@ -1,13 +1,15 @@
 import {
   // connectionPlugin,
-  fieldAuthorizePlugin,
+  // fieldAuthorizePlugin,
   makeSchema,
   nullabilityGuardPlugin,
   queryComplexityPlugin,
 } from '@nexus/schema'
+import { applyMiddleware } from 'graphql-middleware'
 import {nexusPrisma} from 'nexus-plugin-prisma'
 import * as path from 'path'
 
+import permissions from './lib/permissions'
 import * as Mutation from './Mutation'
 import * as Objects from './objects'
 import * as Query from './Query'
@@ -16,7 +18,7 @@ import * as Scalars from './scalars'
 // const DEBUGGING_CURSOR = false
 // let fn = DEBUGGING_CURSOR ? (i: string) => i : undefined
 
-export default makeSchema({
+const schema = makeSchema({
   types: [Query, Mutation, Scalars, Objects],
   outputs: {
     // typegen: path.join(__dirname, '../typegen.gen.ts'),
@@ -30,7 +32,6 @@ export default makeSchema({
     //   decodeCursor: fn,
     // }),
     queryComplexityPlugin(),
-    fieldAuthorizePlugin(),
     nullabilityGuardPlugin({
       shouldGuard: true,
       fallbackValues: {
@@ -53,3 +54,7 @@ export default makeSchema({
   //   },
   // },
 })
+
+const schemaWithShield = applyMiddleware(schema, permissions)
+
+export default schemaWithShield

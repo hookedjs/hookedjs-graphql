@@ -7,7 +7,6 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "yarn codegen",
     "build": "yarn codegen && cd packages/react && yarn build",
     "codegen": "yarn workspaces run codegen",
     "clean": "rimraf packages/*/**/{__generated__,build,node_modules,schema.graphql} node_modules .eslintcache",

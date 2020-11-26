@@ -12,15 +12,6 @@ type ApiAccess {
   reqUserId: String
 }
 
-input ApiAccessCreateInput {
-  createdAt: DateTime
-  duration: Int!
-  id: String
-  ip: String!
-  operationName: String!
-  reqUser: UserCreateOneWithoutApiAccessInput
-}
-
 input ApiAccessCreateManyWithoutReqUserInput {
   connect: [ApiAccessWhereUniqueInput!]
   create: [ApiAccessCreateWithoutReqUserInput!]
@@ -131,18 +122,6 @@ type ApiError {
   reqBody: Json!
   reqUser: User
   reqUserId: String
-  resBody: Json!
-  stack: Json!
-}
-
-input ApiErrorCreateInput {
-  createdAt: DateTime
-  id: String
-  ip: String!
-  message: String!
-  operationName: String!
-  reqBody: Json!
-  reqUser: UserCreateOneWithoutApiErrorInput
   resBody: Json!
   stack: Json!
 }
@@ -270,6 +249,15 @@ type ClientEvent {
   userAgent: String!
 }
 
+input ClientEventCreateInput {
+  createdAt: DateTime
+  id: String
+  ip: String!
+  name: String!
+  reqUser: UserCreateOneWithoutClientEventInput
+  userAgent: String!
+}
+
 input ClientEventCreateManyWithoutReqUserInput {
   connect: [ClientEventWhereUniqueInput!]
   create: [ClientEventCreateWithoutReqUserInput!]
@@ -287,6 +275,15 @@ input ClientEventListRelationFilter {
   every: ClientEventWhereInput
   none: ClientEventWhereInput
   some: ClientEventWhereInput
+}
+
+input ClientEventOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  ip: SortOrder
+  name: SortOrder
+  reqUserById: SortOrder
+  userAgent: SortOrder
 }
 
 input ClientEventScalarWhereInput {
@@ -419,22 +416,10 @@ input IntFilter {
   notIn: [Int!]
 }
 
-input IntNullableFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int!]
-  lt: Int
-  lte: Int
-  not: NestedIntNullableFilter
-  notIn: [Int!]
-}
-
 scalar Json
 
 type Mutation {
-  createOneApiAccess(data: ApiAccessCreateInput!): ApiAccess!
-  createOneApiError(data: ApiErrorCreateInput!): ApiError!
+  createOneClientEvent(data: ClientEventCreateInput!): ClientEvent!
   createOnePost(data: PostCreateInput!): Post!
   createOneTag(data: TagCreateInput!): Tag!
   createOneUser(data: RegisterInputType!): User
@@ -475,17 +460,6 @@ input NestedIntFilter {
   notIn: [Int!]
 }
 
-input NestedIntNullableFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int!]
-  lt: Int
-  lte: Int
-  not: NestedIntNullableFilter
-  notIn: [Int!]
-}
-
 input NestedStringFilter {
   contains: String
   endsWith: String
@@ -514,14 +488,6 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
-input NullableIntFieldUpdateOperationsInput {
-  decrement: Int
-  divide: Int
-  increment: Int
-  multiply: Int
-  set: Int
-}
-
 input NullableStringFieldUpdateOperationsInput {
   set: String
 }
@@ -534,18 +500,19 @@ scalar Password
 type Post {
   author: User!
   authorId: String!
+  createdAt: DateTime!
   createdBy: User
   createdById: String
   id: String!
   status: PostStatus!
   tags(after: TagWhereUniqueInput, before: TagWhereUniqueInput, first: Int, last: Int): [Tag!]!
   title: String!
+  updatedAt: DateTime!
   updatedBy: User
   updatedById: String
 }
 
 input PostCreateInput {
-  blogId: Int
   createdAt: DateTime
   id: String
   status: PostStatus!
@@ -575,7 +542,6 @@ input PostCreateOneWithoutTagsInput {
 }
 
 input PostCreateWithoutAuthorInput {
-  blogId: Int
   createdAt: DateTime
   createdBy: UserCreateOneWithoutPostsCreatedInput
   id: String
@@ -588,7 +554,6 @@ input PostCreateWithoutAuthorInput {
 
 input PostCreateWithoutCreatedByInput {
   author: UserCreateOneWithoutPostsAuthoredInput!
-  blogId: Int
   createdAt: DateTime
   id: String
   status: PostStatus!
@@ -600,7 +565,6 @@ input PostCreateWithoutCreatedByInput {
 
 input PostCreateWithoutTagsInput {
   author: UserCreateOneWithoutPostsAuthoredInput!
-  blogId: Int
   createdAt: DateTime
   createdBy: UserCreateOneWithoutPostsCreatedInput
   id: String
@@ -612,7 +576,6 @@ input PostCreateWithoutTagsInput {
 
 input PostCreateWithoutUpdatedByInput {
   author: UserCreateOneWithoutPostsAuthoredInput!
-  blogId: Int
   createdAt: DateTime
   createdBy: UserCreateOneWithoutPostsCreatedInput
   id: String
@@ -630,7 +593,6 @@ input PostListRelationFilter {
 
 input PostOrderByInput {
   authorId: SortOrder
-  blogId: SortOrder
   createdAt: SortOrder
   createdById: SortOrder
   id: SortOrder
@@ -643,7 +605,6 @@ input PostOrderByInput {
 input PostScalarWhereInput {
   AND: [PostScalarWhereInput!]
   authorId: StringFilter
-  blogId: IntNullableFilter
   createdAt: DateTimeFilter
   createdById: StringNullableFilter
   id: StringFilter
@@ -662,7 +623,6 @@ enum PostStatus {
 
 input PostUpdateInput {
   author: UserUpdateOneRequiredWithoutPostsAuthoredInput
-  blogId: NullableIntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   createdBy: UserUpdateOneWithoutPostsCreatedInput
   id: StringFieldUpdateOperationsInput
@@ -673,7 +633,6 @@ input PostUpdateInput {
 }
 
 input PostUpdateManyDataInput {
-  blogId: NullableIntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   status: EnumPostStatusFieldUpdateOperationsInput
@@ -732,7 +691,6 @@ input PostUpdateOneWithoutTagsInput {
 }
 
 input PostUpdateWithoutAuthorDataInput {
-  blogId: NullableIntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   createdBy: UserUpdateOneWithoutPostsCreatedInput
   id: StringFieldUpdateOperationsInput
@@ -745,7 +703,6 @@ input PostUpdateWithoutAuthorDataInput {
 
 input PostUpdateWithoutCreatedByDataInput {
   author: UserUpdateOneRequiredWithoutPostsAuthoredInput
-  blogId: NullableIntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   status: EnumPostStatusFieldUpdateOperationsInput
@@ -757,7 +714,6 @@ input PostUpdateWithoutCreatedByDataInput {
 
 input PostUpdateWithoutTagsDataInput {
   author: UserUpdateOneRequiredWithoutPostsAuthoredInput
-  blogId: NullableIntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   createdBy: UserUpdateOneWithoutPostsCreatedInput
   id: StringFieldUpdateOperationsInput
@@ -769,7 +725,6 @@ input PostUpdateWithoutTagsDataInput {
 
 input PostUpdateWithoutUpdatedByDataInput {
   author: UserUpdateOneRequiredWithoutPostsAuthoredInput
-  blogId: NullableIntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   createdBy: UserUpdateOneWithoutPostsCreatedInput
   id: StringFieldUpdateOperationsInput
@@ -821,7 +776,6 @@ input PostWhereInput {
   AND: [PostWhereInput!]
   author: UserWhereInput
   authorId: StringFilter
-  blogId: IntNullableFilter
   createdAt: DateTimeFilter
   createdBy: UserWhereInput
   createdById: StringNullableFilter
@@ -847,6 +801,8 @@ type Query {
   apiErrors(after: ApiErrorWhereUniqueInput, before: ApiErrorWhereUniqueInput, first: Int, last: Int, orderBy: [ApiErrorOrderByInput!], where: ApiErrorWhereInput): [ApiError!]!
   auth(email: String!, password: String!): Token
   authRefresh(refreshToken: String!): Token
+  clientEvent(where: ClientEventWhereUniqueInput!): ClientEvent
+  clientEvents(after: ClientEventWhereUniqueInput, before: ClientEventWhereUniqueInput, first: Int, last: Int, orderBy: [ClientEventOrderByInput!], where: ClientEventWhereInput): [ClientEvent!]!
   post(where: PostWhereUniqueInput!): Post
   posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
   tag(where: TagWhereUniqueInput!): Tag
@@ -1027,10 +983,10 @@ type User {
   createdAt: DateTime!
   createdBy: User
   createdById: String
-  email: Email
+  email: String!
   id: String!
   name: String!
-  password: Password
+  password: String
   postsAuthored(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
   postsCreated(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
   postsUpdated(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
@@ -1051,14 +1007,9 @@ input UserCreateManyWithoutUpdatedByInput {
   create: [UserCreateWithoutUpdatedByInput!]
 }
 
-input UserCreateOneWithoutApiAccessInput {
+input UserCreateOneWithoutClientEventInput {
   connect: UserWhereUniqueInput
-  create: UserCreateWithoutApiAccessInput
-}
-
-input UserCreateOneWithoutApiErrorInput {
-  connect: UserWhereUniqueInput
-  create: UserCreateWithoutApiErrorInput
+  create: UserCreateWithoutClientEventInput
 }
 
 input UserCreateOneWithoutPostsAuthoredInput {
@@ -1090,28 +1041,9 @@ input UserCreaterolesInput {
   set: [UserRole!]!
 }
 
-input UserCreateWithoutApiAccessInput {
-  ApiError: ApiErrorCreateManyWithoutReqUserInput
-  ClientEvent: ClientEventCreateManyWithoutReqUserInput
-  createdAt: DateTime
-  createdBy: UserCreateOneWithoutUsersCreatedInput
-  email: String!
-  id: String
-  name: String!
-  password: String
-  postsAuthored: PostCreateManyWithoutAuthorInput
-  postsCreated: PostCreateManyWithoutCreatedByInput
-  postsUpdated: PostCreateManyWithoutUpdatedByInput
-  roles: UserCreaterolesInput
-  updatedAt: DateTime
-  updatedBy: UserCreateOneWithoutUsersUpdatedInput
-  usersCreated: UserCreateManyWithoutCreatedByInput
-  usersUpdated: UserCreateManyWithoutUpdatedByInput
-}
-
-input UserCreateWithoutApiErrorInput {
+input UserCreateWithoutClientEventInput {
   ApiAccess: ApiAccessCreateManyWithoutReqUserInput
-  ClientEvent: ClientEventCreateManyWithoutReqUserInput
+  ApiError: ApiErrorCreateManyWithoutReqUserInput
   createdAt: DateTime
   createdBy: UserCreateOneWithoutUsersCreatedInput
   email: String!
