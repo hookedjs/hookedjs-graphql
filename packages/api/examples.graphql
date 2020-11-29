@@ -1,13 +1,60 @@
-# Get an ADMIN access token for the API
-# ADMIN level access is not required for many models/fields,
-# but it is required for some (i.e. user emails and roles).
-# Using the response.accessToken, you can authorize to the
-# API by adding HTTP header `Authorization: "Bearer <accessToken>"`
-query GetToken {
-    token(email:"admin@example.com", password:"password") {
+# Write your query or mutation here
+query Auth {
+    auth(data:{email:"editor@example.com", password:"CoolPassword9"}) {
+        __typename
         accessToken
+        refreshToken
         userId
         roles
+    }
+}
+
+query AuthRefresh {
+    authRefresh(data: {refreshToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNraHZhb25zZjAwMDYweTQ0NHYyejhjNzEiLCJpYXQiOjE2MDYxODQ3MDcsImV4cCI6MTYwODc3NjcwN30.fGg00Mq9D6fD1TIScCDJ68ax6MaGEYo91N8-kvnRPMc"}) {
+        accessToken
+        refreshToken
+        userId
+        roles
+    }
+}
+
+mutation CreateUser {
+    createOneUser(data:{email:"hello@world.com", password:"CoolPassword8", name:"Brian"}) {
+        id
+    }
+}
+
+mutation UpdateUser {
+    updateOneUser(where:{id:"ckhvavht50110sy44n9pbafzy"}, data:{name:{set:"Briand"}}) {
+        id
+        name
+        updatedById
+    }
+}
+
+query Users {
+    users {
+        createdAt
+        id
+        email
+    }
+}
+
+mutation CreatePost {
+    createOnePost(data:{title:"Cool post bross", status:PUBLISHED}) {
+        id
+        createdById
+        updatedById
+        title
+        authorId
+        status
+    }
+}
+
+mutation UpdatePost {
+    updateOnePost(where:{id:"ckhvaqm870006bp44hzaa8p0y"},data:{title:{set: "sCool again"}}) {
+        id
+        updatedById
     }
 }
 
@@ -23,3 +70,9 @@ query Posts {
     }
 }
 
+query Tags {
+    tags {
+        id
+        value
+    }
+}
