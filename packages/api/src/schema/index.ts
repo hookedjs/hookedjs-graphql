@@ -1,9 +1,7 @@
 import {
-  // connectionPlugin,
-  // fieldAuthorizePlugin,
-  makeSchema,
+  makeSchema, mutationType,
   nullabilityGuardPlugin,
-  queryComplexityPlugin,
+  queryComplexityPlugin, queryType,
 } from '@nexus/schema'
 import { applyMiddleware } from 'graphql-middleware'
 import {nexusPrisma} from 'nexus-plugin-prisma'
@@ -12,26 +10,18 @@ import * as path from 'path'
 import {rules} from './lib'
 import * as Modules from './modules'
 import {ApiAccess, ApiError, ClientEvent, Post, Tag, Token, User} from './modules'
-import * as Mutation from './Mutation'
-import * as Query from './Query'
-import * as Scalars from './scalars'
 
-// const DEBUGGING_CURSOR = false
-// let fn = DEBUGGING_CURSOR ? (i: string) => i : undefined
+const Query = queryType({definition(t) {}})
+const Mutation = mutationType({definition(t) {}})
 
 const schema = makeSchema({
-  types: [Query, Mutation, Scalars, Modules],
+  types: [Query, Mutation, Modules],
   outputs: {
-    // typegen: path.join(__dirname, '../typegen.gen.ts'),
     typegen: path.join(__dirname, '../../node_modules/@types/nexus-typegen/index.d.ts'),
     schema: path.join(__dirname, '../../schema.graphql'),
   },
   plugins: [
     nexusPrisma({experimentalCRUD: true}),
-    // connectionPlugin({
-    //   encodeCursor: fn,
-    //   decodeCursor: fn,
-    // }),
     queryComplexityPlugin(),
     nullabilityGuardPlugin({
       shouldGuard: true,
@@ -40,9 +30,6 @@ const schema = makeSchema({
         DateTime: () => new Date(0),
         Boolean: () => false,
         String: () => '',
-        Email: () => '',
-        Password: () => '',
-        Empty: () => null,
         Json: () => '',
       },
     }),

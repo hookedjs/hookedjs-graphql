@@ -385,12 +385,6 @@ input DateTimeFilter {
   notIn: [DateTime!]
 }
 
-"""The Email scalar type asserts email validity"""
-scalar Email
-
-"""The Empty scalar has no fields"""
-scalar Empty
-
 input EnumPostStatusFieldUpdateOperationsInput {
   set: PostStatus
 }
@@ -500,11 +494,6 @@ input NestedStringNullableFilter {
 input NullableStringFieldUpdateOperationsInput {
   set: String
 }
-
-"""
-The Password scalar type asserts password strength and serializes to null
-"""
-scalar Password
 
 type Post {
   author: User!
