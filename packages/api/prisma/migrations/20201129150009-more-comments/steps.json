@@ -1,0 +1,38 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "reqUserId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "context",
+      "type": "Json",
+      "arity": "Optional"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "ClientEvent",
+      "field": "reqUserById"
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ClientEvent",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "newValue": "[reqUserId]"
+    }
+  ]
+}

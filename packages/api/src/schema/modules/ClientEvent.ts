@@ -9,7 +9,7 @@ const ClientEvent: ObjectModule = {
       t.model.id()
       t.model.createdAt()
       t.model.ip()
-      t.model.reqUserById()
+      t.model.reqUserId()
       t.model.reqUser()
       t.model.userAgent()
       t.model.name()

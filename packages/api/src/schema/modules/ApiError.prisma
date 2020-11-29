@@ -2,12 +2,20 @@ model ApiError {
   id            String   @default(cuid()) @id
   createdAt     DateTime @default(now())
 
+  // Ip address of the express req
   ip            String
+  // The user id of the express req, if known
   reqUserId     String?
+  // The user of the express req, if known
   reqUser       User?    @relation(fields: [reqUserId], references: [id])
+  // The GraphQL Operation that was called, if known
   operationName String
+  // The error message
   message       String
+  // A callstack if available
   stack         Json
+  // The body of the express request
   reqBody       Json
+  // The body of the express response
   resBody       Json
 }

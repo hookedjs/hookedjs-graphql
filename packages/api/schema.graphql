@@ -254,11 +254,12 @@ type ClientEvent {
   ip: String!
   name: String!
   reqUser: User
-  reqUserById: String
+  reqUserId: String
   userAgent: String!
 }
 
 input ClientEventCreateInput {
+  context: Json
   createdAt: DateTime
   id: String
   ip: String!
@@ -273,6 +274,7 @@ input ClientEventCreateManyWithoutReqUserInput {
 }
 
 input ClientEventCreateWithoutReqUserInput {
+  context: Json
   createdAt: DateTime
   id: String
   ip: String!
@@ -287,27 +289,30 @@ input ClientEventListRelationFilter {
 }
 
 input ClientEventOrderByInput {
+  context: SortOrder
   createdAt: SortOrder
   id: SortOrder
   ip: SortOrder
   name: SortOrder
-  reqUserById: SortOrder
+  reqUserId: SortOrder
   userAgent: SortOrder
 }
 
 input ClientEventScalarWhereInput {
   AND: [ClientEventScalarWhereInput!]
+  context: JsonNullableFilter
   createdAt: DateTimeFilter
   id: StringFilter
   ip: StringFilter
   name: StringFilter
   NOT: [ClientEventScalarWhereInput!]
   OR: [ClientEventScalarWhereInput!]
-  reqUserById: StringNullableFilter
+  reqUserId: StringNullableFilter
   userAgent: StringFilter
 }
 
 input ClientEventUpdateManyDataInput {
+  context: Json
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
@@ -333,6 +338,7 @@ input ClientEventUpdateManyWithWhereNestedInput {
 }
 
 input ClientEventUpdateWithoutReqUserDataInput {
+  context: Json
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
@@ -353,6 +359,7 @@ input ClientEventUpsertWithWhereUniqueWithoutReqUserInput {
 
 input ClientEventWhereInput {
   AND: [ClientEventWhereInput!]
+  context: JsonNullableFilter
   createdAt: DateTimeFilter
   id: StringFilter
   ip: StringFilter
@@ -360,7 +367,7 @@ input ClientEventWhereInput {
   NOT: [ClientEventWhereInput!]
   OR: [ClientEventWhereInput!]
   reqUser: UserWhereInput
-  reqUserById: StringNullableFilter
+  reqUserId: StringNullableFilter
   userAgent: StringFilter
 }
 
@@ -420,6 +427,11 @@ input IntFilter {
 }
 
 scalar Json
+
+input JsonNullableFilter {
+  equals: Json
+  not: Json
+}
 
 type Mutation {
   createOneClientEvent(data: ClientEventCreateInput!): ClientEvent!
