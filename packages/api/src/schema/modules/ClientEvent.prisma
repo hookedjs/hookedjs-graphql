@@ -1,0 +1,10 @@
+model ClientEvent {
+  id            String   @default(cuid()) @id
+  createdAt     DateTime @default(now())
+
+  ip            String
+  reqUserById   String?
+  reqUser       User?    @relation(fields: [reqUserById], references: [id])
+  userAgent     String
+  name          String
+}

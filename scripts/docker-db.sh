@@ -35,7 +35,10 @@ waitUntilPgReady() {
   echo "DB is now ready"
 }
 
-start
-waitUntilPgReady
-seed
-wait
+nc -z localhost 5432
+if [[ "$?" -eq 1 ]]; then
+  start
+  waitUntilPgReady
+  seed
+  wait
+fi

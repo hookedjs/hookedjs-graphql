@@ -1,0 +1,13 @@
+model ApiError {
+  id            String   @default(cuid()) @id
+  createdAt     DateTime @default(now())
+
+  ip            String
+  reqUserId     String?
+  reqUser       User?    @relation(fields: [reqUserId], references: [id])
+  operationName String
+  message       String
+  stack         Json
+  reqBody       Json
+  resBody       Json
+}

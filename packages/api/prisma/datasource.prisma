@@ -1,0 +1,7 @@
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres@localhost:5432/nexus"
+}
+generator prisma_client {
+  provider = "prisma-client-js"
+}

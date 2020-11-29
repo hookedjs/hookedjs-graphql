@@ -1,0 +1,19 @@
+model Post {
+  id            String     @default(cuid()) @id
+  createdAt     DateTime   @default(now())
+  createdById   String?
+  createdBy     User?      @relation("PostsCreatedByUser", fields: [createdById], references: [id])
+  updatedAt     DateTime   @updatedAt
+  updatedById   String?
+  updatedBy     User?      @relation("PostsUpdatedByUser", fields: [updatedById], references: [id])
+
+  title         String
+  tags          Tag[]
+  status        PostStatus
+  authorId      String
+  author        User       @relation("PostsAuthoredByUser", fields: [authorId], references: [id])
+}
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+}

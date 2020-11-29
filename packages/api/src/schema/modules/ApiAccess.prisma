@@ -1,0 +1,10 @@
+model ApiAccess {
+  id            String   @default(cuid()) @id
+  createdAt     DateTime @default(now())
+  ip            String
+
+  reqUserId     String?
+  reqUser       User?    @relation(fields: [reqUserId], references: [id])
+  operationName String
+  duration      Int
+}

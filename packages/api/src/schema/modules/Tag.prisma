@@ -1,0 +1,8 @@
+model Tag {
+  id     Int         @default(autoincrement()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  value  String
+  postId String?
+  post   Post?       @relation(fields: [postId], references: [id])
+}

@@ -1,0 +1,28 @@
+model User {
+  id            String      @default(cuid()) @id
+  createdAt     DateTime    @default(now())
+  createdById   String?
+  createdBy     User?       @relation("UsersCreatedByUser", fields: [createdById], references: [id])
+  usersCreated User[]       @relation("UsersCreatedByUser")
+
+  updatedAt     DateTime    @updatedAt
+  updatedById   String?
+  updatedBy     User?       @relation("UsersUpdatedByUser", fields: [updatedById], references: [id])
+  usersUpdated User[]       @relation("UsersUpdatedByUser")
+
+  name          String
+  roles         UserRole[]
+  email         String      @unique
+  password      String?
+
+  postsAuthored Post[]      @relation("PostsAuthoredByUser")
+  postsCreated  Post[]      @relation("PostsCreatedByUser")
+  postsUpdated  Post[]      @relation("PostsUpdatedByUser")
+
+  @@index([email])
+}
+enum UserRole {
+  ADMIN
+  EDITOR
+  AUTHOR
+}
