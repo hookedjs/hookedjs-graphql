@@ -2,14 +2,14 @@ model ApiAccess {
   id            String   @default(cuid()) @id
   createdAt     DateTime @default(now())
 
-  // Ip address of the express req
+  /// Ip address of the express req
   ip            String
-  // The user id of the express req, if known
+  /// The user id of the express req, if known
   reqUserId     String?
-  // The user of the express req, if known
+  /// The user of the express req, if known
   reqUser       User?    @relation(fields: [reqUserId], references: [id])
-  // The GraphQL Operation that was called, if known
+  /// The GraphQL Operation that was called, if known
   operationName String
-  // The amount of time passed to fulfill the request
+  /// The amount of time passed to fulfill the request
   duration      Int
 }
