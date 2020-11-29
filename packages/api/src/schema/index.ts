@@ -9,9 +9,10 @@ import { applyMiddleware } from 'graphql-middleware'
 import {nexusPrisma} from 'nexus-plugin-prisma'
 import * as path from 'path'
 
-import permissions from './lib/permissions'
+import {rules} from './lib'
+import * as Modules from './modules'
+import {ApiAccess, ApiError, ClientEvent, Post, Tag, Token, User} from './modules'
 import * as Mutation from './Mutation'
-import * as Objects from './objects'
 import * as Query from './Query'
 import * as Scalars from './scalars'
 
@@ -19,7 +20,7 @@ import * as Scalars from './scalars'
 // let fn = DEBUGGING_CURSOR ? (i: string) => i : undefined
 
 const schema = makeSchema({
-  types: [Query, Mutation, Scalars, Objects],
+  types: [Query, Mutation, Scalars, Modules],
   outputs: {
     // typegen: path.join(__dirname, '../typegen.gen.ts'),
     typegen: path.join(__dirname, '../../node_modules/@types/nexus-typegen/index.d.ts'),
@@ -46,7 +47,6 @@ const schema = makeSchema({
       },
     }),
   ],
-  // prettierConfig: require.resolve('../../../.prettierrc'),
   // features: {
   //   abstractTypeStrategies: {
   //     __typename: true,
@@ -55,6 +55,22 @@ const schema = makeSchema({
   // },
 })
 
-const schemaWithShield = applyMiddleware(schema, permissions)
+const schemaWithShield = applyMiddleware(schema, rules.shield(
+  rules.mergeRuleSets(
+    ApiAccess.Rules,
+    ApiError.Rules,
+    ClientEvent.Rules,
+    Post.Rules,
+    Tag.Rules,
+    Token.Rules,
+    User.Rules,
+  ),
+  {
+    fallbackError: 'Forbidden',
+    fallbackRule: rules.isAdmin,
+    allowExternalErrors: true,
+  }
+))
 
 export default schemaWithShield
+

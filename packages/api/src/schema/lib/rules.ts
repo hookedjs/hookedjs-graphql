@@ -24,8 +24,13 @@ export const isEditor = rule({ cache: 'contextual' })(
   },
 )
 
-export interface RuleSet {
-  Query: Record<string, any>,
-  Mutation: Record<string, any>,
-  [ObjectName: string]: any,
+export function mergeRuleSets(...ruleSets: RuleSet[]): RuleSet {
+  return ruleSets.reduce(
+    (a,r) => ({
+      ...a,
+      ...r,
+      Query: {...a.Query, ...r.Query},
+      Mutation: {...a.Mutation, ...r.Mutation },
+    }),
+    {Query:{}, Mutation: {}})
 }

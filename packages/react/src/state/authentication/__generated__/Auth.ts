@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { AuthInputType } from "./../../../__generated__/globalTypes";
+
 // ====================================================
 // GraphQL query operation: Auth
 // ====================================================
@@ -20,6 +22,5 @@ export interface Auth {
 }
 
 export interface AuthVariables {
-  email: string;
-  password: string;
+  data: AuthInputType;
 }

@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql'
 
-import { RegisterInputType } from '../../__generated__/globalTypes'
+import { UserCreateInput } from '../../__generated__/globalTypes'
 import { Token_token, TokenVariables } from './__generated__/Token'
 
 export interface AuthState {
@@ -20,7 +20,7 @@ export interface LoginResponse {
   stack?: string;
 }
 
-export type RegisterBody = RegisterInputType;
+export type RegisterBody = UserCreateInput;
 export type RegisterErrors = readonly GraphQLError[];
 export interface RegisterResponse {
   data?: Token_token;

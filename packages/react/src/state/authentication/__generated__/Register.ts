@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { RegisterInputType } from "./../../../__generated__/globalTypes";
+import { UserCreateInput } from "./../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: Register
@@ -15,9 +15,9 @@ export interface Register_createOneUser {
 }
 
 export interface Register {
-  createOneUser: Register_createOneUser | null;
+  createOneUser: Register_createOneUser;
 }
 
 export interface RegisterVariables {
-  data: RegisterInputType;
+  data: UserCreateInput;
 }

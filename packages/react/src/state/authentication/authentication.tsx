@@ -25,7 +25,7 @@ export const AuthenticationProvider: React.FC = ({children}) => {
 
   const login: ContextType['login'] = React.useCallback(
     async (creds) => {
-      const res = await apolloClient.query({query: AUTH, variables: creds})
+      const res = await apolloClient.query({query: AUTH, variables: {data: creds}})
         .then(res => {
           setState(res.data.auth)
           return res
@@ -54,7 +54,7 @@ export const AuthenticationProvider: React.FC = ({children}) => {
 
   useInterval(() => {
     if (state.refreshToken) {
-      apolloClient.query({query: AUTH_REFRESH, variables: {refreshToken: state.refreshToken}})
+      apolloClient.query({query: AUTH_REFRESH, variables: {data: {refreshToken: state.refreshToken}}})
         .then(res => {
           setState(res.data.authRefresh)
         })
@@ -75,8 +75,8 @@ export function useAuthentication() {
 }
 
 const AUTH = gql`
-    query Auth($email: String!, $password: String!) {
-        auth(email: $email, password: $password) {
+    query Auth($data: AuthInputType!) {
+        auth(data: $data) {
             accessToken
             refreshToken
             userId
@@ -86,8 +86,8 @@ const AUTH = gql`
 `
 
 const AUTH_REFRESH = gql`
-    query AuthRefresh($refreshToken: String!) {
-        authRefresh(refreshToken: $refreshToken) {
+    query AuthRefresh($data: AuthRefreshInputType!) {
+        authRefresh(data: $data) {
             accessToken
             refreshToken
             userId
@@ -97,7 +97,7 @@ const AUTH_REFRESH = gql`
 `
 
 const REGISTER = gql`
-    mutation Register($data: RegisterInputType!) {
+    mutation Register($data: UserCreateInput!) {
         createOneUser(data: $data) {
             id
         }

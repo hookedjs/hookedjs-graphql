@@ -239,6 +239,15 @@ input ApiErrorWhereUniqueInput {
   id: String
 }
 
+input AuthInputType {
+  email: String!
+  password: String!
+}
+
+input AuthRefreshInputType {
+  refreshToken: String!
+}
+
 type ClientEvent {
   createdAt: DateTime!
   id: String!
@@ -422,7 +431,7 @@ type Mutation {
   createOneClientEvent(data: ClientEventCreateInput!): ClientEvent!
   createOnePost(data: PostCreateInput!): Post!
   createOneTag(data: TagCreateInput!): Tag!
-  createOneUser(data: RegisterInputType!): User
+  createOneUser(data: UserCreateInput!): User!
   deleteOnePost(where: PostWhereUniqueInput!): Post
   deleteOneTag(where: TagWhereUniqueInput!): Tag
   deleteOneUser(where: UserWhereUniqueInput!): User
@@ -799,8 +808,8 @@ type Query {
   apiAccesses(after: ApiAccessWhereUniqueInput, before: ApiAccessWhereUniqueInput, first: Int, last: Int, orderBy: [ApiAccessOrderByInput!], where: ApiAccessWhereInput): [ApiAccess!]!
   apiError(where: ApiErrorWhereUniqueInput!): ApiError
   apiErrors(after: ApiErrorWhereUniqueInput, before: ApiErrorWhereUniqueInput, first: Int, last: Int, orderBy: [ApiErrorOrderByInput!], where: ApiErrorWhereInput): [ApiError!]!
-  auth(email: String!, password: String!): Token
-  authRefresh(refreshToken: String!): Token
+  auth(data: AuthInputType!): Token
+  authRefresh(data: AuthRefreshInputType!): Token
   clientEvent(where: ClientEventWhereUniqueInput!): ClientEvent
   clientEvents(after: ClientEventWhereUniqueInput, before: ClientEventWhereUniqueInput, first: Int, last: Int, orderBy: [ClientEventOrderByInput!], where: ClientEventWhereInput): [ClientEvent!]!
   post(where: PostWhereUniqueInput!): Post
@@ -814,12 +823,6 @@ type Query {
 enum QueryMode {
   default
   insensitive
-}
-
-input RegisterInputType {
-  email: Email!
-  name: String!
-  password: Password!
 }
 
 enum SortOrder {
@@ -995,6 +998,24 @@ type User {
   updatedBy: User
   updatedById: String
   usersCreated(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): [User!]!
+}
+
+input UserCreateInput {
+  ApiAccess: ApiAccessCreateManyWithoutReqUserInput
+  ApiError: ApiErrorCreateManyWithoutReqUserInput
+  ClientEvent: ClientEventCreateManyWithoutReqUserInput
+  createdAt: DateTime
+  email: String!
+  id: String
+  name: String!
+  password: String
+  postsAuthored: PostCreateManyWithoutAuthorInput
+  postsCreated: PostCreateManyWithoutCreatedByInput
+  postsUpdated: PostCreateManyWithoutUpdatedByInput
+  roles: UserCreaterolesInput
+  updatedAt: DateTime
+  usersCreated: UserCreateManyWithoutCreatedByInput
+  usersUpdated: UserCreateManyWithoutUpdatedByInput
 }
 
 input UserCreateManyWithoutCreatedByInput {

@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { AuthRefreshInputType } from "./../../../__generated__/globalTypes";
+
 // ====================================================
 // GraphQL query operation: AuthRefresh
 // ====================================================
@@ -20,5 +22,5 @@ export interface AuthRefresh {
 }
 
 export interface AuthRefreshVariables {
-  refreshToken: string;
+  data: AuthRefreshInputType;
 }
