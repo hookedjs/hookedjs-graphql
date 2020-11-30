@@ -1,0 +1,116 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "postsAuthoredQuery",
+      "type": "Post",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "postsAuthoredQuery"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "postsAuthoredQuery"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "value": "\"PostsAuthoredByUser\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "postsCreatedQuery",
+      "type": "Post",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "postsCreatedQuery"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "postsCreatedQuery"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "value": "\"PostsCreatedByUser\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "postsUpdatedQuery",
+      "type": "Post",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "postsUpdatedQuery"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "postsUpdatedQuery"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "value": "\"PostsUpdatedByUser\""
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "postsAuthored"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "postsCreated"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "User",
+      "field": "postsUpdated"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import {extendType, objectType} from '@nexus/schema'
 
 import {crypto, difference, isEmail, isPassword, rules} from '../lib'
+import prismaHelpers from '../lib/prismaHelpers'
 
 const isSelf = rules.rule({ cache: 'strict' })(
   async (parent, args, ctx, info) => {
@@ -27,38 +28,22 @@ const shieldMutateInput = rules.rule({ cache: 'strict' })(
 )
 
 const User: ObjectModule = {
-  User: objectType({
+  ObjectType: objectType({
     name: 'User',
     definition(t) {
-      t.model.id()
-      t.model.createdAt()
-      t.model.createdBy()
-      t.model.createdById()
-      t.model.updatedAt()
-      t.model.updatedBy()
-      t.model.updatedById()
-      t.model.password()
-
-      t.model.name()
-      t.model.email()
-      t.model.roles()
-
-      t.model.usersCreated({filtering: true, ordering: true, pagination: true})
-      t.model.postsAuthored({filtering: true, ordering: true, pagination: true})
-      t.model.postsCreated({filtering: true, ordering: true, pagination: true})
-      t.model.postsUpdated({filtering: true, ordering: true, pagination: true})
+      prismaHelpers.includeFields(t)
     },
   }),
   Queries: extendType({
     type: 'Query',
     definition(t) {
-      t.crud.user()
-      t.crud.users({filtering: true, ordering: true, pagination: true})
+      prismaHelpers.includeQueries(t)
     },
   }),
   Mutations: extendType({
     type: 'Mutation',
     definition(t) {
+      prismaHelpers.includeMutations(t, ['createOneUser', 'updateOneUser'])
       t.crud.createOneUser({
         computedInputs: {
           createdBy: ({ctx}) => ctx.user.id ? ({connect: {id: ctx.user.id}}): ({}),
@@ -70,7 +55,6 @@ const User: ObjectModule = {
           updatedBy: ({ctx}) => ({connect: {id: ctx.user.id}}),
         },
       })
-      t.crud.deleteOneUser()
     },
   }),
   Rules: {
@@ -85,7 +69,7 @@ const User: ObjectModule = {
       id: rules.allow,
       name: rules.isAuthenticated,
       email: isSelf,
-      postsAuthored: rules.isAuthenticated,
+      postsAuthoredJ: rules.isAuthenticated,
     }
   }
 }

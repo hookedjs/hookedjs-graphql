@@ -2,6 +2,7 @@ import {extendType, objectType} from '@nexus/schema'
 import {PostStatus} from '@prisma/client'
 
 import {rules} from '../lib'
+import prismaHelpers from '../lib/prismaHelpers'
 
 const isPostPublishedOrOwner = rules.rule({ cache: 'strict' })(
   async (parent, args, ctx, info) => {
@@ -10,34 +11,22 @@ const isPostPublishedOrOwner = rules.rule({ cache: 'strict' })(
 )
 
 const Post: ObjectModule = {
-  Post: objectType({
+  ObjectType: objectType({
     name: 'Post',
     definition(t) {
-      t.model.createdAt()
-      t.model.createdBy()
-      t.model.createdById()
-      t.model.updatedAt()
-      t.model.updatedBy()
-      t.model.updatedById()
-      t.model.id()
-
-      t.model.title()
-      t.model.tags()
-      t.model.status()
-      t.model.author()
-      t.model.authorId()
+      prismaHelpers.includeFields(t)
     },
   }),
   Queries: extendType({
     type: 'Query',
     definition(t) {
-      t.crud.post()
-      t.crud.posts({filtering: true, ordering: true, pagination: true})
+      prismaHelpers.includeQueries(t)
     },
   }),
   Mutations: extendType({
     type: 'Mutation',
     definition(t) {
+      prismaHelpers.includeMutations(t, ['createOnePost', 'updateOnePost'])
       t.crud.createOnePost({
         computedInputs: {
           createdBy: ({ctx}) => ({connect: {id: ctx.user.id}}),
@@ -50,7 +39,6 @@ const Post: ObjectModule = {
           updatedBy: ({ctx}) => ({connect: {id: ctx.user.id}}),
         },
       })
-      t.crud.deleteOnePost()
     },
   }),
   Rules: {

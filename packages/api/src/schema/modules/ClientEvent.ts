@@ -1,30 +1,25 @@
 import {extendType, objectType} from '@nexus/schema'
 
 import {rules} from '../lib'
+import prismaHelpers from '../lib/prismaHelpers'
 
 const ClientEvent: ObjectModule = {
-  ClientEvent: objectType({
+  ObjectType: objectType({
     name: 'ClientEvent',
     definition(t) {
-      t.model.id()
-      t.model.createdAt()
-      t.model.ip()
-      t.model.reqUserId()
-      t.model.reqUser()
-      t.model.userAgent()
-      t.model.name()
+      prismaHelpers.includeFields(t)
     },
   }),
   Queries: extendType({
     type: 'Query',
     definition(t) {
-      t.crud.clientEvent()
-      t.crud.clientEvents({filtering: true, ordering: true, pagination: true})
+      prismaHelpers.includeQueries(t)
     },
   }),
   Mutations: extendType({
     type: 'Mutation',
     definition(t) {
+      prismaHelpers.includeMutations(t, ['createOneClientEvent'])
       t.crud.createOneClientEvent({
         computedInputs: {
           createdBy: ({ctx}) => ({
@@ -32,7 +27,6 @@ const ClientEvent: ObjectModule = {
           }),
         },
       })
-      // t.crud.updateOneApiError()
     },
   }),
   Rules: {

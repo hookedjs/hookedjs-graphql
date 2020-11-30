@@ -13,8 +13,9 @@
 // }
 
 interface ObjectModule {
+  ObjectType: any;
   Queries: any;
   Mutations: any;
   Rules: RuleSet;
-  [ObjectName: string]: any;
+  // [ObjectName: string]: any;
 }

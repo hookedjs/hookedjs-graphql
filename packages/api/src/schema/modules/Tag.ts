@@ -1,28 +1,25 @@
 import {extendType, objectType} from '@nexus/schema'
 
 import {rules} from '../lib'
+import prismaHelpers from '../lib/prismaHelpers'
 
 const Tag: ObjectModule = {
-  Tag: objectType({
+  ObjectType: objectType({
     name: 'Tag',
     definition(t) {
-      t.model.id()
-      t.model.value()
+      prismaHelpers.includeFields(t)
     },
   }),
   Queries: extendType({
     type: 'Query',
     definition(t) {
-      t.crud.tag()
-      t.crud.tags({filtering: true, ordering: true, pagination: true})
+      prismaHelpers.includeQueries(t)
     },
   }),
   Mutations: extendType({
     type: 'Mutation',
     definition(t) {
-      t.crud.createOneTag()
-      t.crud.updateOneTag()
-      t.crud.deleteOneTag()
+      prismaHelpers.includeMutations(t)
     },
   }),
   Rules: {

@@ -11,6 +11,7 @@ check_docker() {
 
 seed() {
   cd packages/api
+#  yarn prisma:save
   yarn prisma:apply
   yarn seed
 }

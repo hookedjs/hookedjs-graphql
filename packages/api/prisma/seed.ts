@@ -18,7 +18,7 @@ async function main() {
       email: 'admin@example.com',
       roles: [UserRole.ADMIN],
       password: passwordHash,
-      postsAuthored: {
+      postsAuthoredJ: {
         create: [
           {
             title: 'post_1',
@@ -36,7 +36,7 @@ async function main() {
       email: 'editor@example.com',
       roles: [UserRole.EDITOR],
       password: passwordHash,
-      postsAuthored: {
+      postsAuthoredJ: {
         create: [
           {
             title: 'post_2',
@@ -54,7 +54,7 @@ async function main() {
       email: 'author@example.com',
       roles: [UserRole.AUTHOR],
       password: passwordHash,
-      postsAuthored: {
+      postsAuthoredJ: {
         create: [
           {
             title: 'post_3',

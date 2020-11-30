@@ -1,32 +1,25 @@
 import {extendType, objectType} from '@nexus/schema'
 
 import {rules} from '../lib'
+import prismaHelpers from '../lib/prismaHelpers'
 
 const ApiAccess: ObjectModule = {
-  ApiAccess: objectType({
+  ObjectType: objectType({
     name: 'ApiAccess',
     definition(t) {
-      t.model.id()
-      t.model.createdAt()
-      t.model.ip()
-      t.model.reqUserId()
-      t.model.reqUser()
-      t.model.operationName()
-      t.model.duration()
+      prismaHelpers.includeFields(t)
     },
   }),
   Queries: extendType({
     type: 'Query',
     definition(t) {
-      t.crud.apiAccess()
-      t.crud.apiAccesses({filtering: true, ordering: true, pagination: true})
+      prismaHelpers.includeQueries(t)
     },
   }),
   Mutations: extendType({
     type: 'Mutation',
     definition(t) {
-      // t.crud.createOneApiAccess()
-      // t.crud.updateOneApiAccess()
+      prismaHelpers.includeMutations(t)
     },
   }),
   Rules: {

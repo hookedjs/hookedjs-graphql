@@ -15,10 +15,6 @@ model User {
   email         String      @unique
   password      String?
 
-  postsAuthored Post[]      @relation("PostsAuthoredByUser")
-  postsCreated  Post[]      @relation("PostsCreatedByUser")
-  postsUpdated  Post[]      @relation("PostsUpdatedByUser")
-
   @@index([email])
 }
 enum UserRole {

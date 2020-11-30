@@ -12,6 +12,15 @@ type ApiAccess {
   reqUserId: String
 }
 
+input ApiAccessCreateInput {
+  createdAt: DateTime
+  duration: Int!
+  id: String
+  ip: String!
+  operationName: String!
+  reqUser: UserCreateOneWithoutApiAccessInput
+}
+
 input ApiAccessCreateManyWithoutReqUserInput {
   connect: [ApiAccessWhereUniqueInput!]
   create: [ApiAccessCreateWithoutReqUserInput!]
@@ -52,7 +61,24 @@ input ApiAccessScalarWhereInput {
   reqUserId: StringNullableFilter
 }
 
+input ApiAccessUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  duration: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+  reqUser: UserUpdateOneWithoutApiAccessInput
+}
+
 input ApiAccessUpdateManyDataInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  duration: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+}
+
+input ApiAccessUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   duration: IntFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -126,6 +152,18 @@ type ApiError {
   stack: Json!
 }
 
+input ApiErrorCreateInput {
+  createdAt: DateTime
+  id: String
+  ip: String!
+  message: String!
+  operationName: String!
+  reqBody: Json!
+  reqUser: UserCreateOneWithoutApiErrorInput
+  resBody: Json!
+  stack: Json!
+}
+
 input ApiErrorCreateManyWithoutReqUserInput {
   connect: [ApiErrorWhereUniqueInput!]
   create: [ApiErrorCreateWithoutReqUserInput!]
@@ -172,7 +210,30 @@ input ApiErrorScalarWhereInput {
   reqUserId: StringNullableFilter
 }
 
+input ApiErrorUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+  reqBody: Json
+  reqUser: UserUpdateOneWithoutApiErrorInput
+  resBody: Json
+  stack: Json
+}
+
 input ApiErrorUpdateManyDataInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  operationName: StringFieldUpdateOperationsInput
+  reqBody: Json
+  resBody: Json
+  stack: Json
+}
+
+input ApiErrorUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
@@ -248,7 +309,12 @@ input AuthRefreshInputType {
   refreshToken: String!
 }
 
+type BatchPayload {
+  count: Int!
+}
+
 type ClientEvent {
+  context: Json
   createdAt: DateTime!
   id: String!
   ip: String!
@@ -311,7 +377,26 @@ input ClientEventScalarWhereInput {
   userAgent: StringFilter
 }
 
+input ClientEventUpdateInput {
+  context: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  reqUser: UserUpdateOneWithoutClientEventInput
+  userAgent: StringFieldUpdateOperationsInput
+}
+
 input ClientEventUpdateManyDataInput {
+  context: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  ip: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  userAgent: StringFieldUpdateOperationsInput
+}
+
+input ClientEventUpdateManyMutationInput {
   context: Json
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -434,13 +519,33 @@ input JsonNullableFilter {
 }
 
 type Mutation {
+  createOneApiAccess(data: ApiAccessCreateInput!): ApiAccess!
+  createOneApiError(data: ApiErrorCreateInput!): ApiError!
   createOneClientEvent(data: ClientEventCreateInput!): ClientEvent!
   createOnePost(data: PostCreateInput!): Post!
   createOneTag(data: TagCreateInput!): Tag!
   createOneUser(data: UserCreateInput!): User!
+  deleteManyApiAccess(where: ApiAccessWhereInput): BatchPayload!
+  deleteManyApiError(where: ApiErrorWhereInput): BatchPayload!
+  deleteManyClientEvent(where: ClientEventWhereInput): BatchPayload!
+  deleteManyPost(where: PostWhereInput): BatchPayload!
+  deleteManyTag(where: TagWhereInput): BatchPayload!
+  deleteManyUser(where: UserWhereInput): BatchPayload!
+  deleteOneApiAccess(where: ApiAccessWhereUniqueInput!): ApiAccess
+  deleteOneApiError(where: ApiErrorWhereUniqueInput!): ApiError
+  deleteOneClientEvent(where: ClientEventWhereUniqueInput!): ClientEvent
   deleteOnePost(where: PostWhereUniqueInput!): Post
   deleteOneTag(where: TagWhereUniqueInput!): Tag
   deleteOneUser(where: UserWhereUniqueInput!): User
+  updateManyApiAccess(data: ApiAccessUpdateManyMutationInput!, where: ApiAccessWhereInput): BatchPayload!
+  updateManyApiError(data: ApiErrorUpdateManyMutationInput!, where: ApiErrorWhereInput): BatchPayload!
+  updateManyClientEvent(data: ClientEventUpdateManyMutationInput!, where: ClientEventWhereInput): BatchPayload!
+  updateManyPost(data: PostUpdateManyMutationInput!, where: PostWhereInput): BatchPayload!
+  updateManyTag(data: TagUpdateManyMutationInput!, where: TagWhereInput): BatchPayload!
+  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateOneApiAccess(data: ApiAccessUpdateInput!, where: ApiAccessWhereUniqueInput!): ApiAccess
+  updateOneApiError(data: ApiErrorUpdateInput!, where: ApiErrorWhereUniqueInput!): ApiError
+  updateOneClientEvent(data: ClientEventUpdateInput!, where: ClientEventWhereUniqueInput!): ClientEvent
   updateOnePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateOneTag(data: TagUpdateInput!, where: TagWhereUniqueInput!): Tag
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -523,12 +628,15 @@ type Post {
 }
 
 input PostCreateInput {
+  author: UserCreateOneWithoutPostsAuthoredJInput!
   createdAt: DateTime
+  createdBy: UserCreateOneWithoutPostsCreatedJInput
   id: String
   status: PostStatus!
   tags: TagCreateManyWithoutPostInput
   title: String!
   updatedAt: DateTime
+  updatedBy: UserCreateOneWithoutPostsUpdatedJInput
 }
 
 input PostCreateManyWithoutAuthorInput {
@@ -553,41 +661,41 @@ input PostCreateOneWithoutTagsInput {
 
 input PostCreateWithoutAuthorInput {
   createdAt: DateTime
-  createdBy: UserCreateOneWithoutPostsCreatedInput
+  createdBy: UserCreateOneWithoutPostsCreatedJInput
   id: String
   status: PostStatus!
   tags: TagCreateManyWithoutPostInput
   title: String!
   updatedAt: DateTime
-  updatedBy: UserCreateOneWithoutPostsUpdatedInput
+  updatedBy: UserCreateOneWithoutPostsUpdatedJInput
 }
 
 input PostCreateWithoutCreatedByInput {
-  author: UserCreateOneWithoutPostsAuthoredInput!
+  author: UserCreateOneWithoutPostsAuthoredJInput!
   createdAt: DateTime
   id: String
   status: PostStatus!
   tags: TagCreateManyWithoutPostInput
   title: String!
   updatedAt: DateTime
-  updatedBy: UserCreateOneWithoutPostsUpdatedInput
+  updatedBy: UserCreateOneWithoutPostsUpdatedJInput
 }
 
 input PostCreateWithoutTagsInput {
-  author: UserCreateOneWithoutPostsAuthoredInput!
+  author: UserCreateOneWithoutPostsAuthoredJInput!
   createdAt: DateTime
-  createdBy: UserCreateOneWithoutPostsCreatedInput
+  createdBy: UserCreateOneWithoutPostsCreatedJInput
   id: String
   status: PostStatus!
   title: String!
   updatedAt: DateTime
-  updatedBy: UserCreateOneWithoutPostsUpdatedInput
+  updatedBy: UserCreateOneWithoutPostsUpdatedJInput
 }
 
 input PostCreateWithoutUpdatedByInput {
-  author: UserCreateOneWithoutPostsAuthoredInput!
+  author: UserCreateOneWithoutPostsAuthoredJInput!
   createdAt: DateTime
-  createdBy: UserCreateOneWithoutPostsCreatedInput
+  createdBy: UserCreateOneWithoutPostsCreatedJInput
   id: String
   status: PostStatus!
   tags: TagCreateManyWithoutPostInput
@@ -632,17 +740,26 @@ enum PostStatus {
 }
 
 input PostUpdateInput {
-  author: UserUpdateOneRequiredWithoutPostsAuthoredInput
+  author: UserUpdateOneRequiredWithoutPostsAuthoredJInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  createdBy: UserUpdateOneWithoutPostsCreatedInput
+  createdBy: UserUpdateOneWithoutPostsCreatedJInput
   id: StringFieldUpdateOperationsInput
   status: EnumPostStatusFieldUpdateOperationsInput
   tags: TagUpdateManyWithoutPostInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  updatedBy: UserUpdateOneWithoutPostsUpdatedJInput
 }
 
 input PostUpdateManyDataInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  status: EnumPostStatusFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input PostUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   status: EnumPostStatusFieldUpdateOperationsInput
@@ -702,41 +819,41 @@ input PostUpdateOneWithoutTagsInput {
 
 input PostUpdateWithoutAuthorDataInput {
   createdAt: DateTimeFieldUpdateOperationsInput
-  createdBy: UserUpdateOneWithoutPostsCreatedInput
+  createdBy: UserUpdateOneWithoutPostsCreatedJInput
   id: StringFieldUpdateOperationsInput
   status: EnumPostStatusFieldUpdateOperationsInput
   tags: TagUpdateManyWithoutPostInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  updatedBy: UserUpdateOneWithoutPostsUpdatedInput
+  updatedBy: UserUpdateOneWithoutPostsUpdatedJInput
 }
 
 input PostUpdateWithoutCreatedByDataInput {
-  author: UserUpdateOneRequiredWithoutPostsAuthoredInput
+  author: UserUpdateOneRequiredWithoutPostsAuthoredJInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   status: EnumPostStatusFieldUpdateOperationsInput
   tags: TagUpdateManyWithoutPostInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  updatedBy: UserUpdateOneWithoutPostsUpdatedInput
+  updatedBy: UserUpdateOneWithoutPostsUpdatedJInput
 }
 
 input PostUpdateWithoutTagsDataInput {
-  author: UserUpdateOneRequiredWithoutPostsAuthoredInput
+  author: UserUpdateOneRequiredWithoutPostsAuthoredJInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  createdBy: UserUpdateOneWithoutPostsCreatedInput
+  createdBy: UserUpdateOneWithoutPostsCreatedJInput
   id: StringFieldUpdateOperationsInput
   status: EnumPostStatusFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  updatedBy: UserUpdateOneWithoutPostsUpdatedInput
+  updatedBy: UserUpdateOneWithoutPostsUpdatedJInput
 }
 
 input PostUpdateWithoutUpdatedByDataInput {
-  author: UserUpdateOneRequiredWithoutPostsAuthoredInput
+  author: UserUpdateOneRequiredWithoutPostsAuthoredJInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  createdBy: UserUpdateOneWithoutPostsCreatedInput
+  createdBy: UserUpdateOneWithoutPostsCreatedJInput
   id: StringFieldUpdateOperationsInput
   status: EnumPostStatusFieldUpdateOperationsInput
   tags: TagUpdateManyWithoutPostInput
@@ -866,7 +983,11 @@ input StringNullableFilter {
 }
 
 type Tag {
+  createdAt: DateTime!
   id: Int!
+  post: Post
+  postId: String
+  updatedAt: DateTime!
   value: String!
 }
 
@@ -921,6 +1042,12 @@ input TagUpdateInput {
 }
 
 input TagUpdateManyDataInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  value: StringFieldUpdateOperationsInput
+}
+
+input TagUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   value: StringFieldUpdateOperationsInput
@@ -984,6 +1111,9 @@ type Token {
 }
 
 type User {
+  ApiAccess(after: ApiAccessWhereUniqueInput, before: ApiAccessWhereUniqueInput, first: Int, last: Int): [ApiAccess!]!
+  ApiError(after: ApiErrorWhereUniqueInput, before: ApiErrorWhereUniqueInput, first: Int, last: Int): [ApiError!]!
+  ClientEvent(after: ClientEventWhereUniqueInput, before: ClientEventWhereUniqueInput, first: Int, last: Int): [ClientEvent!]!
   createdAt: DateTime!
   createdBy: User
   createdById: String
@@ -991,14 +1121,15 @@ type User {
   id: String!
   name: String!
   password: String
-  postsAuthored(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
-  postsCreated(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
-  postsUpdated(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
+  postsAuthoredJ(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
+  postsCreatedJ(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
+  postsUpdatedJ(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): [Post!]!
   roles: [UserRole!]!
   updatedAt: DateTime!
   updatedBy: User
   updatedById: String
-  usersCreated(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): [User!]!
+  usersCreated(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
+  usersUpdated(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
 }
 
 input UserCreateInput {
@@ -1006,15 +1137,17 @@ input UserCreateInput {
   ApiError: ApiErrorCreateManyWithoutReqUserInput
   ClientEvent: ClientEventCreateManyWithoutReqUserInput
   createdAt: DateTime
+  createdBy: UserCreateOneWithoutUsersCreatedInput
   email: String!
   id: String
   name: String!
   password: String
-  postsAuthored: PostCreateManyWithoutAuthorInput
-  postsCreated: PostCreateManyWithoutCreatedByInput
-  postsUpdated: PostCreateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
   roles: UserCreaterolesInput
   updatedAt: DateTime
+  updatedBy: UserCreateOneWithoutUsersUpdatedInput
   usersCreated: UserCreateManyWithoutCreatedByInput
   usersUpdated: UserCreateManyWithoutUpdatedByInput
 }
@@ -1029,24 +1162,34 @@ input UserCreateManyWithoutUpdatedByInput {
   create: [UserCreateWithoutUpdatedByInput!]
 }
 
+input UserCreateOneWithoutApiAccessInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutApiAccessInput
+}
+
+input UserCreateOneWithoutApiErrorInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutApiErrorInput
+}
+
 input UserCreateOneWithoutClientEventInput {
   connect: UserWhereUniqueInput
   create: UserCreateWithoutClientEventInput
 }
 
-input UserCreateOneWithoutPostsAuthoredInput {
+input UserCreateOneWithoutPostsAuthoredJInput {
   connect: UserWhereUniqueInput
-  create: UserCreateWithoutPostsAuthoredInput
+  create: UserCreateWithoutPostsAuthoredJInput
 }
 
-input UserCreateOneWithoutPostsCreatedInput {
+input UserCreateOneWithoutPostsCreatedJInput {
   connect: UserWhereUniqueInput
-  create: UserCreateWithoutPostsCreatedInput
+  create: UserCreateWithoutPostsCreatedJInput
 }
 
-input UserCreateOneWithoutPostsUpdatedInput {
+input UserCreateOneWithoutPostsUpdatedJInput {
   connect: UserWhereUniqueInput
-  create: UserCreateWithoutPostsUpdatedInput
+  create: UserCreateWithoutPostsUpdatedJInput
 }
 
 input UserCreateOneWithoutUsersCreatedInput {
@@ -1063,6 +1206,44 @@ input UserCreaterolesInput {
   set: [UserRole!]!
 }
 
+input UserCreateWithoutApiAccessInput {
+  ApiError: ApiErrorCreateManyWithoutReqUserInput
+  ClientEvent: ClientEventCreateManyWithoutReqUserInput
+  createdAt: DateTime
+  createdBy: UserCreateOneWithoutUsersCreatedInput
+  email: String!
+  id: String
+  name: String!
+  password: String
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
+  roles: UserCreaterolesInput
+  updatedAt: DateTime
+  updatedBy: UserCreateOneWithoutUsersUpdatedInput
+  usersCreated: UserCreateManyWithoutCreatedByInput
+  usersUpdated: UserCreateManyWithoutUpdatedByInput
+}
+
+input UserCreateWithoutApiErrorInput {
+  ApiAccess: ApiAccessCreateManyWithoutReqUserInput
+  ClientEvent: ClientEventCreateManyWithoutReqUserInput
+  createdAt: DateTime
+  createdBy: UserCreateOneWithoutUsersCreatedInput
+  email: String!
+  id: String
+  name: String!
+  password: String
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
+  roles: UserCreaterolesInput
+  updatedAt: DateTime
+  updatedBy: UserCreateOneWithoutUsersUpdatedInput
+  usersCreated: UserCreateManyWithoutCreatedByInput
+  usersUpdated: UserCreateManyWithoutUpdatedByInput
+}
+
 input UserCreateWithoutClientEventInput {
   ApiAccess: ApiAccessCreateManyWithoutReqUserInput
   ApiError: ApiErrorCreateManyWithoutReqUserInput
@@ -1072,9 +1253,9 @@ input UserCreateWithoutClientEventInput {
   id: String
   name: String!
   password: String
-  postsAuthored: PostCreateManyWithoutAuthorInput
-  postsCreated: PostCreateManyWithoutCreatedByInput
-  postsUpdated: PostCreateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
   roles: UserCreaterolesInput
   updatedAt: DateTime
   updatedBy: UserCreateOneWithoutUsersUpdatedInput
@@ -1091,9 +1272,9 @@ input UserCreateWithoutCreatedByInput {
   id: String
   name: String!
   password: String
-  postsAuthored: PostCreateManyWithoutAuthorInput
-  postsCreated: PostCreateManyWithoutCreatedByInput
-  postsUpdated: PostCreateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
   roles: UserCreaterolesInput
   updatedAt: DateTime
   updatedBy: UserCreateOneWithoutUsersUpdatedInput
@@ -1101,7 +1282,7 @@ input UserCreateWithoutCreatedByInput {
   usersUpdated: UserCreateManyWithoutUpdatedByInput
 }
 
-input UserCreateWithoutPostsAuthoredInput {
+input UserCreateWithoutPostsAuthoredJInput {
   ApiAccess: ApiAccessCreateManyWithoutReqUserInput
   ApiError: ApiErrorCreateManyWithoutReqUserInput
   ClientEvent: ClientEventCreateManyWithoutReqUserInput
@@ -1111,8 +1292,8 @@ input UserCreateWithoutPostsAuthoredInput {
   id: String
   name: String!
   password: String
-  postsCreated: PostCreateManyWithoutCreatedByInput
-  postsUpdated: PostCreateManyWithoutUpdatedByInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
   roles: UserCreaterolesInput
   updatedAt: DateTime
   updatedBy: UserCreateOneWithoutUsersUpdatedInput
@@ -1120,7 +1301,7 @@ input UserCreateWithoutPostsAuthoredInput {
   usersUpdated: UserCreateManyWithoutUpdatedByInput
 }
 
-input UserCreateWithoutPostsCreatedInput {
+input UserCreateWithoutPostsCreatedJInput {
   ApiAccess: ApiAccessCreateManyWithoutReqUserInput
   ApiError: ApiErrorCreateManyWithoutReqUserInput
   ClientEvent: ClientEventCreateManyWithoutReqUserInput
@@ -1130,8 +1311,8 @@ input UserCreateWithoutPostsCreatedInput {
   id: String
   name: String!
   password: String
-  postsAuthored: PostCreateManyWithoutAuthorInput
-  postsUpdated: PostCreateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
   roles: UserCreaterolesInput
   updatedAt: DateTime
   updatedBy: UserCreateOneWithoutUsersUpdatedInput
@@ -1139,7 +1320,7 @@ input UserCreateWithoutPostsCreatedInput {
   usersUpdated: UserCreateManyWithoutUpdatedByInput
 }
 
-input UserCreateWithoutPostsUpdatedInput {
+input UserCreateWithoutPostsUpdatedJInput {
   ApiAccess: ApiAccessCreateManyWithoutReqUserInput
   ApiError: ApiErrorCreateManyWithoutReqUserInput
   ClientEvent: ClientEventCreateManyWithoutReqUserInput
@@ -1149,8 +1330,8 @@ input UserCreateWithoutPostsUpdatedInput {
   id: String
   name: String!
   password: String
-  postsAuthored: PostCreateManyWithoutAuthorInput
-  postsCreated: PostCreateManyWithoutCreatedByInput
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
   roles: UserCreaterolesInput
   updatedAt: DateTime
   updatedBy: UserCreateOneWithoutUsersUpdatedInput
@@ -1168,9 +1349,9 @@ input UserCreateWithoutUpdatedByInput {
   id: String
   name: String!
   password: String
-  postsAuthored: PostCreateManyWithoutAuthorInput
-  postsCreated: PostCreateManyWithoutCreatedByInput
-  postsUpdated: PostCreateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
   roles: UserCreaterolesInput
   updatedAt: DateTime
   usersCreated: UserCreateManyWithoutCreatedByInput
@@ -1187,9 +1368,9 @@ input UserCreateWithoutUsersCreatedInput {
   id: String
   name: String!
   password: String
-  postsAuthored: PostCreateManyWithoutAuthorInput
-  postsCreated: PostCreateManyWithoutCreatedByInput
-  postsUpdated: PostCreateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
   roles: UserCreaterolesInput
   updatedAt: DateTime
   updatedBy: UserCreateOneWithoutUsersUpdatedInput
@@ -1206,9 +1387,9 @@ input UserCreateWithoutUsersUpdatedInput {
   id: String
   name: String!
   password: String
-  postsAuthored: PostCreateManyWithoutAuthorInput
-  postsCreated: PostCreateManyWithoutCreatedByInput
-  postsUpdated: PostCreateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostCreateManyWithoutAuthorInput
+  postsCreatedJ: PostCreateManyWithoutCreatedByInput
+  postsUpdatedJ: PostCreateManyWithoutUpdatedByInput
   roles: UserCreaterolesInput
   updatedAt: DateTime
   updatedBy: UserCreateOneWithoutUsersUpdatedInput
@@ -1264,16 +1445,27 @@ input UserUpdateInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
-  postsAuthored: PostUpdateManyWithoutAuthorInput
-  postsCreated: PostUpdateManyWithoutCreatedByInput
-  postsUpdated: PostUpdateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
   roles: UserUpdaterolesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  updatedBy: UserUpdateOneWithoutUsersUpdatedInput
   usersCreated: UserUpdateManyWithoutCreatedByInput
   usersUpdated: UserUpdateManyWithoutUpdatedByInput
 }
 
 input UserUpdateManyDataInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  roles: UserUpdaterolesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -1312,29 +1504,56 @@ input UserUpdateManyWithWhereNestedInput {
   where: UserScalarWhereInput!
 }
 
-input UserUpdateOneRequiredWithoutPostsAuthoredInput {
+input UserUpdateOneRequiredWithoutPostsAuthoredJInput {
   connect: UserWhereUniqueInput
-  create: UserCreateWithoutPostsAuthoredInput
-  update: UserUpdateWithoutPostsAuthoredDataInput
-  upsert: UserUpsertWithoutPostsAuthoredInput
+  create: UserCreateWithoutPostsAuthoredJInput
+  update: UserUpdateWithoutPostsAuthoredJDataInput
+  upsert: UserUpsertWithoutPostsAuthoredJInput
 }
 
-input UserUpdateOneWithoutPostsCreatedInput {
+input UserUpdateOneWithoutApiAccessInput {
   connect: UserWhereUniqueInput
-  create: UserCreateWithoutPostsCreatedInput
+  create: UserCreateWithoutApiAccessInput
   delete: Boolean
   disconnect: Boolean
-  update: UserUpdateWithoutPostsCreatedDataInput
-  upsert: UserUpsertWithoutPostsCreatedInput
+  update: UserUpdateWithoutApiAccessDataInput
+  upsert: UserUpsertWithoutApiAccessInput
 }
 
-input UserUpdateOneWithoutPostsUpdatedInput {
+input UserUpdateOneWithoutApiErrorInput {
   connect: UserWhereUniqueInput
-  create: UserCreateWithoutPostsUpdatedInput
+  create: UserCreateWithoutApiErrorInput
   delete: Boolean
   disconnect: Boolean
-  update: UserUpdateWithoutPostsUpdatedDataInput
-  upsert: UserUpsertWithoutPostsUpdatedInput
+  update: UserUpdateWithoutApiErrorDataInput
+  upsert: UserUpsertWithoutApiErrorInput
+}
+
+input UserUpdateOneWithoutClientEventInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutClientEventInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutClientEventDataInput
+  upsert: UserUpsertWithoutClientEventInput
+}
+
+input UserUpdateOneWithoutPostsCreatedJInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutPostsCreatedJInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutPostsCreatedJDataInput
+  upsert: UserUpsertWithoutPostsCreatedJInput
+}
+
+input UserUpdateOneWithoutPostsUpdatedJInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutPostsUpdatedJInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutPostsUpdatedJDataInput
+  upsert: UserUpsertWithoutPostsUpdatedJInput
 }
 
 input UserUpdateOneWithoutUsersCreatedInput {
@@ -1359,6 +1578,63 @@ input UserUpdaterolesInput {
   set: [UserRole!]!
 }
 
+input UserUpdateWithoutApiAccessDataInput {
+  ApiError: ApiErrorUpdateManyWithoutReqUserInput
+  ClientEvent: ClientEventUpdateManyWithoutReqUserInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  createdBy: UserUpdateOneWithoutUsersCreatedInput
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
+  roles: UserUpdaterolesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  updatedBy: UserUpdateOneWithoutUsersUpdatedInput
+  usersCreated: UserUpdateManyWithoutCreatedByInput
+  usersUpdated: UserUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutApiErrorDataInput {
+  ApiAccess: ApiAccessUpdateManyWithoutReqUserInput
+  ClientEvent: ClientEventUpdateManyWithoutReqUserInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  createdBy: UserUpdateOneWithoutUsersCreatedInput
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
+  roles: UserUpdaterolesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  updatedBy: UserUpdateOneWithoutUsersUpdatedInput
+  usersCreated: UserUpdateManyWithoutCreatedByInput
+  usersUpdated: UserUpdateManyWithoutUpdatedByInput
+}
+
+input UserUpdateWithoutClientEventDataInput {
+  ApiAccess: ApiAccessUpdateManyWithoutReqUserInput
+  ApiError: ApiErrorUpdateManyWithoutReqUserInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  createdBy: UserUpdateOneWithoutUsersCreatedInput
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
+  roles: UserUpdaterolesInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  updatedBy: UserUpdateOneWithoutUsersUpdatedInput
+  usersCreated: UserUpdateManyWithoutCreatedByInput
+  usersUpdated: UserUpdateManyWithoutUpdatedByInput
+}
+
 input UserUpdateWithoutCreatedByDataInput {
   ApiAccess: ApiAccessUpdateManyWithoutReqUserInput
   ApiError: ApiErrorUpdateManyWithoutReqUserInput
@@ -1368,9 +1644,9 @@ input UserUpdateWithoutCreatedByDataInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
-  postsAuthored: PostUpdateManyWithoutAuthorInput
-  postsCreated: PostUpdateManyWithoutCreatedByInput
-  postsUpdated: PostUpdateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
   roles: UserUpdaterolesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   updatedBy: UserUpdateOneWithoutUsersUpdatedInput
@@ -1378,7 +1654,7 @@ input UserUpdateWithoutCreatedByDataInput {
   usersUpdated: UserUpdateManyWithoutUpdatedByInput
 }
 
-input UserUpdateWithoutPostsAuthoredDataInput {
+input UserUpdateWithoutPostsAuthoredJDataInput {
   ApiAccess: ApiAccessUpdateManyWithoutReqUserInput
   ApiError: ApiErrorUpdateManyWithoutReqUserInput
   ClientEvent: ClientEventUpdateManyWithoutReqUserInput
@@ -1388,8 +1664,8 @@ input UserUpdateWithoutPostsAuthoredDataInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
-  postsCreated: PostUpdateManyWithoutCreatedByInput
-  postsUpdated: PostUpdateManyWithoutUpdatedByInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
   roles: UserUpdaterolesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   updatedBy: UserUpdateOneWithoutUsersUpdatedInput
@@ -1397,7 +1673,7 @@ input UserUpdateWithoutPostsAuthoredDataInput {
   usersUpdated: UserUpdateManyWithoutUpdatedByInput
 }
 
-input UserUpdateWithoutPostsCreatedDataInput {
+input UserUpdateWithoutPostsCreatedJDataInput {
   ApiAccess: ApiAccessUpdateManyWithoutReqUserInput
   ApiError: ApiErrorUpdateManyWithoutReqUserInput
   ClientEvent: ClientEventUpdateManyWithoutReqUserInput
@@ -1407,8 +1683,8 @@ input UserUpdateWithoutPostsCreatedDataInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
-  postsAuthored: PostUpdateManyWithoutAuthorInput
-  postsUpdated: PostUpdateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
   roles: UserUpdaterolesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   updatedBy: UserUpdateOneWithoutUsersUpdatedInput
@@ -1416,7 +1692,7 @@ input UserUpdateWithoutPostsCreatedDataInput {
   usersUpdated: UserUpdateManyWithoutUpdatedByInput
 }
 
-input UserUpdateWithoutPostsUpdatedDataInput {
+input UserUpdateWithoutPostsUpdatedJDataInput {
   ApiAccess: ApiAccessUpdateManyWithoutReqUserInput
   ApiError: ApiErrorUpdateManyWithoutReqUserInput
   ClientEvent: ClientEventUpdateManyWithoutReqUserInput
@@ -1426,8 +1702,8 @@ input UserUpdateWithoutPostsUpdatedDataInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
-  postsAuthored: PostUpdateManyWithoutAuthorInput
-  postsCreated: PostUpdateManyWithoutCreatedByInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
   roles: UserUpdaterolesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   updatedBy: UserUpdateOneWithoutUsersUpdatedInput
@@ -1445,9 +1721,9 @@ input UserUpdateWithoutUpdatedByDataInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
-  postsAuthored: PostUpdateManyWithoutAuthorInput
-  postsCreated: PostUpdateManyWithoutCreatedByInput
-  postsUpdated: PostUpdateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
   roles: UserUpdaterolesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   usersCreated: UserUpdateManyWithoutCreatedByInput
@@ -1464,9 +1740,9 @@ input UserUpdateWithoutUsersCreatedDataInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
-  postsAuthored: PostUpdateManyWithoutAuthorInput
-  postsCreated: PostUpdateManyWithoutCreatedByInput
-  postsUpdated: PostUpdateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
   roles: UserUpdaterolesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   updatedBy: UserUpdateOneWithoutUsersUpdatedInput
@@ -1483,9 +1759,9 @@ input UserUpdateWithoutUsersUpdatedDataInput {
   id: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
-  postsAuthored: PostUpdateManyWithoutAuthorInput
-  postsCreated: PostUpdateManyWithoutCreatedByInput
-  postsUpdated: PostUpdateManyWithoutUpdatedByInput
+  postsAuthoredJ: PostUpdateManyWithoutAuthorInput
+  postsCreatedJ: PostUpdateManyWithoutCreatedByInput
+  postsUpdatedJ: PostUpdateManyWithoutUpdatedByInput
   roles: UserUpdaterolesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   updatedBy: UserUpdateOneWithoutUsersUpdatedInput
@@ -1502,19 +1778,34 @@ input UserUpdateWithWhereUniqueWithoutUpdatedByInput {
   where: UserWhereUniqueInput!
 }
 
-input UserUpsertWithoutPostsAuthoredInput {
-  create: UserCreateWithoutPostsAuthoredInput!
-  update: UserUpdateWithoutPostsAuthoredDataInput!
+input UserUpsertWithoutApiAccessInput {
+  create: UserCreateWithoutApiAccessInput!
+  update: UserUpdateWithoutApiAccessDataInput!
 }
 
-input UserUpsertWithoutPostsCreatedInput {
-  create: UserCreateWithoutPostsCreatedInput!
-  update: UserUpdateWithoutPostsCreatedDataInput!
+input UserUpsertWithoutApiErrorInput {
+  create: UserCreateWithoutApiErrorInput!
+  update: UserUpdateWithoutApiErrorDataInput!
 }
 
-input UserUpsertWithoutPostsUpdatedInput {
-  create: UserCreateWithoutPostsUpdatedInput!
-  update: UserUpdateWithoutPostsUpdatedDataInput!
+input UserUpsertWithoutClientEventInput {
+  create: UserCreateWithoutClientEventInput!
+  update: UserUpdateWithoutClientEventDataInput!
+}
+
+input UserUpsertWithoutPostsAuthoredJInput {
+  create: UserCreateWithoutPostsAuthoredJInput!
+  update: UserUpdateWithoutPostsAuthoredJDataInput!
+}
+
+input UserUpsertWithoutPostsCreatedJInput {
+  create: UserCreateWithoutPostsCreatedJInput!
+  update: UserUpdateWithoutPostsCreatedJDataInput!
+}
+
+input UserUpsertWithoutPostsUpdatedJInput {
+  create: UserCreateWithoutPostsUpdatedJInput!
+  update: UserUpdateWithoutPostsUpdatedJDataInput!
 }
 
 input UserUpsertWithoutUsersCreatedInput {
@@ -1553,9 +1844,9 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   password: StringNullableFilter
-  postsAuthored: PostListRelationFilter
-  postsCreated: PostListRelationFilter
-  postsUpdated: PostListRelationFilter
+  postsAuthoredJ: PostListRelationFilter
+  postsCreatedJ: PostListRelationFilter
+  postsUpdatedJ: PostListRelationFilter
   roles: EnumUserRoleNullableListFilter
   updatedAt: DateTimeFilter
   updatedBy: UserWhereInput

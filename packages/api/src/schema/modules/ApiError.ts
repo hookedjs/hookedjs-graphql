@@ -1,35 +1,25 @@
 import {extendType, objectType} from '@nexus/schema'
 
 import {rules} from '../lib'
+import prismaHelpers from '../lib/prismaHelpers'
 
 const ApiError: ObjectModule = {
-  ApiError: objectType({
+  ObjectType: objectType({
     name: 'ApiError',
     definition(t) {
-      t.model.id()
-      t.model.createdAt()
-      t.model.ip()
-      t.model.reqUserId()
-      t.model.reqUser()
-      t.model.operationName()
-      t.model.message()
-      t.model.stack()
-      t.model.reqBody()
-      t.model.resBody()
+      prismaHelpers.includeFields(t)
     },
   }),
   Queries: extendType({
     type: 'Query',
     definition(t) {
-      t.crud.apiError()
-      t.crud.apiErrors({filtering: true, ordering: true, pagination: true})
+      prismaHelpers.includeQueries(t)
     },
   }),
   Mutations: extendType({
     type: 'Mutation',
     definition(t) {
-      // t.crud.createOneApiError()
-      // t.crud.updateOneApiError()
+      prismaHelpers.includeMutations(t)
     },
   }),
   Rules: {

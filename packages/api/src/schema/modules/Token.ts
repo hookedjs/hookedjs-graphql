@@ -19,7 +19,7 @@ const AuthRefreshInputType = inputObjectType({
 })
 
 const Token: ObjectModule = {
-  Token: objectType({
+  ObjectType: objectType({
     name: 'Token',
     definition(t) {
       t.string('accessToken')

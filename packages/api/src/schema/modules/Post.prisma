@@ -17,3 +17,8 @@ enum PostStatus {
   DRAFT
   PUBLISHED
 }
+extends model User {
+  postsAuthoredJ Post[]      @relation("PostsAuthoredByUser")
+  postsCreatedJ  Post[]      @relation("PostsCreatedByUser")
+  postsUpdatedJ  Post[]      @relation("PostsUpdatedByUser")
+}

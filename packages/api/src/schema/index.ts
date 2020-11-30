@@ -9,7 +9,6 @@ import * as path from 'path'
 
 import {rules} from './lib'
 import * as Modules from './modules'
-import {ApiAccess, ApiError, ClientEvent, Post, Tag, Token, User} from './modules'
 
 const Query = queryType({definition(t) {}})
 const Mutation = mutationType({definition(t) {}})
@@ -43,15 +42,7 @@ const schema = makeSchema({
 })
 
 const schemaWithShield = applyMiddleware(schema, rules.shield(
-  rules.mergeRuleSets(
-    ApiAccess.Rules,
-    ApiError.Rules,
-    ClientEvent.Rules,
-    Post.Rules,
-    Tag.Rules,
-    Token.Rules,
-    User.Rules,
-  ),
+  rules.mergeRuleSets(...Object.values(Modules).map(m => m.Rules)),
   {
     fallbackError: 'Forbidden',
     fallbackRule: rules.isAdmin,

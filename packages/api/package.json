@@ -14,7 +14,7 @@
     "nexus:codegen": "NODE_ENV=development ts-node --transpile-only src/schema",
     "prisma:save": "./prisma/schemaGen.sh && prisma migrate save --experimental -c",
     "prisma:apply": "prisma migrate up --experimental -c > /dev/null",
-    "prisma:codegen": "./prisma/schemaGen.sh && prisma generate",
+    "prisma:codegen": "ts-node prisma/schemaGen.ts && prisma generate",
     "prisma:studio": "prisma studio"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "@types/papaparse": "^5.2.4",
     "apollo-server-express": "^2.19.0",
     "compression": "^1.7.4",
+    "glob": "^7.1.6",
     "graphql": "^15.3.0",
     "graphql-middleware": "^4.0.2",
     "graphql-query-complexity": "^0.7.1",

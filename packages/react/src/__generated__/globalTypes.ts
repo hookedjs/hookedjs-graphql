@@ -70,6 +70,7 @@ export interface ClientEventCreateManyWithoutReqUserInput {
 }
 
 export interface ClientEventCreateWithoutReqUserInput {
+  context?: any | null;
   createdAt?: any | null;
   id?: string | null;
   ip: string;
@@ -98,30 +99,30 @@ export interface PostCreateManyWithoutUpdatedByInput {
 
 export interface PostCreateWithoutAuthorInput {
   createdAt?: any | null;
-  createdBy?: UserCreateOneWithoutPostsCreatedInput | null;
+  createdBy?: UserCreateOneWithoutPostsCreatedJInput | null;
   id?: string | null;
   status: PostStatus;
   tags?: TagCreateManyWithoutPostInput | null;
   title: string;
   updatedAt?: any | null;
-  updatedBy?: UserCreateOneWithoutPostsUpdatedInput | null;
+  updatedBy?: UserCreateOneWithoutPostsUpdatedJInput | null;
 }
 
 export interface PostCreateWithoutCreatedByInput {
-  author: UserCreateOneWithoutPostsAuthoredInput;
+  author: UserCreateOneWithoutPostsAuthoredJInput;
   createdAt?: any | null;
   id?: string | null;
   status: PostStatus;
   tags?: TagCreateManyWithoutPostInput | null;
   title: string;
   updatedAt?: any | null;
-  updatedBy?: UserCreateOneWithoutPostsUpdatedInput | null;
+  updatedBy?: UserCreateOneWithoutPostsUpdatedJInput | null;
 }
 
 export interface PostCreateWithoutUpdatedByInput {
-  author: UserCreateOneWithoutPostsAuthoredInput;
+  author: UserCreateOneWithoutPostsAuthoredJInput;
   createdAt?: any | null;
-  createdBy?: UserCreateOneWithoutPostsCreatedInput | null;
+  createdBy?: UserCreateOneWithoutPostsCreatedJInput | null;
   id?: string | null;
   status: PostStatus;
   tags?: TagCreateManyWithoutPostInput | null;
@@ -153,15 +154,17 @@ export interface UserCreateInput {
   ApiError?: ApiErrorCreateManyWithoutReqUserInput | null;
   ClientEvent?: ClientEventCreateManyWithoutReqUserInput | null;
   createdAt?: any | null;
+  createdBy?: UserCreateOneWithoutUsersCreatedInput | null;
   email: string;
   id?: string | null;
   name: string;
   password?: string | null;
-  postsAuthored?: PostCreateManyWithoutAuthorInput | null;
-  postsCreated?: PostCreateManyWithoutCreatedByInput | null;
-  postsUpdated?: PostCreateManyWithoutUpdatedByInput | null;
+  postsAuthoredJ?: PostCreateManyWithoutAuthorInput | null;
+  postsCreatedJ?: PostCreateManyWithoutCreatedByInput | null;
+  postsUpdatedJ?: PostCreateManyWithoutUpdatedByInput | null;
   roles?: UserCreaterolesInput | null;
   updatedAt?: any | null;
+  updatedBy?: UserCreateOneWithoutUsersUpdatedInput | null;
   usersCreated?: UserCreateManyWithoutCreatedByInput | null;
   usersUpdated?: UserCreateManyWithoutUpdatedByInput | null;
 }
@@ -176,19 +179,19 @@ export interface UserCreateManyWithoutUpdatedByInput {
   create?: UserCreateWithoutUpdatedByInput[] | null;
 }
 
-export interface UserCreateOneWithoutPostsAuthoredInput {
+export interface UserCreateOneWithoutPostsAuthoredJInput {
   connect?: UserWhereUniqueInput | null;
-  create?: UserCreateWithoutPostsAuthoredInput | null;
+  create?: UserCreateWithoutPostsAuthoredJInput | null;
 }
 
-export interface UserCreateOneWithoutPostsCreatedInput {
+export interface UserCreateOneWithoutPostsCreatedJInput {
   connect?: UserWhereUniqueInput | null;
-  create?: UserCreateWithoutPostsCreatedInput | null;
+  create?: UserCreateWithoutPostsCreatedJInput | null;
 }
 
-export interface UserCreateOneWithoutPostsUpdatedInput {
+export interface UserCreateOneWithoutPostsUpdatedJInput {
   connect?: UserWhereUniqueInput | null;
-  create?: UserCreateWithoutPostsUpdatedInput | null;
+  create?: UserCreateWithoutPostsUpdatedJInput | null;
 }
 
 export interface UserCreateOneWithoutUsersCreatedInput {
@@ -210,9 +213,9 @@ export interface UserCreateWithoutCreatedByInput {
   id?: string | null;
   name: string;
   password?: string | null;
-  postsAuthored?: PostCreateManyWithoutAuthorInput | null;
-  postsCreated?: PostCreateManyWithoutCreatedByInput | null;
-  postsUpdated?: PostCreateManyWithoutUpdatedByInput | null;
+  postsAuthoredJ?: PostCreateManyWithoutAuthorInput | null;
+  postsCreatedJ?: PostCreateManyWithoutCreatedByInput | null;
+  postsUpdatedJ?: PostCreateManyWithoutUpdatedByInput | null;
   roles?: UserCreaterolesInput | null;
   updatedAt?: any | null;
   updatedBy?: UserCreateOneWithoutUsersUpdatedInput | null;
@@ -220,7 +223,7 @@ export interface UserCreateWithoutCreatedByInput {
   usersUpdated?: UserCreateManyWithoutUpdatedByInput | null;
 }
 
-export interface UserCreateWithoutPostsAuthoredInput {
+export interface UserCreateWithoutPostsAuthoredJInput {
   ApiAccess?: ApiAccessCreateManyWithoutReqUserInput | null;
   ApiError?: ApiErrorCreateManyWithoutReqUserInput | null;
   ClientEvent?: ClientEventCreateManyWithoutReqUserInput | null;
@@ -230,8 +233,8 @@ export interface UserCreateWithoutPostsAuthoredInput {
   id?: string | null;
   name: string;
   password?: string | null;
-  postsCreated?: PostCreateManyWithoutCreatedByInput | null;
-  postsUpdated?: PostCreateManyWithoutUpdatedByInput | null;
+  postsCreatedJ?: PostCreateManyWithoutCreatedByInput | null;
+  postsUpdatedJ?: PostCreateManyWithoutUpdatedByInput | null;
   roles?: UserCreaterolesInput | null;
   updatedAt?: any | null;
   updatedBy?: UserCreateOneWithoutUsersUpdatedInput | null;
@@ -239,7 +242,7 @@ export interface UserCreateWithoutPostsAuthoredInput {
   usersUpdated?: UserCreateManyWithoutUpdatedByInput | null;
 }
 
-export interface UserCreateWithoutPostsCreatedInput {
+export interface UserCreateWithoutPostsCreatedJInput {
   ApiAccess?: ApiAccessCreateManyWithoutReqUserInput | null;
   ApiError?: ApiErrorCreateManyWithoutReqUserInput | null;
   ClientEvent?: ClientEventCreateManyWithoutReqUserInput | null;
@@ -249,8 +252,8 @@ export interface UserCreateWithoutPostsCreatedInput {
   id?: string | null;
   name: string;
   password?: string | null;
-  postsAuthored?: PostCreateManyWithoutAuthorInput | null;
-  postsUpdated?: PostCreateManyWithoutUpdatedByInput | null;
+  postsAuthoredJ?: PostCreateManyWithoutAuthorInput | null;
+  postsUpdatedJ?: PostCreateManyWithoutUpdatedByInput | null;
   roles?: UserCreaterolesInput | null;
   updatedAt?: any | null;
   updatedBy?: UserCreateOneWithoutUsersUpdatedInput | null;
@@ -258,7 +261,7 @@ export interface UserCreateWithoutPostsCreatedInput {
   usersUpdated?: UserCreateManyWithoutUpdatedByInput | null;
 }
 
-export interface UserCreateWithoutPostsUpdatedInput {
+export interface UserCreateWithoutPostsUpdatedJInput {
   ApiAccess?: ApiAccessCreateManyWithoutReqUserInput | null;
   ApiError?: ApiErrorCreateManyWithoutReqUserInput | null;
   ClientEvent?: ClientEventCreateManyWithoutReqUserInput | null;
@@ -268,8 +271,8 @@ export interface UserCreateWithoutPostsUpdatedInput {
   id?: string | null;
   name: string;
   password?: string | null;
-  postsAuthored?: PostCreateManyWithoutAuthorInput | null;
-  postsCreated?: PostCreateManyWithoutCreatedByInput | null;
+  postsAuthoredJ?: PostCreateManyWithoutAuthorInput | null;
+  postsCreatedJ?: PostCreateManyWithoutCreatedByInput | null;
   roles?: UserCreaterolesInput | null;
   updatedAt?: any | null;
   updatedBy?: UserCreateOneWithoutUsersUpdatedInput | null;
@@ -287,9 +290,9 @@ export interface UserCreateWithoutUpdatedByInput {
   id?: string | null;
   name: string;
   password?: string | null;
-  postsAuthored?: PostCreateManyWithoutAuthorInput | null;
-  postsCreated?: PostCreateManyWithoutCreatedByInput | null;
-  postsUpdated?: PostCreateManyWithoutUpdatedByInput | null;
+  postsAuthoredJ?: PostCreateManyWithoutAuthorInput | null;
+  postsCreatedJ?: PostCreateManyWithoutCreatedByInput | null;
+  postsUpdatedJ?: PostCreateManyWithoutUpdatedByInput | null;
   roles?: UserCreaterolesInput | null;
   updatedAt?: any | null;
   usersCreated?: UserCreateManyWithoutCreatedByInput | null;
@@ -306,9 +309,9 @@ export interface UserCreateWithoutUsersCreatedInput {
   id?: string | null;
   name: string;
   password?: string | null;
-  postsAuthored?: PostCreateManyWithoutAuthorInput | null;
-  postsCreated?: PostCreateManyWithoutCreatedByInput | null;
-  postsUpdated?: PostCreateManyWithoutUpdatedByInput | null;
+  postsAuthoredJ?: PostCreateManyWithoutAuthorInput | null;
+  postsCreatedJ?: PostCreateManyWithoutCreatedByInput | null;
+  postsUpdatedJ?: PostCreateManyWithoutUpdatedByInput | null;
   roles?: UserCreaterolesInput | null;
   updatedAt?: any | null;
   updatedBy?: UserCreateOneWithoutUsersUpdatedInput | null;
@@ -325,9 +328,9 @@ export interface UserCreateWithoutUsersUpdatedInput {
   id?: string | null;
   name: string;
   password?: string | null;
-  postsAuthored?: PostCreateManyWithoutAuthorInput | null;
-  postsCreated?: PostCreateManyWithoutCreatedByInput | null;
-  postsUpdated?: PostCreateManyWithoutUpdatedByInput | null;
+  postsAuthoredJ?: PostCreateManyWithoutAuthorInput | null;
+  postsCreatedJ?: PostCreateManyWithoutCreatedByInput | null;
+  postsUpdatedJ?: PostCreateManyWithoutUpdatedByInput | null;
   roles?: UserCreaterolesInput | null;
   updatedAt?: any | null;
   updatedBy?: UserCreateOneWithoutUsersUpdatedInput | null;
