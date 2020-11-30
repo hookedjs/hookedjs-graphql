@@ -3,7 +3,8 @@ import express from 'express'
 import path from 'path'
 import sirv from 'sirv'
 
-import {apolloServer, gqlLogger, jwt} from './middleware'
+import apolloServer from './graphql/apolloServer'
+import {gqlLogger, jwt} from './middleware'
 
 const {PORT = 4000, NODE_ENV} = process.env
 const dev = NODE_ENV === 'development'

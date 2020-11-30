@@ -1,7 +1,6 @@
 import {extendType, objectType} from '@nexus/schema'
 
-import {rules} from '../lib'
-import prismaHelpers from '../lib/prismaHelpers'
+import {prismaHelpers, rules} from '../../lib'
 
 const ClientEvent: ObjectModule = {
   ObjectType: objectType({

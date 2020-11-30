@@ -4,7 +4,7 @@ import {separateOperations} from 'graphql'
 import {fieldExtensionsEstimator, getComplexity, simpleEstimator} from 'graphql-query-complexity'
 
 import {prisma} from '../lib'
-import schema from '../schema'
+import schema from './schema'
 
 const apolloServer = new ApolloServer({
   schema,

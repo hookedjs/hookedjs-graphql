@@ -1,11 +1,10 @@
 import {extendType, objectType} from '@nexus/schema'
 
-import {rules} from '../lib'
-import prismaHelpers from '../lib/prismaHelpers'
+import {prismaHelpers, rules} from '../../lib'
 
-const Tag: ObjectModule = {
+const ApiAccess: ObjectModule = {
   ObjectType: objectType({
-    name: 'Tag',
+    name: 'ApiAccess',
     definition(t) {
       prismaHelpers.includeFields(t)
     },
@@ -23,13 +22,9 @@ const Tag: ObjectModule = {
     },
   }),
   Rules: {
-    Query: {
-      tags: rules.isAuthenticated,
-    },
-    Mutation: {
-      createOneTag: rules.isAuthenticated,
-    },
-    Tag: rules.isAuthenticated,
-  },
+    Query: {},
+    Mutation: {},
+    ApiAccess: rules.isAdmin,
+  }
 }
-export default Tag
+export default ApiAccess

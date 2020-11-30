@@ -1,8 +1,7 @@
 import {extendType, objectType} from '@nexus/schema'
 import {PostStatus} from '@prisma/client'
 
-import {rules} from '../lib'
-import prismaHelpers from '../lib/prismaHelpers'
+import {prismaHelpers, rules} from '../../lib'
 
 const isPostPublishedOrOwner = rules.rule({ cache: 'strict' })(
   async (parent, args, ctx, info) => {

@@ -1,7 +1,6 @@
 import {extendType, objectType} from '@nexus/schema'
 
-import {crypto, difference, isEmail, isPassword, rules} from '../lib'
-import prismaHelpers from '../lib/prismaHelpers'
+import {crypto, difference, isEmail, isPassword, prismaHelpers, rules} from '../../lib'
 
 const isSelf = rules.rule({ cache: 'strict' })(
   async (parent, args, ctx, info) => {

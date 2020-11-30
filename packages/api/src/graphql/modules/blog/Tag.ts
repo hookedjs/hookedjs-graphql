@@ -1,11 +1,10 @@
 import {extendType, objectType} from '@nexus/schema'
 
-import {rules} from '../lib'
-import prismaHelpers from '../lib/prismaHelpers'
+import {prismaHelpers, rules} from '../../lib'
 
-const ApiError: ObjectModule = {
+const Tag: ObjectModule = {
   ObjectType: objectType({
-    name: 'ApiError',
+    name: 'Tag',
     definition(t) {
       prismaHelpers.includeFields(t)
     },
@@ -23,9 +22,13 @@ const ApiError: ObjectModule = {
     },
   }),
   Rules: {
-    Query: {},
-    Mutation: {},
-    ApiError: rules.isAdmin,
+    Query: {
+      tags: rules.isAuthenticated,
+    },
+    Mutation: {
+      createOneTag: rules.isAuthenticated,
+    },
+    Tag: rules.isAuthenticated,
   },
 }
-export default ApiError
+export default Tag
