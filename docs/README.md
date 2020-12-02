@@ -23,6 +23,7 @@ As of now, HookedJS requires MacOS in order to build IOS apps.
 Then, install more dependencies and bootstrap
 
 ```
+sudo gem install cocoapods
 brew install gnu-sed
 brew install watchman
 brew tap AdoptOpenJDK/openjdk
