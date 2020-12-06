@@ -5,8 +5,6 @@
   "private": true,
   "license": "ISC",
   "scripts": {
-    "codegen": "tsc",
-    "dev": "tsc --watch",
     "lint": "eslint --ext .js,.ts 'src/**/*.ts' --fix",
     "repl": "ts-node-dev --respawn src/repl.ts",
     "validate": "tsc --noEmit"

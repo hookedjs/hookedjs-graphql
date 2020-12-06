@@ -10,10 +10,8 @@
     ],
     "rootDir": "src",
     "strict": true,
-    "outDir": "dist",
     "esModuleInterop": true,
-    "sourceMap": true,
-    "declaration": true
+    "noEmit": true
   },
   "include": ["src"]
 }

@@ -1,4 +1,4 @@
-import { wait } from '@h/common/src/async'
+import { delay } from 'rambdax'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -28,7 +28,7 @@ const Component: React.FC = () => {
   )
 
   React.useEffect(() => {
-    if (authState.userId) wait(1000).then(() => (from ? navigate(-1) : navigate('/')))
+    if (authState.userId) delay(1000).then(() => (from ? navigate(-1) : navigate('/')))
   }, [authState.userId, from, navigate])
 
   if (authState.userId) {

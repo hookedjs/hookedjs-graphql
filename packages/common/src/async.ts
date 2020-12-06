@@ -3,6 +3,8 @@ const debugLog = (message: string) => null // console.debug;
 /**
  * Return a promise that resolves after ms milliseconds
  *
+ * Is basically the same as Rambdax's delay
+ *
  * Can be used in async functions to wait for stuff.
  *
  * For example,

@@ -1,4 +1,4 @@
-import { wait } from '@h/common/src/async'
+import { delay } from 'rambdax'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,7 +10,7 @@ const Logout: Logout = () => {
   const navigate = useNavigate()
   React.useEffect(() => {
     logout()
-    wait(1000).then(() => navigate(LoginMeta.path))
+    delay(1000).then(() => navigate(LoginMeta.path))
   }, [logout, navigate])
   return (
     <>
