@@ -628,15 +628,12 @@ type Post {
 }
 
 input PostCreateInput {
-  author: UserCreateOneWithoutPostsAuthoredJInput!
   createdAt: DateTime
-  createdBy: UserCreateOneWithoutPostsCreatedJInput
   id: String
   status: PostStatus!
   tags: TagCreateManyWithoutPostInput
   title: String!
   updatedAt: DateTime
-  updatedBy: UserCreateOneWithoutPostsUpdatedJInput
 }
 
 input PostCreateManyWithoutAuthorInput {
@@ -748,7 +745,6 @@ input PostUpdateInput {
   tags: TagUpdateManyWithoutPostInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
-  updatedBy: UserUpdateOneWithoutPostsUpdatedJInput
 }
 
 input PostUpdateManyDataInput {

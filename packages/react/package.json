@@ -8,7 +8,7 @@
     "build": "react-app-rewired build",
     "dev": "BROWSER=false react-app-rewired start",
     "repl": "ts-node-dev --respawn src/repl",
-    "analyze": "ANALYZE=1 npm run build",
+    "bundleVisualize": "BUNDLE_VISUALIZE=1 npm run build",
     "test": "react-app-rewired test",
     "e2e": "cd e2e && jest",
     "validate": "tsc --noEmit"
@@ -51,6 +51,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "apollo": "^2.31.0",
+    "customize-cra": "^1.0.0",
     "eslint": "^6.6.0",
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "jest-puppeteer": "^4.4.0",
@@ -59,8 +60,8 @@
     "puppeteer": "^5.3.1",
     "react-app-rewired": "^2.1.6",
     "react-scripts": "^3.4.2",
-    "webpack-bundle-analyzer": "^3.8.0",
-    "typescript": "*"
+    "typescript": "*",
+    "webpack-bundle-analyzer": "^4.2.0"
   },
   "engines": {
     "node": ">=12 <15"
