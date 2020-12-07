@@ -5,7 +5,10 @@ module.exports = {
       name: "localApollo",
       localSchemaFile: "../api/schema.graphql",
       // url: "http://localhost:4000",
-      includes: ["src/**/*.{tsx,ts,jsx,js}"],
+      includes: [
+        "src/**/*.{tsx,ts,jsx,js}",
+        "react/**/*.{tsx,ts,jsx,js}",
+      ],
     },
   },
 };

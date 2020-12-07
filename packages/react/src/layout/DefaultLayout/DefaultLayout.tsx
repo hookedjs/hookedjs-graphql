@@ -2,7 +2,7 @@ import React from 'react'
 import useMetaTags from 'react-metatags-hook'
 
 import { ErrorBoundary } from '../compounds/ErrorBoundary'
-import { useScrollRestore } from '../useScrollRestore'
+// import { useScrollRestore } from '../useScrollRestore'
 import Breadcrumbs from './compounds/Breadcrumbs'
 import Header from './compounds/Header'
 import { DefaultComponent } from './types'
@@ -10,7 +10,7 @@ import { DefaultComponent } from './types'
 export const Component: DefaultComponent = (props) => {
   const { children = '', routeMeta } = props
   useMetaTags({ title: `${routeMeta.title} - Boilerplate` }, [])
-  useScrollRestore('#scroll-div')
+  // useScrollRestore('#scroll-div')
   return (
     <div
       className={`layout-default ${routeMeta.slug}`}

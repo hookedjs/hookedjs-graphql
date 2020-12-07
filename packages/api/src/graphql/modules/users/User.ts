@@ -1,6 +1,6 @@
 import {extendType, objectType} from '@nexus/schema'
 
-import {crypto, difference, isEmail, isPassword, prismaHelpers, rules} from '../../lib'
+import {crypto, difference, isEmail, isPassword, ObjectModule, prismaHelpers, rules} from '../../lib'
 
 const isSelf = rules.rule({ cache: 'strict' })(
   async (parent, args, ctx, info) => {
@@ -58,6 +58,7 @@ const User: ObjectModule = {
   }),
   Rules: {
     Query: {
+      user: rules.isAuthenticated,
       users: rules.isAuthenticated,
     },
     Mutation: {
@@ -66,6 +67,8 @@ const User: ObjectModule = {
     },
     User: {
       id: rules.allow,
+      createdAt: isSelf,
+      updatedAt: isSelf,
       name: rules.isAuthenticated,
       email: isSelf,
       postsAuthoredJ: rules.isAuthenticated,

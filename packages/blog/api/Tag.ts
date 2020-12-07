@@ -1,6 +1,5 @@
+import {ObjectModule, prismaHelpers, rules} from '@h/api/src/graphql/lib'
 import {extendType, objectType} from '@nexus/schema'
-
-import {prismaHelpers, rules} from '../../lib'
 
 const Tag: ObjectModule = {
   ObjectType: objectType({

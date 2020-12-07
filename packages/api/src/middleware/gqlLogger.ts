@@ -74,10 +74,11 @@ async function logRequest(req: Request, res: Response, chunks: any, start: numbe
       throw e
     })
 
-    if (res.statusCode >= 400) {
-      resBody?.errors.forEach((e: GraphQLError) => {
+    if (resBody?.errors?.length) {
+      resBody.errors.forEach((e: GraphQLError) => {
         const errorMessage: ApiErrorCreateInput = {
           ...baseMessage,
+          roles: req.user?.roles as ApiErrorCreateInput['roles'] ?? [],
           reqBody,
           message: e.message,
           stack: e.extensions,

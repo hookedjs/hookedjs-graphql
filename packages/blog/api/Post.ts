@@ -1,7 +1,6 @@
+import {ObjectModule, prismaHelpers, rules} from '@h/api/src/graphql/lib'
 import {extendType, objectType} from '@nexus/schema'
 import {PostStatus} from '@prisma/client'
-
-import {prismaHelpers, rules} from '../../lib'
 
 const isPostPublishedOrOwner = rules.rule({ cache: 'strict' })(
   async (parent, args, ctx, info) => {

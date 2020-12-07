@@ -1,9 +1,19 @@
 import * as fs from 'fs'
 import * as glob from 'glob'
+import * as path from 'path'
 
 const datasource = fs.readFileSync('prisma/datasource.prisma')
 
-const moduleFiles = glob.sync('src/**/*.prisma', {})
+const hookedjsModuleFiles =
+  fs.readdirSync(path.join(__dirname, '../../'))
+    .filter(p => !['.DS_Store', 'api', 'react', 'common'].includes(p))
+    .map(p => glob.sync(path.resolve(__dirname, `../../${p}/api/**/*.prisma`)))
+    .reduce((acc, val) => acc.concat(val), []) // is like .flat(1) but ts no likey
+
+const moduleFiles = [
+  ...glob.sync('src/**/*.prisma', {}),
+  ...hookedjsModuleFiles,
+]
 
 const modules = moduleFiles.reduce((a,f) => {
   const module = fs.readFileSync(f)

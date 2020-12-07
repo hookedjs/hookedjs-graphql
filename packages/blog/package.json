@@ -1,0 +1,16 @@
+{
+  "name": "@h/blog",
+  "description": "A blog hookedjs module",
+  "version": "1.0.0",
+  "private": true,
+  "license": "ISC",
+  "scripts": {
+    "postinstall": "//mkdir -p node_modules/@types &> /dev/null; ln -s ../api/node_modules/@types/nexus-typegen node_modules/@types/nexus-typegen",
+    "codegen": "apollo client:codegen --target=typescript --globalTypesFile=react/__generated__/globalTypes.ts --includes=\"react/**/*.{tsx,ts,jsx,js}\" && rm -rf __generated__",
+    "seed": "ts-node scripts/seed.ts",
+    "lint": "eslint --ext .js,.ts '{react,common,api}/**/*.ts' --fix"
+  },
+  "engines": {
+    "node": ">=12 <15"
+  }
+}

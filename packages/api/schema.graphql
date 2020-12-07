@@ -149,6 +149,7 @@ type ApiError {
   reqUser: User
   reqUserId: String
   resBody: Json!
+  roles: [UserRole!]!
   stack: Json!
 }
 
@@ -161,12 +162,17 @@ input ApiErrorCreateInput {
   reqBody: Json!
   reqUser: UserCreateOneWithoutApiErrorInput
   resBody: Json!
+  roles: ApiErrorCreaterolesInput
   stack: Json!
 }
 
 input ApiErrorCreateManyWithoutReqUserInput {
   connect: [ApiErrorWhereUniqueInput!]
   create: [ApiErrorCreateWithoutReqUserInput!]
+}
+
+input ApiErrorCreaterolesInput {
+  set: [UserRole!]!
 }
 
 input ApiErrorCreateWithoutReqUserInput {
@@ -177,6 +183,7 @@ input ApiErrorCreateWithoutReqUserInput {
   operationName: String!
   reqBody: Json!
   resBody: Json!
+  roles: ApiErrorCreaterolesInput
   stack: Json!
 }
 
@@ -195,6 +202,7 @@ input ApiErrorOrderByInput {
   reqBody: SortOrder
   reqUserId: SortOrder
   resBody: SortOrder
+  roles: SortOrder
   stack: SortOrder
 }
 
@@ -208,6 +216,7 @@ input ApiErrorScalarWhereInput {
   operationName: StringFilter
   OR: [ApiErrorScalarWhereInput!]
   reqUserId: StringNullableFilter
+  roles: EnumUserRoleNullableListFilter
 }
 
 input ApiErrorUpdateInput {
@@ -219,6 +228,7 @@ input ApiErrorUpdateInput {
   reqBody: Json
   reqUser: UserUpdateOneWithoutApiErrorInput
   resBody: Json
+  roles: ApiErrorUpdaterolesInput
   stack: Json
 }
 
@@ -230,6 +240,7 @@ input ApiErrorUpdateManyDataInput {
   operationName: StringFieldUpdateOperationsInput
   reqBody: Json
   resBody: Json
+  roles: ApiErrorUpdaterolesInput
   stack: Json
 }
 
@@ -241,6 +252,7 @@ input ApiErrorUpdateManyMutationInput {
   operationName: StringFieldUpdateOperationsInput
   reqBody: Json
   resBody: Json
+  roles: ApiErrorUpdaterolesInput
   stack: Json
 }
 
@@ -261,6 +273,10 @@ input ApiErrorUpdateManyWithWhereNestedInput {
   where: ApiErrorScalarWhereInput!
 }
 
+input ApiErrorUpdaterolesInput {
+  set: [UserRole!]!
+}
+
 input ApiErrorUpdateWithoutReqUserDataInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -269,6 +285,7 @@ input ApiErrorUpdateWithoutReqUserDataInput {
   operationName: StringFieldUpdateOperationsInput
   reqBody: Json
   resBody: Json
+  roles: ApiErrorUpdaterolesInput
   stack: Json
 }
 
@@ -294,6 +311,7 @@ input ApiErrorWhereInput {
   OR: [ApiErrorWhereInput!]
   reqUser: UserWhereInput
   reqUserId: StringNullableFilter
+  roles: EnumUserRoleNullableListFilter
 }
 
 input ApiErrorWhereUniqueInput {
@@ -628,12 +646,15 @@ type Post {
 }
 
 input PostCreateInput {
+  author: UserCreateOneWithoutPostsAuthoredJInput!
   createdAt: DateTime
+  createdBy: UserCreateOneWithoutPostsCreatedJInput
   id: String
   status: PostStatus!
   tags: TagCreateManyWithoutPostInput
   title: String!
   updatedAt: DateTime
+  updatedBy: UserCreateOneWithoutPostsUpdatedJInput
 }
 
 input PostCreateManyWithoutAuthorInput {
@@ -745,6 +766,7 @@ input PostUpdateInput {
   tags: TagUpdateManyWithoutPostInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  updatedBy: UserUpdateOneWithoutPostsUpdatedJInput
 }
 
 input PostUpdateManyDataInput {

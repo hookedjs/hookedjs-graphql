@@ -48,7 +48,12 @@ export interface ApiErrorCreateWithoutReqUserInput {
   operationName: string;
   reqBody: any;
   resBody: any;
+  roles?: ApiErrorCreaterolesInput | null;
   stack: any;
+}
+
+export interface ApiErrorCreaterolesInput {
+  set: UserRole[];
 }
 
 export interface ApiErrorWhereUniqueInput {

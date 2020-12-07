@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[[ $1 = "--migrationsRebuild" ]] && MIGRATE_REBUILD_MODE=1
+
 # Check if docker is running
 check_docker() {
   docker_state=$(docker info >/dev/null 2>&1)
@@ -11,9 +13,12 @@ check_docker() {
 
 seed() {
   cd packages/api
-#  yarn prisma:save
+  if [ $MIGRATE_REBUILD_MODE ]; then
+    rm -rf prisma/migrations &> /dev/null
+    yarn prisma:save
+  fi
   yarn prisma:apply
-  yarn seed
+  yarn workspaces run seed
 }
 
 start() {

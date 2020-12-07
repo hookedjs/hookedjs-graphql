@@ -5,13 +5,13 @@
   "private": true,
   "scripts": {
     "codegen": "apollo client:codegen --target=typescript --globalTypesFile=src/__generated__/globalTypes.ts && rm -rf __generated__",
+    "seed": "echo '' > /dev/null",
     "build": "react-app-rewired build",
     "dev": "BROWSER=false react-app-rewired start",
     "repl": "ts-node-dev --respawn src/repl",
     "bundleVisualize": "BUNDLE_VISUALIZE=1 npm run build",
     "test": "react-app-rewired test",
-    "e2e": "cd e2e && jest",
-    "validate": "tsc --noEmit"
+    "e2e": "cd e2e && jest"
   },
   "browserslist": {
     "production": [
@@ -30,6 +30,7 @@
     "graphql": "^15.3.0",
     "history": "^5.0.0",
     "preact": "^10.4.7",
+    "rambdax": "*",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.3.1",

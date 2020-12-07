@@ -75,31 +75,31 @@ export function useAuthentication() {
 }
 
 const AUTH = gql`
-    query Auth($data: AuthInputType!) {
-        auth(data: $data) {
-            accessToken
-            refreshToken
-            userId
-            roles
-        }
+  query Auth($data: AuthInputType!) {
+    auth(data: $data) {
+      accessToken
+      refreshToken
+      userId
+      roles
     }
+  }
 `
 
 const AUTH_REFRESH = gql`
-    query AuthRefresh($data: AuthRefreshInputType!) {
-        authRefresh(data: $data) {
-            accessToken
-            refreshToken
-            userId
-            roles
-        }
+  query AuthRefresh($data: AuthRefreshInputType!) {
+    authRefresh(data: $data) {
+      accessToken
+      refreshToken
+      userId
+      roles
     }
+  }
 `
 
 const REGISTER = gql`
-    mutation Register($data: UserCreateInput!) {
-        createOneUser(data: $data) {
-            id
-        }
+  mutation Register($data: UserCreateInput!) {
+    createOneUser(data: $data) {
+      id
     }
+  }
 `

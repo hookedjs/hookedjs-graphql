@@ -42,180 +42,6 @@
     },
     {
       "tag": "CreateModel",
-      "model": "ApiError"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "id",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "ApiError",
-          "field": "id"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "ApiError",
-          "field": "id"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "cuid()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "ApiError",
-          "field": "id"
-        },
-        "directive": "id"
-      }
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "createdAt",
-      "type": "DateTime",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "ApiError",
-          "field": "createdAt"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "ApiError",
-          "field": "createdAt"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "now()"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "ip",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "reqUserId",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "reqUser",
-      "type": "User",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "ApiError",
-          "field": "reqUser"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "ApiError",
-          "field": "reqUser"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[reqUserId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "ApiError",
-          "field": "reqUser"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "operationName",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "message",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "stack",
-      "type": "Json",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "reqBody",
-      "type": "Json",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "ApiError",
-      "field": "resBody",
-      "type": "Json",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateModel",
       "model": "ApiAccess"
     },
     {
@@ -369,6 +195,187 @@
     },
     {
       "tag": "CreateModel",
+      "model": "ApiError"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ApiError",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ApiError",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "cuid()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ApiError",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ApiError",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ApiError",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "ip",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "reqUserId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "reqUser",
+      "type": "User",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ApiError",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ApiError",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[reqUserId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "ApiError",
+          "field": "reqUser"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "roles",
+      "type": "UserRole",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "operationName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "message",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "stack",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "reqBody",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ApiError",
+      "field": "resBody",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateModel",
       "model": "ClientEvent"
     },
     {
@@ -456,7 +463,7 @@
     {
       "tag": "CreateField",
       "model": "ClientEvent",
-      "field": "reqUserById",
+      "field": "reqUserId",
       "type": "String",
       "arity": "Optional"
     },
@@ -490,7 +497,7 @@
         "directive": "relation"
       },
       "argument": "fields",
-      "value": "[reqUserById]"
+      "value": "[reqUserId]"
     },
     {
       "tag": "CreateArgument",
@@ -519,6 +526,13 @@
       "field": "name",
       "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "ClientEvent",
+      "field": "context",
+      "type": "Json",
+      "arity": "Optional"
     },
     {
       "tag": "CreateModel",
@@ -857,7 +871,7 @@
     {
       "tag": "CreateField",
       "model": "User",
-      "field": "postsAuthored",
+      "field": "postsAuthoredJ",
       "type": "Post",
       "arity": "List"
     },
@@ -867,7 +881,7 @@
         "path": {
           "tag": "Field",
           "model": "User",
-          "field": "postsAuthored"
+          "field": "postsAuthoredJ"
         },
         "directive": "relation"
       }
@@ -879,7 +893,7 @@
         "path": {
           "tag": "Field",
           "model": "User",
-          "field": "postsAuthored"
+          "field": "postsAuthoredJ"
         },
         "directive": "relation"
       },
@@ -889,7 +903,7 @@
     {
       "tag": "CreateField",
       "model": "User",
-      "field": "postsCreated",
+      "field": "postsCreatedJ",
       "type": "Post",
       "arity": "List"
     },
@@ -899,7 +913,7 @@
         "path": {
           "tag": "Field",
           "model": "User",
-          "field": "postsCreated"
+          "field": "postsCreatedJ"
         },
         "directive": "relation"
       }
@@ -911,7 +925,7 @@
         "path": {
           "tag": "Field",
           "model": "User",
-          "field": "postsCreated"
+          "field": "postsCreatedJ"
         },
         "directive": "relation"
       },
@@ -921,7 +935,7 @@
     {
       "tag": "CreateField",
       "model": "User",
-      "field": "postsUpdated",
+      "field": "postsUpdatedJ",
       "type": "Post",
       "arity": "List"
     },
@@ -931,7 +945,7 @@
         "path": {
           "tag": "Field",
           "model": "User",
-          "field": "postsUpdated"
+          "field": "postsUpdatedJ"
         },
         "directive": "relation"
       }
@@ -943,7 +957,7 @@
         "path": {
           "tag": "Field",
           "model": "User",
-          "field": "postsUpdated"
+          "field": "postsUpdatedJ"
         },
         "directive": "relation"
       },
@@ -1210,13 +1224,6 @@
       "field": "tags",
       "type": "Tag",
       "arity": "List"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Post",
-      "field": "blogId",
-      "type": "Int",
-      "arity": "Optional"
     },
     {
       "tag": "CreateField",

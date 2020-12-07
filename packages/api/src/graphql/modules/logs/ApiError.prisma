@@ -8,6 +8,8 @@ model ApiError {
   reqUserId     String?
   /// The user of the express req, if known
   reqUser       User?    @relation(fields: [reqUserId], references: [id])
+  /// The user roles of the express req, if known
+  roles         UserRole[]
   /// The GraphQL Operation that was called, if known
   operationName String
   /// The error message

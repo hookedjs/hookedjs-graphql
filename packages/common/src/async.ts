@@ -13,7 +13,7 @@ const debugLog = (message: string) => null // console.debug;
  * @param ms: Number of milliseconds to wait
  *
  **/
-export const wait = (ms: number) => {
+export const delay = (ms: number) => {
   return new Promise(function (resolve) {
     setTimeout(resolve, ms)
   })
@@ -87,7 +87,7 @@ const waitForPass: WaitForPass = async (callback: any, options: any) => {
     debugLog(`waitFor: tries=${tries} timeUntilInt=${timeUntilInterval}`)
     if (timeUntilInterval > 0) {
       debugLog(`waitFor: waiting ${timeUntilInterval}`)
-      await wait(timeUntilInterval)
+      await delay(timeUntilInterval)
     }
   }
   return res
@@ -170,7 +170,7 @@ export const waitForTruthy: WaitForTruthy = async (callback: any, options: any) 
     debugLog(`waitFor: tries=${tries} timeUntilInt=${timeUntilInterval}`)
     if (timeUntilInterval > 0) {
       debugLog(`waitFor: waiting ${timeUntilInterval}`)
-      await wait(timeUntilInterval)
+      await delay(timeUntilInterval)
     }
   }
   return res
@@ -192,7 +192,7 @@ type WaitForTruthy = {
 
 // const testWait = async () => {
 //   const before = Date.now();
-//   await wait(100);
+//   await delay(100);
 //   const elapsed = Date.now() - before;
 //   if (elapsed < 100) console.log(`testWait.elapsed: Failed`);
 //   else console.log(`testWait.elapsed: Passed with ${elapsed}`);
@@ -206,7 +206,7 @@ type WaitForTruthy = {
 //
 //   const callback = async () => {
 //     console.log(`Tries: ${tries}; Elapsed: ${getElapsed()}`)
-//     await wait(10)
+//     await delay(10)
 //     if (tries++ < 5) throw 0
 //     return "success"
 //   }
@@ -238,7 +238,7 @@ type WaitForTruthy = {
 //
 //   const callback = async () => {
 //     console.log(`Tries: ${tries}; Elapsed: ${getElapsed()}`);
-//     await wait(10);
+//     await delay(10);
 //     tries++;
 //     return tries > 5;
 //   };

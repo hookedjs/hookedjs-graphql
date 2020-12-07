@@ -1,6 +1,6 @@
 import {extendType, objectType} from '@nexus/schema'
 
-import {prismaHelpers, rules} from '../../lib'
+import {ObjectModule, prismaHelpers, rules} from '../../lib'
 
 const ApiAccess: ObjectModule = {
   ObjectType: objectType({

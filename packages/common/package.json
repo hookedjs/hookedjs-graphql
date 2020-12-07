@@ -5,12 +5,14 @@
   "private": true,
   "license": "ISC",
   "scripts": {
+    "codegen": "echo '' > /dev/null",
+    "seed": "echo '' > /dev/null",
     "lint": "eslint --ext .js,.ts 'src/**/*.ts' --fix",
-    "repl": "ts-node-dev --respawn src/repl.ts",
-    "validate": "tsc --noEmit"
+    "repl": "ts-node-dev --respawn src/repl.ts"
   },
   "dependencies": {
-    "papaparse": "^5.3.0"
+    "papaparse": "^5.3.0",
+    "rambdax": "^7.1.0"
   },
   "devDependencies": {
     "@types/node": "*",

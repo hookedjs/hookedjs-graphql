@@ -45,7 +45,7 @@ export class KeyValueStore {
 
   public async getKeys() {
     const store = await this.getStore()
-    return new Promise((resolve, reject) => {
+    return new Promise<string[]>((resolve, reject) => {
       const request = store.getAllKeys()
       request.onerror = reject
       request.onsuccess = function() {
@@ -66,7 +66,7 @@ export class KeyValueStore {
 
   public async remove(key: string) {
     const store = await this.getStore()
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const request = store.delete(key)
       request.onsuccess = () => resolve()
       request.onerror = reject
@@ -75,7 +75,7 @@ export class KeyValueStore {
 
   public async clear() {
     const store = await this.getStore()
-    new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const request = store.clear()
       request.onsuccess = () => resolve()
       request.onerror = reject
@@ -166,7 +166,7 @@ export class KeyValueStore {
   public async clearExpired() {
     const { maxAge } = this.config
     const store = await this.getStore()
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const request = store.index('t').openCursor(IDBKeyRange.upperBound(Date.now() - maxAge!))
 
       request.onsuccess = event => {

@@ -34,3 +34,9 @@ export function mergeRuleSets(...ruleSets: RuleSet[]): RuleSet {
     }),
     {Query:{}, Mutation: {}})
 }
+
+export interface RuleSet {
+  Query: Record<string, any>,
+  Mutation: Record<string, any>,
+  [ObjectName: string]: any,
+}

@@ -15,7 +15,7 @@
     "dev:api": "cd packages/api && yarn dev",
     "dev:react": "cd packages/react && yarn dev",
     "start": "yarn codegen && cd packages/api && yarn prisma:apply && yarn start",
-    "validate": "printf \"\\n> @all\\n\" && yarn lint && yarn workspaces run validate",
+    "validate": "printf \"\\n> @all\\n\" && yarn lint && yarn workspaces run tsc",
     "lint": "eslint --cache --ext .ts 'packages/*/src/**/*.ts' 'packages/api/prisma/**/*.ts' --fix",
     "test": "yarn workspaces run test"
   },
