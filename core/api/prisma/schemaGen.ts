@@ -5,9 +5,9 @@ import * as path from 'path'
 const datasource = fs.readFileSync('prisma/datasource.prisma')
 
 const hookedjsModuleFiles =
-  fs.readdirSync(path.join(__dirname, '../../'))
+  fs.readdirSync(path.join(__dirname, '../../../modules/'))
     .filter(p => !['.DS_Store', 'api', 'react', 'common'].includes(p))
-    .map(p => glob.sync(path.resolve(__dirname, `../../${p}/api/**/*.prisma`)))
+    .map(p => glob.sync(path.resolve(__dirname, `../../../modules/${p}/api/**/*.prisma`)))
     .reduce((acc, val) => acc.concat(val), []) // is like .flat(1) but ts no likey
 
 const moduleFiles = [

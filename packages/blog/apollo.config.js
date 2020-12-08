@@ -1,1 +1,0 @@
-module.exports = require('@h/react/apollo.config.js')

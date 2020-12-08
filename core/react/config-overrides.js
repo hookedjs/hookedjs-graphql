@@ -3,13 +3,17 @@ const path = require('path')
 const {override, addBundleVisualizer, babelInclude, disableEsLint, removeModuleScopePlugin, addWebpackAlias} = require('customize-cra')
 
 const hookedjsModulePaths =
-  fs.readdirSync(path.join(__dirname, '../'))
+  fs.readdirSync(path.join(__dirname, '../../modules/'))
     .filter(p => !['.DS_Store', 'api', 'react'].includes(p))
-    .map(p => path.resolve(__dirname, `../${p}`))
+    .map(p => path.resolve(__dirname, `../../modules/${p}`))
+    .concat([
+      path.resolve(__dirname, `../common`),
+    ])
 const hookedjsModuleSrcs = [
   ...hookedjsModulePaths.map(p => p + '/react'),
   ...hookedjsModulePaths.map(p => p + '/common')
 ]
+console.dir(hookedjsModulePaths)
 
 module.exports = override(
   addBanner(),

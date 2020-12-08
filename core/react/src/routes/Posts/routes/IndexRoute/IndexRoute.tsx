@@ -1,4 +1,4 @@
-import PostList from '@h/blog/react/components/PostList'
+import PostList from '@m/blog/react/components/PostList'
 import React from 'react'
 
 const Component: React.FC = () => {

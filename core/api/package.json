@@ -4,7 +4,6 @@
   "license": "ISC",
   "private": true,
   "scripts": {
-    "postinstall": "yarn codegen",
     "codegen": "yarn prisma:codegen && yarn nexus:codegen",
     "start": "NODE_ENV=production ts-node --transpile-only src/main.ts",
     "dev": "NODE_ENV=development ts-node-dev --tree-kill --no-notify --respawn --transpile-only src/main.ts",

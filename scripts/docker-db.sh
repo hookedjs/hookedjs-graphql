@@ -12,7 +12,7 @@ check_docker() {
 }
 
 seed() {
-  cd packages/api
+  cd core/api
   if [ $MIGRATE_REBUILD_MODE ]; then
     rm -rf prisma/migrations &> /dev/null
     yarn prisma:save

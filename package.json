@@ -4,19 +4,20 @@
   "license": "ISC",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "core/*",
+    "modules/*"
   ],
   "scripts": {
-    "build": "yarn codegen && cd packages/react && yarn build",
+    "build": "yarn codegen && cd core/react && yarn build",
     "codegen": "yarn workspaces run codegen",
-    "clean": "rimraf packages/*/**/{__generated__,build,node_modules,schema.graphql} node_modules .eslintcache",
+    "clean": "rimraf core/*/**/{__generated__,build,node_modules,schema.graphql} node_modules .eslintcache",
     "dev": "npm-run-all -l codegen -p dev:*",
     "dev:db": "./scripts/docker-db.sh",
-    "dev:api": "cd packages/api && yarn dev",
-    "dev:react": "cd packages/react && yarn dev",
-    "start": "yarn codegen && cd packages/api && yarn prisma:apply && yarn start",
+    "dev:api": "cd core/api && yarn dev",
+    "dev:react": "cd core/react && yarn dev",
+    "start": "yarn codegen && cd core/api && yarn prisma:apply && yarn start",
     "validate": "printf \"\\n> @all\\n\" && yarn lint && yarn workspaces run tsc",
-    "lint": "eslint --cache --ext .ts 'packages/*/src/**/*.ts' 'packages/api/prisma/**/*.ts' --fix",
+    "lint": "eslint --cache --ext .ts '{core,modules}/*/{src,common,api,react,prisma}/**/*.ts' --fix",
     "test": "yarn workspaces run test"
   },
   "husky": {
