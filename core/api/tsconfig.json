@@ -8,7 +8,11 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "noEmit": true
+    "noEmit": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "include": ["src"],
   "exclude": ["prisma/**/*", "node_modules"]

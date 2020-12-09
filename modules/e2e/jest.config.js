@@ -3,11 +3,12 @@ module.exports = {
 	globals: {
 		URL: 'http://localhost:3000',
 	},
-	testMatch: ['**/tests/*.test.ts'],
+	// roots: ['../../../e2e'],
+	testMatch: ['**/*.test.ts'],
 	transform: {
 		'\\.ts$': 'react-scripts/config/jest/babelTransform',
 	},
 	verbose: true,
-	setupFilesAfterEnv: ['./lib/setup.ts'],
+	setupFilesAfterEnv: ['./setup.ts'],
 	maxConcurrency: 1,
 };

@@ -1,4 +1,4 @@
-import {ObjectModule, prismaHelpers, rules} from '@h/api/src/graphql/lib'
+import {ObjectModule, prismaHelpers, rules} from '@h/api-core/src/graphql/lib'
 import {extendType, objectType} from '@nexus/schema'
 import {PostStatus} from '@prisma/client'
 

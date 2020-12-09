@@ -1,5 +1,5 @@
 {
-  "extends": "../../core/api/tsconfig.modules.json",
+  "extends": "../../core/common/tsconfig.json",
   "compilerOptions": {
     "typeRoots": [
       "../../node_modules/@types",
@@ -9,5 +9,9 @@
       "node_modules/@types"
     ]
   },
-  "include": ["react", "api", "common"]
+  "include": [
+    "react",
+    "api",
+    "common"
+  ]
 }

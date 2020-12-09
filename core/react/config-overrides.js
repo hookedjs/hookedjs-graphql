@@ -13,7 +13,6 @@ const hookedjsModuleSrcs = [
   ...hookedjsModulePaths.map(p => p + '/react'),
   ...hookedjsModulePaths.map(p => p + '/common')
 ]
-console.dir(hookedjsModulePaths)
 
 module.exports = override(
   addBanner(),
@@ -22,6 +21,7 @@ module.exports = override(
 
   babelInclude([
     path.resolve('src'),
+    path.resolve(path.resolve(__dirname, '../../react/src')),
     ...hookedjsModuleSrcs,
   ]),
 

@@ -1,0 +1,25 @@
+{
+  "name": "@h/react-entrypoint",
+  "description": "The entry point for react",
+  "version": "1.0.0",
+  "private": true,
+  "license": "ISC",
+  "scripts": {
+    "codegen": "apollo client:codegen --target=typescript --globalTypesFile=src/__generated__/globalTypes.ts && rm -rf __generated__",
+    "seed": "echo '' > /dev/null",
+    "test": "CI=true react-scripts test --colors; rm src/react-app-env.d.ts",
+    "lint": "eslint --ext .js,.ts '{react,common,api}/**/*.ts' --fix"
+  },
+  "engines": {
+    "node": ">=12 <15"
+  },
+  "dependencies": {
+    "history": "^5.0.0",
+    "react-hook-form": "^6.3.1",
+    "react-metatags-hook": "^1.3.0",
+    "react-router": "^6.0.0-beta.0",
+    "react-router-dom": "^6.0.0-beta.0",
+    "react-use": "^15.3.3",
+    "react-useportal": "^1.0.13"
+  }
+}

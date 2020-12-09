@@ -7,7 +7,9 @@
   "scripts": {
     "codegen": "apollo client:codegen --target=typescript --globalTypesFile=react/__generated__/globalTypes.ts --includes=\"react/**/*.{tsx,ts,jsx,js}\" && rm -rf __generated__",
     "seed": "ts-node scripts/seed.ts",
-    "lint": "eslint --ext .js,.ts '{react,common,api}/**/*.ts' --fix"
+    "lint": "eslint --ext .js,.ts '{react,common,api}/**/*.ts' --fix",
+    "test": "yarn test:react",
+    "test:react": "cd react && jest"
   },
   "engines": {
     "node": ">=12 <15"

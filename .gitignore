@@ -18,4 +18,5 @@ yarn-error.log*
 .private
 .tmp
 
+react-app-env.d.ts
 schema.prisma

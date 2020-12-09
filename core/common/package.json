@@ -1,5 +1,5 @@
 {
-  "name": "@h/common",
+  "name": "@h/common-core",
   "description": "Generic util library",
   "version": "1.0.0",
   "private": true,
@@ -8,14 +8,14 @@
     "codegen": "echo '' > /dev/null",
     "seed": "echo '' > /dev/null",
     "lint": "eslint --ext .js,.ts 'src/**/*.ts' --fix",
-    "repl": "ts-node-dev --respawn src/repl.ts"
+    "repl": "ts-node-dev --respawn src/repl.ts",
+    "test": "echo '' > /dev/null"
   },
   "dependencies": {
     "papaparse": "^5.3.0",
     "rambdax": "^7.1.0"
   },
   "devDependencies": {
-    "@types/node": "*",
     "@types/papaparse": "^5.2.4"
   },
   "engines": {

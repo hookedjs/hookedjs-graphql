@@ -1,5 +1,5 @@
 {
-  "name": "@h/api",
+  "name": "@h/api-core",
   "version": "0.0.0",
   "license": "ISC",
   "private": true,
@@ -13,7 +13,8 @@
     "prisma:save": "ts-node prisma/schemaGen.ts && prisma migrate save --experimental -c",
     "prisma:apply": "prisma migrate up --experimental -c > /dev/null",
     "prisma:codegen": "ts-node prisma/schemaGen.ts && prisma generate",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "test": "echo '' > /dev/null"
   },
   "dependencies": {
     "@nexus/schema": "0.18.0",
@@ -38,7 +39,6 @@
     "@types/express-jwt": "^0.0.42",
     "@types/faker": "^5.1.2",
     "@types/jsonwebtoken": "^8.5.0",
-    "@types/node": "^14.14.9",
     "@types/ws": "^7.2.7",
     "faker": "^5.1.0"
   },

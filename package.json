@@ -5,20 +5,23 @@
   "private": true,
   "workspaces": [
     "core/*",
-    "modules/*"
+    "modules/*",
+    "react"
   ],
   "scripts": {
-    "build": "yarn codegen && cd core/react && yarn build",
+    "postinstall": "patch-package",
+    "build": "yarn codegen && yarn workspace @h/react-core build",
     "codegen": "yarn workspaces run codegen",
     "clean": "rimraf core/*/**/{__generated__,build,node_modules,schema.graphql} node_modules .eslintcache",
     "dev": "npm-run-all -l codegen -p dev:*",
     "dev:db": "./scripts/docker-db.sh",
-    "dev:api": "cd core/api && yarn dev",
-    "dev:react": "cd core/react && yarn dev",
-    "start": "yarn codegen && cd core/api && yarn prisma:apply && yarn start",
+    "dev:api": "yarn workspace @h/api-core dev",
+    "dev:react": "yarn workspace @h/react-core dev",
+    "start": "yarn codegen && yarn workspace @h/api-core prisma:apply && yarn workspace @h/api-core start",
     "validate": "printf \"\\n> @all\\n\" && yarn lint && yarn workspaces run tsc",
     "lint": "eslint --cache --ext .ts '{core,modules}/*/{src,common,api,react,prisma}/**/*.ts' --fix",
-    "test": "yarn workspaces run test"
+    "test": "yarn workspaces run test",
+    "e2e": "yarn workspace @h/react-core e2e"
   },
   "husky": {
     "hooks": {
@@ -36,6 +39,7 @@
     "eslint": "^6.6.3",
     "eslint-plugin-simple-import-sort": "^6.0.1",
     "husky": "^4.3.0",
+    "patch-package": "^6.2.2",
     "rimraf": "*",
     "ts-node": "^9.0.0",
     "ts-node-dev": "^1.0.0",

@@ -1,6 +1,7 @@
 {
-  "extends": "../api/tsconfig.modules.json",
+  "extends": "../api/tsconfig.json",
   "compilerOptions": {
+    "jsx": "react",
     "typeRoots": [
       "../../node_modules/@types",
       "../api/node_modules/@types",

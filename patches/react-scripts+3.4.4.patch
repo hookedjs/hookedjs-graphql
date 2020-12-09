@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js b/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js
+index ebd93d7..59e1824 100644
+--- a/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js
++++ b/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js
+@@ -237,6 +237,7 @@ function verifyTypeScriptSetup() {
+       );
+       console.log();
+     } else {
++      return;
+       console.warn(
+         chalk.bold(
+           'The following changes are being made to your',

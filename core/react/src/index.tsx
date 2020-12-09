@@ -1,21 +1,12 @@
-import './index.css'
-
+import Index from '@h/react-entrypoint/src'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { ErrorBoundary } from './layout/compounds/ErrorBoundary'
-import LoadingLayout from './layout/LoadingLayout'
 import * as serviceWorker from './serviceWorker'
-
-const App = React.lazy(() => import('./App'))
 
 ReactDOM.render(
   <React.StrictMode>
-    <ErrorBoundary showBack>
-      <React.Suspense fallback={<LoadingLayout variant="outer" percentLoaded={1} />}>
-        <App />
-      </React.Suspense>
-    </ErrorBoundary>
+    <Index />
   </React.StrictMode>,
   document.getElementById('root')
 )
