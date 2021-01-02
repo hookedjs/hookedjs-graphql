@@ -7,7 +7,7 @@
     "codegen": "yarn prisma:codegen && yarn nexus:codegen",
     "start": "NODE_ENV=production ts-node --transpile-only src/main.ts",
     "dev": "NODE_ENV=development ts-node-dev --tree-kill --no-notify --respawn --transpile-only src/main.ts",
-    "seed": "yarn ts-node prisma/seed.ts",
+    "seed": "echo '' > /dev/null",
     "repl": "ts-node-dev --respawn src/repl.ts",
     "nexus:codegen": "NODE_ENV=development ts-node --transpile-only src/graphql/schema.ts",
     "prisma:save": "ts-node prisma/schemaGen.ts && prisma migrate save --experimental -c",

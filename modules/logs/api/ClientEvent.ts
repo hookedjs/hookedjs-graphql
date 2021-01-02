@@ -1,6 +1,6 @@
 import {extendType, objectType} from '@nexus/schema'
 
-import {ObjectModule, prismaHelpers, rules} from '../../lib'
+import {ObjectModule, prismaHelpers, rules} from '@h/api-core/src/graphql/lib'
 
 const ClientEvent: ObjectModule = {
   ObjectType: objectType({

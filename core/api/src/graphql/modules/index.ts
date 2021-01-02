@@ -1,3 +1,3 @@
-export * from './logs'
-export * from './users'
+export * from '@m/logs/api'
+export * from '@m/users/api'
 export * from '@m/blog/api'

@@ -1,7 +1,7 @@
 import {extendType, inputObjectType, objectType, stringArg} from '@nexus/schema'
 import {AuthenticationError, ForbiddenError} from 'apollo-server-express'
 
-import {crypto, ObjectModule, prisma, rules} from '../../lib'
+import {crypto, ObjectModule, prisma, rules} from '@h/api-core/src/graphql/lib'
 
 const AuthInputType = inputObjectType({
   name: 'AuthInputType',

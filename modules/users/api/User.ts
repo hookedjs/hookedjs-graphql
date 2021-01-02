@@ -1,6 +1,6 @@
 import {extendType, objectType} from '@nexus/schema'
 
-import {crypto, difference, isEmail, isPassword, ObjectModule, prismaHelpers, rules} from '../../lib'
+import {crypto, difference, isEmail, isPassword, ObjectModule, prismaHelpers, rules} from '@h/api-core/src/graphql/lib'
 
 const isSelf = rules.rule({ cache: 'strict' })(
   async (parent, args, ctx, info) => {
